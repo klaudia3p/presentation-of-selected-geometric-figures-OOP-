@@ -50,6 +50,12 @@ namespace ProjektNr2_Plutka_62026
 
         private void LaboratoriumNr2_Load(object sender, EventArgs e)
         {
+            label1.Location =
+                new Point(pbRysownica.Location.X + pbRysownica.Width + Margines,
+                this.Top + 2 * Margines);
+            chlbFiguryGeometryczne.Location =
+                new Point(pbRysownica.Location.X + pbRysownica.Width + Margines,
+                label1.Top+ label1.Height+Margines);
 
         }
 
@@ -89,8 +95,47 @@ namespace ProjektNr2_Plutka_62026
                     case 2: StylLini = DashStyle.Dot; break;
                     case 3: StylLini = DashStyle.DashDot; break;
                     case 4: StylLini = DashStyle.DashDotDot; break;
+                        default: StylLini = DashStyle.Solid; break;
                 }
-            }
+                //wylosowanie jednej z wybranych figur geometrycznych, utworzenie dla niej egzemplarza i jej wykreslenie
+                switch (WybraneFG[rnd.Next(WybraneFG.Count)].ToString())
+                {
+                    case "Punkt":
+                        {
+                            //utworzenie egzemplarza Punkt i wpisanie jego referncji do TFG
+                            TFG[IndexTFG] = new Punkt(Xp, Yp, Kolor);
+                            //wykreslenie figury geometrycznej
+                            TFG[IndexTFG].Wykreśl(Rysownica);
+                            //przesuniecie  indextfg na wolna pozucje
+                            IndexTFG++;
+                            break;
+                        }
+                    case "Linia":
+                        {
+                           //wylosowanie wspolrzednych konca lini
+                           int Xk = rnd.Next(Margines, Xmax- Margines);
+                            int Yk = rnd.Next(Margines, Ymax- Margines);
+                            //utworzenie egzemplarza lini i wpisanie jej referencji do TFG
+                            TFG[IndexTFG] = new Linia(Xp, Yp, Xk, Yk, Kolor, StylLini, GrubośćLini);
+                            //przesuniecie  
+                            IndexTFG++;
+                            break;
+                        }
+                        default:
+                        {
+                            MessageBox.Show("UWAGA: tej figury jeszcze nie wykreślam :(");
+                            break;
+                        }
+                        //kolejne case dla kolejnych figur 
+
+                }//od switcha
+
+            }//od for
+            //odswiezenie powierzchni graficznej
+            pbRysownica.Refresh();
+            //ustwienie stanu braku aktywnosci dla przycisku start
+            btnStart.Enabled = false;
+            //uaktywnienie innych przyciskow i kontrolek
 
 
         }

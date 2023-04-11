@@ -67,6 +67,9 @@
       <DependentUpon>ProjektIndywidualnyNr2.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="KokpitProjektuNr2_Plutka_62026.resx">
+      <DependentUpon>KokpitProjektuNr2_Plutka_62026.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="LaboratoriumNr2.resx">
       <DependentUpon>LaboratoriumNr2.cs</DependentUpon>
     </EmbeddedResource>
