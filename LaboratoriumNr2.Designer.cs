@@ -116,6 +116,7 @@
             this.Controls.Add(this.pbRysownica);
             this.Name = "LaboratoriumNr2";
             this.Text = "LaboratoriumNr2";
+            this.Load += new System.EventHandler(this.LaboratoriumNr2_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pbRysownica)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
