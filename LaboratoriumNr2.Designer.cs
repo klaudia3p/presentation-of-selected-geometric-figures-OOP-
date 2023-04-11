@@ -28,13 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.pbRysownica = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.txtN = new System.Windows.Forms.TextBox();
             this.btnStart = new System.Windows.Forms.Button();
             this.chlbFiguryGeometryczne = new System.Windows.Forms.CheckedListBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.pbRysownica)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // pbRysownica
@@ -65,9 +69,11 @@
             this.txtN.Name = "txtN";
             this.txtN.Size = new System.Drawing.Size(100, 20);
             this.txtN.TabIndex = 2;
+            this.txtN.TextChanged += new System.EventHandler(this.txtN_TextChanged);
             // 
             // btnStart
             // 
+            this.btnStart.Enabled = false;
             this.btnStart.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.btnStart.Location = new System.Drawing.Point(34, 352);
             this.btnStart.Name = "btnStart";
@@ -75,6 +81,7 @@
             this.btnStart.TabIndex = 3;
             this.btnStart.Text = "Start";
             this.btnStart.UseVisualStyleBackColor = true;
+            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
             // 
             // chlbFiguryGeometryczne
             // 
@@ -92,6 +99,7 @@
             this.chlbFiguryGeometryczne.Name = "chlbFiguryGeometryczne";
             this.chlbFiguryGeometryczne.Size = new System.Drawing.Size(152, 172);
             this.chlbFiguryGeometryczne.TabIndex = 4;
+            this.chlbFiguryGeometryczne.SelectedIndexChanged += new System.EventHandler(this.chlbFiguryGeometryczne_SelectedIndexChanged);
             // 
             // label2
             // 
@@ -102,6 +110,14 @@
             this.label2.Size = new System.Drawing.Size(124, 42);
             this.label2.TabIndex = 5;
             this.label2.Text = "Zaznacz figury \r\ndo prezentacji:";
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
+            // backgroundWorker1
+            // 
+            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
             // 
             // LaboratoriumNr2
             // 
@@ -118,6 +134,7 @@
             this.Text = "LaboratoriumNr2";
             this.Load += new System.EventHandler(this.LaboratoriumNr2_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pbRysownica)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -131,5 +148,7 @@
         private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.CheckedListBox chlbFiguryGeometryczne;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }

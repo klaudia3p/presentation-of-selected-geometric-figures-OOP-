@@ -50,5 +50,49 @@ namespace ProjektNr2_Plutka_62026
         {
 
         }
+
+        private void btnStart_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtN_TextChanged(object sender, EventArgs e)
+        {
+            //deklaracja pomocnicza
+            ushort N;
+            //zgaszenie kontorlki errorprovider
+            errorProvider1.Dispose();
+            //sprawdzenie czy do kontrolki txtN wpisamo liczbe naturalna
+            if (!ushort.TryParse(txtN.Text, out N))
+            {
+                errorProvider1.SetError(txtN, "ERROR: w zapisie liczby figur wystąpił niedozwolony znak");
+                    return;
+            }
+            //ustawienie stanu braku aktywnosci dla kontrolki txtN
+            txtN.Enabled = false;
+            //sprawdzenie czy zpstaly wybrane figury geometryczne do prezentacji
+            if (chlbFiguryGeometryczne.CheckedItems.Count > 0)
+                //uaktywnieni przycisku polecen start
+                btnStart.Enabled = true;
+            else
+                //zapalenie kontrolki errorprovider przy kontrolce chlbFiguryGeom.
+                errorProvider1.SetError(chlbFiguryGeometryczne, "UWAGA: Musisz wybrać co najmniej jedną figurę geometryczną");
+
+        }
+
+        private void chlbFiguryGeometryczne_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //zgaszenie kontrolki errorprovider
+            errorProvider1.Dispose();
+            //sprawdzenie czy juz podano liczbe figur do prezentacji
+            if (!txtN.Enabled)
+                btnStart.Enabled = true;
+
+        }
+
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+
+        }
     }
 }
