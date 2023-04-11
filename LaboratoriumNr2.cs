@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Drawing.Printing;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -18,7 +20,7 @@ namespace ProjektNr2_Plutka_62026
         const int Margines = 10;
         Graphics Rysownica;
         Punkt[] TFG;
-        int IndexTFG;
+        ushort IndexTFG;
         public LaboratoriumNr2()
         { 
             InitializeComponent();
@@ -53,6 +55,43 @@ namespace ProjektNr2_Plutka_62026
 
         private void btnStart_Click(object sender, EventArgs e)
         {
+            ushort N;
+            //zgaszenie errorpro
+            errorProvider1.Dispose();
+            Random rnd = new Random();
+            int Xmax, Ymax;
+            int Xp, Yp;
+            Color Kolor;
+            float GrubośćLini;
+            DashStyle StylLini;
+
+            //pobranie liczby figur do prezentacji
+            N = ushort.Parse(txtN.Text);
+            //utworzenie egzemplarza tablicy figur geom
+            TFG = new Punkt[N];
+            IndexTFG = 0;
+            //rozmiar powierzni graficznej
+            Xmax = pbRysownica.Width; Ymax = pbRysownica.Height;
+            //utworzenie kolekcji wybranych figur geom
+            CheckedListBox.CheckedItemCollection WybraneFG = chlbFiguryGeometryczne.CheckedItems;
+            //tworzenie egzemplarzy fg i wpisanie do tfg ich referencji oraz wykreslenie
+            for (ushort i = 1; i <= N; i++)
+            {
+                Xp = rnd.Next(Margines, Xmax- Margines);
+                Yp = rnd.Next(Margines, Ymax - Margines);
+                Kolor = Color.FromArgb(rnd.Next(255), rnd.Next(255), rnd.Next(255));
+                GrubośćLini = (float)(rnd.NextDouble() * ((double) Margines - 0.5) + 0.5);
+                //wylosownaie stylu lini
+                switch (rnd.Next(0,5))
+                {
+                    case 0: StylLini = DashStyle.Solid; break;
+                    case 1: StylLini = DashStyle.Dash; break;
+                    case 2: StylLini = DashStyle.Dot; break;
+                    case 3: StylLini = DashStyle.DashDot; break;
+                    case 4: StylLini = DashStyle.DashDotDot; break;
+                }
+            }
+
 
         }
 
