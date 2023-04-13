@@ -522,6 +522,7 @@
             this.kpbtnWczytaj.TabIndex = 15;
             this.kpbtnWczytaj.Text = "Wczytaj Bitmape z pliku";
             this.kpbtnWczytaj.UseVisualStyleBackColor = true;
+            this.kpbtnWczytaj.Click += new System.EventHandler(this.kpbtnWczytaj_Click);
             // 
             // label1
             // 
