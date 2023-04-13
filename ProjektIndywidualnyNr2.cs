@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,12 +15,19 @@ namespace ProjektNr2_Plutka_62026
     public partial class ProjektIndywidualnyNr2 : Form
     {
         Point kpPunkt = Point.Empty;
-        Graphics kppbRysownica;
+        Graphics kpRysownica;
         Pen kpPióro;
         SolidBrush kpPędzel;
         public ProjektIndywidualnyNr2()
         {
             InitializeComponent();
+            kppbRysownica.Image = new Bitmap(kppbRysownica.Width, kppbRysownica.Height);
+            kpRysownica = Graphics.FromImage(kppbRysownica.Image);
+            kpPióro = new Pen(Color.Red, 1.7F);
+            kpPióro.DashStyle = DashStyle.Solid;
+            kpPióro.StartCap = LineCap.Round;
+            kpPióro.EndCap = LineCap.Round;
+            kpPędzel = new SolidBrush(DefaultBackColor);
         }
 
         private void kpbtnZapisz_Click(object sender, EventArgs e)
