@@ -132,6 +132,7 @@
             this.Controls.Add(this.pbRysownica);
             this.Name = "LaboratoriumNr2";
             this.Text = "LaboratoriumNr2";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.LaboratoriumNr2_FormClosing);
             this.Load += new System.EventHandler(this.LaboratoriumNr2_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pbRysownica)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();

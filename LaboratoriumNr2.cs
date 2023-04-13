@@ -184,5 +184,24 @@ namespace ProjektNr2_Plutka_62026
         {
 
         }
+
+        private void LaboratoriumNr2_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DialogResult OknoMessage = MessageBox.Show("Czy chcesz zamknąć ten formularz i przejść do formularza głownego?",
+                this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (OknoMessage == DialogResult.Yes)
+            {
+                foreach (Form Formularz in Application.OpenForms)
+                    if (Formularz.Name == "KokpitProjektuNr2_Plutka_62026")
+                    {
+                        this.Hide();
+                        Formularz.Show();
+                        return;
+                    }
+
+            }
+            else
+                e.Cancel = true;
+        }
     }
 }
