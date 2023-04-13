@@ -89,6 +89,8 @@
             this.kppbRysownica.Size = new System.Drawing.Size(770, 454);
             this.kppbRysownica.TabIndex = 0;
             this.kppbRysownica.TabStop = false;
+            this.kppbRysownica.MouseDown += new System.Windows.Forms.MouseEventHandler(this.kppbRysownica_MouseDown);
+            this.kppbRysownica.MouseUp += new System.Windows.Forms.MouseEventHandler(this.kppbRysownica_MouseUp);
             // 
             // kpgbWybierzFigurę
             // 

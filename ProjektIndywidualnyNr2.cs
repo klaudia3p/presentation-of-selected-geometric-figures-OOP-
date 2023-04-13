@@ -7,11 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static ProjektNr2_Plutka_62026.FiguryGeometryczne;
 
 namespace ProjektNr2_Plutka_62026
 {
     public partial class ProjektIndywidualnyNr2 : Form
     {
+        Point kpPunkt = Point.Empty;
         public ProjektIndywidualnyNr2()
         {
             InitializeComponent();
@@ -53,6 +55,28 @@ namespace ProjektNr2_Plutka_62026
             if (PaletaKolorów.ShowDialog() == DialogResult.OK)
                 kpbtnKolorWypełnienia.BackColor = PaletaKolorów.Color;
             PaletaKolorów.Dispose();
+        }
+
+        private void kppbRysownica_MouseDown(object sender, MouseEventArgs e)
+        {
+
+            kplblX.Text = e.Location.X.ToString();
+            kplblY.Text = e.Location.Y.ToString();
+            if (e.Button == MouseButtons.Left)
+                kpPunkt = e.Location;
+
+        }
+
+        private void kppbRysownica_MouseUp(object sender, MouseEventArgs e)
+        {
+
+            kplblX.Text = e.Location.X.ToString();
+            kplblY.Text = e.Location.Y.ToString();
+            int kpLewyGórnyNarożnikX = (kpPunkt.X > e.Location.X) ? e.Location.X : kpPunkt.X;
+            int kpLewyGórnyNarożnikY = (kpPunkt.Y > e.Location.Y) ? e.Location.Y : kpPunkt.Y;
+            int kpSzerokość = Math.Abs(kpPunkt.X - e.Location.X);
+            int kpWysokość = Math.Abs(kpPunkt.Y - e.Location.Y);
+
         }
     }
 }
