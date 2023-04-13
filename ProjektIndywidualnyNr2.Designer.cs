@@ -363,6 +363,7 @@
             this.kpbtnKolorLini.TabIndex = 0;
             this.kpbtnKolorLini.Text = "Kolor Lini";
             this.kpbtnKolorLini.UseVisualStyleBackColor = true;
+            this.kpbtnKolorLini.Click += new System.EventHandler(this.kpbtnKolorLini_Click);
             // 
             // kpbtnKolorWypełnienia
             // 
@@ -381,6 +382,7 @@
             this.kptbGrubośćLini.Name = "kptbGrubośćLini";
             this.kptbGrubośćLini.Size = new System.Drawing.Size(148, 45);
             this.kptbGrubośćLini.TabIndex = 2;
+            this.kptbGrubośćLini.Scroll += new System.EventHandler(this.kptbGrubośćLini_Scroll);
             // 
             // label2
             // 
@@ -407,6 +409,7 @@
             this.comboBox1.Size = new System.Drawing.Size(139, 23);
             this.comboBox1.TabIndex = 4;
             this.comboBox1.Text = "Wybierz styl lini";
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // kpbtnPrzesuńFigury
             // 

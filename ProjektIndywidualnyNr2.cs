@@ -14,6 +14,9 @@ namespace ProjektNr2_Plutka_62026
     public partial class ProjektIndywidualnyNr2 : Form
     {
         Point kpPunkt = Point.Empty;
+        Graphics kppbRysownica;
+        Pen kpPióro;
+        SolidBrush kpPędzel;
         public ProjektIndywidualnyNr2()
         {
             InitializeComponent();
@@ -73,11 +76,11 @@ namespace ProjektNr2_Plutka_62026
 
         private void kpbtnKolorWypełnienia_Click(object sender, EventArgs e)
         {
-            ColorDialog PaletaKolorów = new ColorDialog();
-            PaletaKolorów.Color = kpbtnKolorWypełnienia.BackColor;
-            if (PaletaKolorów.ShowDialog() == DialogResult.OK)
-                kpbtnKolorWypełnienia.BackColor = PaletaKolorów.Color;
-            PaletaKolorów.Dispose();
+            ColorDialog kpPaletaKolorów = new ColorDialog();
+            kpPaletaKolorów.Color = kpbtnKolorWypełnienia.BackColor;
+            if (kpPaletaKolorów.ShowDialog() == DialogResult.OK)
+                kpbtnKolorWypełnienia.BackColor = kpPaletaKolorów.Color;
+            kpPaletaKolorów.Dispose();
         }
 
         private void kppbRysownica_MouseDown(object sender, MouseEventArgs e)
@@ -167,6 +170,27 @@ namespace ProjektNr2_Plutka_62026
             else
                 MessageBox.Show("Plik do odczytu tablicy TWS nie został wybrany i obsługa polecenia: 'Odczytanie stablicowanego szeregu z pliku' (z menu poziomu Plik) nie może być zrealizowana");
 
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void kptbGrubośćLini_Scroll(object sender, EventArgs e)
+        {
+
+        }
+
+        private void kpbtnKolorLini_Click(object sender, EventArgs e)
+        {
+            ColorDialog kpPaletaKolorów = new ColorDialog();
+            kpPaletaKolorów.Color = kpbtnKolorWypełnienia.BackColor;
+
+            if (kpPaletaKolorów.ShowDialog() == DialogResult.OK)
+
+                kpPaletaKolorów.Dispose();
+            kpPióro.Color = kpPaletaKolorów.Color;
         }
     }
 }
