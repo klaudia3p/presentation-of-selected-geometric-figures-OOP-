@@ -21,5 +21,10 @@ namespace ProjektNr2_Plutka_62026
         {
 
         }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

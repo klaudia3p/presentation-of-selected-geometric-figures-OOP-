@@ -29,8 +29,6 @@
         private void InitializeComponent()
         {
             this.kppbRysownica = new System.Windows.Forms.PictureBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.kptxtN = new System.Windows.Forms.TextBox();
             this.kpgbWybierzFigurę = new System.Windows.Forms.GroupBox();
             this.kprdbPunkt = new System.Windows.Forms.RadioButton();
             this.kprdbElipsa = new System.Windows.Forms.RadioButton();
@@ -70,6 +68,11 @@
             this.kpbtnNastępny = new System.Windows.Forms.Button();
             this.kpbtnZapisz = new System.Windows.Forms.Button();
             this.kpbtnWczytaj = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.kplblX = new System.Windows.Forms.Label();
+            this.kplblY = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.kppbRysownica)).BeginInit();
             this.kpgbWybierzFigurę.SuspendLayout();
             this.kpgbAtrybutyGraficzne.SuspendLayout();
@@ -86,23 +89,6 @@
             this.kppbRysownica.Size = new System.Drawing.Size(770, 454);
             this.kppbRysownica.TabIndex = 0;
             this.kppbRysownica.TabStop = false;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label1.Location = new System.Drawing.Point(22, 25);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(281, 22);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Podaj liczbę wyświetlanych figur:";
-            // 
-            // kptxtN
-            // 
-            this.kptxtN.Location = new System.Drawing.Point(310, 25);
-            this.kptxtN.Name = "kptxtN";
-            this.kptxtN.Size = new System.Drawing.Size(100, 20);
-            this.kptxtN.TabIndex = 2;
             // 
             // kpgbWybierzFigurę
             // 
@@ -534,11 +520,67 @@
             this.kpbtnWczytaj.Text = "Wczytaj Bitmape z pliku";
             this.kpbtnWczytaj.UseVisualStyleBackColor = true;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label1.Location = new System.Drawing.Point(38, 25);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(145, 19);
+            this.label1.TabIndex = 16;
+            this.label1.Text = "Współrzędne myszy:";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label4.Location = new System.Drawing.Point(199, 25);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(25, 19);
+            this.label4.TabIndex = 17;
+            this.label4.Text = "X:";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label5.Location = new System.Drawing.Point(375, 24);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(23, 19);
+            this.label5.TabIndex = 18;
+            this.label5.Text = "Y:";
+            this.label5.Click += new System.EventHandler(this.label5_Click);
+            // 
+            // kplblX
+            // 
+            this.kplblX.AutoSize = true;
+            this.kplblX.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.kplblX.Location = new System.Drawing.Point(230, 25);
+            this.kplblX.Name = "kplblX";
+            this.kplblX.Size = new System.Drawing.Size(20, 19);
+            this.kplblX.TabIndex = 19;
+            this.kplblX.Text = "X";
+            // 
+            // kplblY
+            // 
+            this.kplblY.AutoSize = true;
+            this.kplblY.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.kplblY.Location = new System.Drawing.Point(403, 24);
+            this.kplblY.Name = "kplblY";
+            this.kplblY.Size = new System.Drawing.Size(19, 19);
+            this.kplblY.TabIndex = 20;
+            this.kplblY.Text = "Y";
+            // 
             // ProjektIndywidualnyNr2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1105, 704);
+            this.Controls.Add(this.kplblY);
+            this.Controls.Add(this.kplblX);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.kpbtnWczytaj);
             this.Controls.Add(this.kpbtnZapisz);
             this.Controls.Add(this.kpbtnNastępny);
@@ -551,8 +593,6 @@
             this.Controls.Add(this.kpbtnPrzesuńFigury);
             this.Controls.Add(this.kpgbAtrybutyGraficzne);
             this.Controls.Add(this.kpgbWybierzFigurę);
-            this.Controls.Add(this.kptxtN);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.kppbRysownica);
             this.Name = "ProjektIndywidualnyNr2";
             this.Text = "ProjektIndywidualnyNr2";
@@ -572,8 +612,6 @@
         #endregion
 
         private System.Windows.Forms.PictureBox kppbRysownica;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox kptxtN;
         private System.Windows.Forms.GroupBox kpgbWybierzFigurę;
         private System.Windows.Forms.Button kpbtnCofnij;
         private System.Windows.Forms.RadioButton kprdbFillPie;
@@ -613,5 +651,10 @@
         private System.Windows.Forms.Button kpbtnNastępny;
         private System.Windows.Forms.Button kpbtnZapisz;
         private System.Windows.Forms.Button kpbtnWczytaj;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label kplblX;
+        private System.Windows.Forms.Label kplblY;
     }
 }
