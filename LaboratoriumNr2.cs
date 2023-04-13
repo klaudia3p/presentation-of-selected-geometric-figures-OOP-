@@ -50,12 +50,18 @@ namespace ProjektNr2_Plutka_62026
 
         private void LaboratoriumNr2_Load(object sender, EventArgs e)
         {
-            label1.Location =
+            //label1.Location =
+            //    new Point(pbRysownica.Location.X - pbRysownica.Width + Margines,
+            //    this.Top + 2 * Margines);
+            label2.Location =
                 new Point(pbRysownica.Location.X + pbRysownica.Width + Margines,
                 this.Top + 2 * Margines);
             chlbFiguryGeometryczne.Location =
                 new Point(pbRysownica.Location.X + pbRysownica.Width + Margines,
-                label1.Top+ label1.Height+Margines);
+                label2.Top + label2.Height + Margines);
+            //txtN.Location =
+            //    new Point(pbRysownica.Location.Y + pbRysownica.Top + Margines,
+            //    label1.Left + label1.Left + Margines);
 
         }
 
