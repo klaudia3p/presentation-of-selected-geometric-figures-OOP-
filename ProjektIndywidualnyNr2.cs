@@ -16,5 +16,10 @@ namespace ProjektNr2_Plutka_62026
         {
             InitializeComponent();
         }
+
+        private void kpbtnZapisz_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
