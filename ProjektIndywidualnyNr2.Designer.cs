@@ -371,6 +371,7 @@
             this.kpbtnKolorWypełnienia.TabIndex = 1;
             this.kpbtnKolorWypełnienia.Text = "Kolor \r\nwypełnienia";
             this.kpbtnKolorWypełnienia.UseVisualStyleBackColor = true;
+            this.kpbtnKolorWypełnienia.Click += new System.EventHandler(this.kpbtnKolorWypełnienia_Click);
             // 
             // kptbGrubośćLini
             // 
@@ -596,6 +597,7 @@
             this.Controls.Add(this.kppbRysownica);
             this.Name = "ProjektIndywidualnyNr2";
             this.Text = "ProjektIndywidualnyNr2";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ProjektIndywidualnyNr2_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.kppbRysownica)).EndInit();
             this.kpgbWybierzFigurę.ResumeLayout(false);
             this.kpgbWybierzFigurę.PerformLayout();

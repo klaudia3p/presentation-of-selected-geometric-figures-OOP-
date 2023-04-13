@@ -76,6 +76,7 @@
             this.Controls.Add(this.button1);
             this.Name = "KokpitProjektuNr2_Plutka_62026";
             this.Text = "Form1";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.KokpitProjektuNr2_Plutka_62026_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 
