@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static ProjektNr2_Plutka_62026.FiguryGeometryczne;
 
+using System.Data.SqlClient;
+
 namespace ProjektNr2_Plutka_62026
 {
     public partial class ProjektIndywidualnyNr2 : Form
@@ -18,13 +20,14 @@ namespace ProjektNr2_Plutka_62026
         Graphics kpRysownica;
         Pen kpPióro;
         SolidBrush kpPędzel;
+        const ushort kpPromienPunktu = 2;
         public ProjektIndywidualnyNr2()
         {
             InitializeComponent();
             kppbRysownica.Image = new Bitmap(kppbRysownica.Width, kppbRysownica.Height);
             kpRysownica = Graphics.FromImage(kppbRysownica.Image);
             kpPióro = new Pen(Color.Red, 1.7F);
-            kpPióro.DashStyle = DashStyle.Solid;
+            kpPióro.DashStyle = DashStyle.Dash;
             kpPióro.StartCap = LineCap.Round;
             kpPióro.EndCap = LineCap.Round;
             kpPędzel = new SolidBrush(DefaultBackColor);
@@ -99,8 +102,6 @@ namespace ProjektNr2_Plutka_62026
             if (e.Button == MouseButtons.Left)
                 kpPunkt = e.Location;
 
-           
-
         }
 
         private void kppbRysownica_MouseUp(object sender, MouseEventArgs e)
@@ -115,9 +116,36 @@ namespace ProjektNr2_Plutka_62026
 
             if (e.Button == MouseButtons.Left)
             {
-            
+                if (kprdbPunkt.Checked)
+                    
+                    kpRysownica.FillEllipse(kpPędzel,
+                        kpPunkt.X - kpPromienPunktu,
+                        kpPunkt.Y - kpPromienPunktu,
+                        2 * kpPromienPunktu,
+                        2 * kpPromienPunktu);
+                if (kprdbLiniaProsta.Checked)
+                    kpRysownica.DrawLine(kpPióro,
+                        kpPunkt.X,
+                        kpPunkt.Y,
+                        e.Location.X,
+                        e.Location.Y);
+                if (kprdbLiniaCiągłaKreślonaMyszą.Checked)
+                    kpRysownica.DrawLine(kpPióro,
+                        kpPunkt.X,
+                        kpPunkt.Y,
+                        e.Location.X,
+                        e.Location.Y);
+               
+                if (kprdbProstokąt.Checked)
+                {
+                    ushort kpStopieńWielokąta = 4;
+                    for (int i = 0; i < kpStopieńWielokąta; i++)
+                        kpRysownica.DrawRectangle(kpPióro, kpLewyGórnyNarożnikX, kpLewyGórnyNarożnikY,
+                            kpSzerokość, kpWysokość);
+                }
+                
             }
-
+            kppbRysownica.Refresh();
 
         }
 
@@ -199,6 +227,47 @@ namespace ProjektNr2_Plutka_62026
 
                 kpPaletaKolorów.Dispose();
             kpPióro.Color = kpPaletaKolorów.Color;
+        }
+
+        private void kprdbLiniaCiągłaKreślonaMyszą_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ProjektIndywidualnyNr2_MouseMove(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void kprdbKwadrat_CheckedChanged(object sender, EventArgs e)
+        {
+            
+           
+        }
+
+        private void kprdbProstokąt_CheckedChanged(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void kppbRysownica_MouseMove(object sender, MouseEventArgs e)
+        {
+
+            kplblX.Text = e.Location.X.ToString();
+            kplblY.Text = e.Location.Y.ToString();
+            if (e.Button == MouseButtons.Left)
+            {
+                if (kprdbLiniaCiągłaKreślonaMyszą.Checked)
+                {
+                    kpRysownica.DrawLine(kpPióro,
+                       kpPunkt.X,
+                       kpPunkt.Y,
+                       e.Location.X,
+                       e.Location.Y);
+                    kpPunkt = e.Location;
+                }
+                kppbRysownica.Refresh();
+            }
         }
     }
 }
