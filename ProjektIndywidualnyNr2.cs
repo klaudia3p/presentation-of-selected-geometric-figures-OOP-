@@ -65,30 +65,17 @@ namespace ProjektNr2_Plutka_62026
 
         private void kpbtnZapisz_Click(object sender, EventArgs e)
         {
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+            saveFileDialog1.Filter = "JPEG Image|*.jpg|Bitmap Image|*.bmp|PNG Image|*.png";
+            saveFileDialog1.Title = "Save an Image File";
+            saveFileDialog1.ShowDialog();
 
-            SaveFileDialog OknoWyboruPlikuDoZapisu = new SaveFileDialog();
-            OknoWyboruPlikuDoZapisu.Filter = "Pdf files (*.pdf)|*.pdf|All files (*.*)|*.*";
-            OknoWyboruPlikuDoZapisu.FilterIndex = 1;
-            OknoWyboruPlikuDoZapisu.RestoreDirectory = true;
-            OknoWyboruPlikuDoZapisu.InitialDirectory = "E:\\";
-            OknoWyboruPlikuDoZapisu.Title = "Wybór pliku do zapisu BitMapy";
-            if (OknoWyboruPlikuDoZapisu.ShowDialog() == DialogResult.OK)
+            if (saveFileDialog1.FileName != "")
             {
-                System.IO.StreamWriter PlikZnakowy = new System.IO.StreamWriter(OknoWyboruPlikuDoZapisu.FileName);
-                try
-                {
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("ERROR: podczas zapisywania Bitmapy w pliku wystąpił błąd: " + ex.Message);
-                }
-                finally
-                {
-                    PlikZnakowy.Close();
-                }
+                Bitmap bmp = new Bitmap(kppbRysownica.Width, kppbRysownica.Height);
+                kppbRysownica.DrawToBitmap(bmp, kppbRysownica.ClientRectangle);
+                bmp.Save(saveFileDialog1.FileName, System.Drawing.Imaging.ImageFormat.Jpeg);
             }
-            else
-                MessageBox.Show("UWAGA: nie dokonano wyboru pliku i polecenia zapisu nie zostało zrealizowane");
         }
 
         private void label5_Click(object sender, EventArgs e)
@@ -647,60 +634,16 @@ namespace ProjektNr2_Plutka_62026
         private void kpbtnWczytaj_Click(object sender, EventArgs e)
         {
 
-            OpenFileDialog OknoWyboruPlikuDoOdczytu = new OpenFileDialog();
-            OknoWyboruPlikuDoOdczytu.Filter = "pdffiles (*.pdf)|*.pdf|All files(*.*)|*.*";
-            OknoWyboruPlikuDoOdczytu.FilterIndex = 1;
-            OknoWyboruPlikuDoOdczytu.RestoreDirectory = true;
-            OknoWyboruPlikuDoOdczytu.InitialDirectory = "H:\\";
-            OknoWyboruPlikuDoOdczytu.Title = "Wybór pliku do odczytuBitMapy";
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            openFileDialog1.Filter = "JPEG Image|*.jpg|Bitmap Image|*.bmp|PNG Image|*.png";
+            openFileDialog1.Title = "Open an Image File";
+            openFileDialog1.ShowDialog();
 
-            if (OknoWyboruPlikuDoOdczytu.ShowDialog() == DialogResult.OK)
+            if (openFileDialog1.FileName != "")
             {
-                string WierszDanych;
-                string[] DaneWiersza;
-                ushort LicznikWierszy;
-                System.IO.StreamReader PlikZnakowy = new System.IO.StreamReader(OknoWyboruPlikuDoOdczytu.FileName);
-
-                LicznikWierszy = 0;
-                while (!((WierszDanych = PlikZnakowy.ReadLine()) is null))
-                    LicznikWierszy++;
-
-
-                PlikZnakowy.Close();
-
-
-                PlikZnakowy = new System.IO.StreamReader(OknoWyboruPlikuDoOdczytu.FileName);
-
-                try
-
-                {
-                    int NrWiersza = 0;
-
-                    while (!((WierszDanych = PlikZnakowy.ReadLine()) is null))
-                    {
-                        DaneWiersza = WierszDanych.Split(';');
-
-                        DaneWiersza[0].Trim(); DaneWiersza[1].Trim(); DaneWiersza[2].Trim();
-
-
-                    }
-
-
-                    kppbRysownica.Visible = true;
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("ERROR: błąd operacji (działania) na pliku (wyświetlony komunikat): ---> " + ex.Message);
-                }
-                finally
-                {
-                    PlikZnakowy.Close();
-                    PlikZnakowy.Dispose();
-                }
+                Bitmap bmp = new Bitmap(openFileDialog1.FileName);
+                kppbRysownica.Image = bmp;
             }
-            else
-                MessageBox.Show("Plik do odczytu tablicy TWS nie został wybrany i obsługa polecenia: 'Odczytanie stablicowanego szeregu z pliku' (z menu poziomu Plik) nie może być zrealizowana");
-
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -763,6 +706,47 @@ namespace ProjektNr2_Plutka_62026
                 }
                 kppbRysownica.Refresh();
             }
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            //Random rand = new Random();
+            //int x = rand.Next(kppbRysownica.Width);
+            //int y = rand.Next(kppbRysownica.Height);
+            //int width = rand.Next(kppbRysownica.Width - x);
+            //int height = rand.Next(kppbRysownica.Height - y);
+            //Color color = Color.FromArgb(rand.Next(256), rand.Next(256), rand.Next(256));
+            //Rectangle rect = new Rectangle(x, y, width, height);
+
+            //Bitmap bmp = new Bitmap(kppbRysownica.Width, kppbRysownica.Height);
+            //Graphics g = Graphics.FromImage(bmp);
+            //g.FillRectangle(new SolidBrush(color), rect);
+            //kppbRysownica.Image = bmp;
+        }
+
+        private void ProjektIndywidualnyNr2_Load(object sender, EventArgs e)
+        {
+            timer1.Start();
+        }
+
+        private void kpbtnPokazFigur_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+            Random rand = new Random();
+            int x = rand.Next(kppbRysownica.Width);
+            int y = rand.Next(kppbRysownica.Height);
+            int width = rand.Next(kppbRysownica.Width - x);
+            int height = rand.Next(kppbRysownica.Height - y);
+            Color color = Color.FromArgb(rand.Next(256), rand.Next(256), rand.Next(256));
+            Rectangle rect = new Rectangle(x, y, width, height);
+
+            Bitmap bmp = new Bitmap(kppbRysownica.Width, kppbRysownica.Height);
+            Graphics g = Graphics.FromImage(bmp);
+            g.FillRectangle(new SolidBrush(color), rect);
+            kppbRysownica.Image = bmp;
         }
     }
 }

@@ -31,6 +31,8 @@
             this.components = new System.ComponentModel.Container();
             this.kppbRysownica = new System.Windows.Forms.PictureBox();
             this.kpgbWybierzFigurę = new System.Windows.Forms.GroupBox();
+            this.kpnumKąty = new System.Windows.Forms.NumericUpDown();
+            this.label6 = new System.Windows.Forms.Label();
             this.kpbtnCofnij = new System.Windows.Forms.Button();
             this.kprdbFillPie = new System.Windows.Forms.RadioButton();
             this.kprdbDrawArc = new System.Windows.Forms.RadioButton();
@@ -76,15 +78,13 @@
             this.kplblY = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.label6 = new System.Windows.Forms.Label();
-            this.kpnumKąty = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.kppbRysownica)).BeginInit();
             this.kpgbWybierzFigurę.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kpnumKąty)).BeginInit();
             this.kpgbAtrybutyGraficzne.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kptbGrubośćLini)).BeginInit();
             this.kpgbPokazFigur.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.kpnumKąty)).BeginInit();
             this.SuspendLayout();
             // 
             // kppbRysownica
@@ -130,6 +130,39 @@
             this.kpgbWybierzFigurę.TabIndex = 4;
             this.kpgbWybierzFigurę.TabStop = false;
             this.kpgbWybierzFigurę.Text = "Wybierz figurę lub linię krzywą";
+            // 
+            // kpnumKąty
+            // 
+            this.kpnumKąty.Location = new System.Drawing.Point(235, 112);
+            this.kpnumKąty.Maximum = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
+            this.kpnumKąty.Minimum = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            this.kpnumKąty.Name = "kpnumKąty";
+            this.kpnumKąty.Size = new System.Drawing.Size(43, 20);
+            this.kpnumKąty.TabIndex = 22;
+            this.kpnumKąty.Value = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label6.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
+            this.label6.Location = new System.Drawing.Point(156, 114);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(79, 13);
+            this.label6.TabIndex = 21;
+            this.label6.Text = "Liczba kątów:";
             // 
             // kpbtnCofnij
             // 
@@ -424,6 +457,7 @@
             this.kpbtnPokazFigur.TabIndex = 7;
             this.kpbtnPokazFigur.Text = "Włącz pokaz figur";
             this.kpbtnPokazFigur.UseVisualStyleBackColor = true;
+            this.kpbtnPokazFigur.Click += new System.EventHandler(this.kpbtnPokazFigur_Click);
             // 
             // kpgbPokazFigur
             // 
@@ -446,6 +480,7 @@
             this.radioButton1.TabStop = true;
             this.radioButton1.Text = "Manualny\r\n(sterowany przyciskami)";
             this.radioButton1.UseVisualStyleBackColor = true;
+            this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
             // 
             // kprdbPokazAutomatyczny
             // 
@@ -572,40 +607,13 @@
             this.kplblY.TabIndex = 20;
             this.kplblY.Text = "Y";
             // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // errorProvider1
             // 
             this.errorProvider1.ContainerControl = this;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(156, 114);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(73, 13);
-            this.label6.TabIndex = 21;
-            this.label6.Text = "Liczba kątów:";
-            // 
-            // kpnumKąty
-            // 
-            this.kpnumKąty.Location = new System.Drawing.Point(235, 112);
-            this.kpnumKąty.Maximum = new decimal(new int[] {
-            20,
-            0,
-            0,
-            0});
-            this.kpnumKąty.Minimum = new decimal(new int[] {
-            3,
-            0,
-            0,
-            0});
-            this.kpnumKąty.Name = "kpnumKąty";
-            this.kpnumKąty.Size = new System.Drawing.Size(43, 20);
-            this.kpnumKąty.TabIndex = 22;
-            this.kpnumKąty.Value = new decimal(new int[] {
-            3,
-            0,
-            0,
-            0});
             // 
             // ProjektIndywidualnyNr2
             // 
@@ -633,17 +641,18 @@
             this.Name = "ProjektIndywidualnyNr2";
             this.Text = "ProjektIndywidualnyNr2";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ProjektIndywidualnyNr2_FormClosing);
+            this.Load += new System.EventHandler(this.ProjektIndywidualnyNr2_Load);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ProjektIndywidualnyNr2_MouseMove);
             ((System.ComponentModel.ISupportInitialize)(this.kppbRysownica)).EndInit();
             this.kpgbWybierzFigurę.ResumeLayout(false);
             this.kpgbWybierzFigurę.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kpnumKąty)).EndInit();
             this.kpgbAtrybutyGraficzne.ResumeLayout(false);
             this.kpgbAtrybutyGraficzne.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kptbGrubośćLini)).EndInit();
             this.kpgbPokazFigur.ResumeLayout(false);
             this.kpgbPokazFigur.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.kpnumKąty)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
