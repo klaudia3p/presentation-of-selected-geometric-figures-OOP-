@@ -595,6 +595,50 @@ namespace ProjektNr2_Plutka_62026
                     }
                     kpRysownica.DrawPolygon(kpPióro, kpWierzchołkiWielokąta);
                 }
+
+                if (kprdbWielokątForemny.Checked)
+                {
+                    
+                    ushort StopieńWielokąta = (ushort)kpnumKąty.Value;
+                    int R = kpSzerokość;
+                    double KątPołożeniaPierwszegoWierzchołka = 0.0;
+                    double KątMiędzyWierzchołkamiWielokąta = 360.0 / StopieńWielokąta;
+                    Point[] WierzchołkiWielokąta = new Point[StopieńWielokąta];
+                    for (int i = 0; i < StopieńWielokąta; i++)
+                    {
+                        WierzchołkiWielokąta[i].X = kpLewyGórnyNarożnikX +
+                          (int)(R * Math.Cos(Math.PI * (KątPołożeniaPierwszegoWierzchołka +
+                            i * KątMiędzyWierzchołkamiWielokąta) / 180));
+
+                        WierzchołkiWielokąta[i].Y = kpLewyGórnyNarożnikY +
+                          (int)(R * Math.Sin(Math.PI * (KątPołożeniaPierwszegoWierzchołka +
+                            i * KątMiędzyWierzchołkamiWielokąta) / 180));
+                    }
+                   
+                    kpRysownica.DrawPolygon(kpPióro, WierzchołkiWielokąta);
+
+                }
+
+                if (kprdbWielokątWypełniony.Checked)
+                {
+                    ushort StopieńWielokąta = (ushort)kpnumKąty.Value;
+                    int R = kpSzerokość;
+                    double KątPołożeniaPierwszegoWierzchołka = 0.0;
+                    double KątMiędzyWierzchołkamiWielokąta = 360.0 / StopieńWielokąta;
+                    Point[] WierzchołkiWielokąta = new Point[StopieńWielokąta];
+                    for (int i = 0; i < StopieńWielokąta; i++)
+                    {
+                        WierzchołkiWielokąta[i].X = kpLewyGórnyNarożnikX +
+                          (int)(R * Math.Cos(Math.PI * (KątPołożeniaPierwszegoWierzchołka +
+                            i * KątMiędzyWierzchołkamiWielokąta) / 180));
+
+                        WierzchołkiWielokąta[i].Y = kpLewyGórnyNarożnikY +
+                          (int)(R * Math.Sin(Math.PI * (KątPołożeniaPierwszegoWierzchołka +
+                            i * KątMiędzyWierzchołkamiWielokąta) / 180));
+                    }
+                    kpPędzel.Color = kpbtnKolorWypełnienia.BackColor;
+                    kpRysownica.FillPolygon(kpPędzel, WierzchołkiWielokąta);
+                }
             }
             kppbRysownica.Refresh();
 

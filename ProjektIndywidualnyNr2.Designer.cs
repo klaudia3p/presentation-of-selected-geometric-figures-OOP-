@@ -76,12 +76,15 @@
             this.kplblY = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.label6 = new System.Windows.Forms.Label();
+            this.kpnumKąty = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.kppbRysownica)).BeginInit();
             this.kpgbWybierzFigurę.SuspendLayout();
             this.kpgbAtrybutyGraficzne.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kptbGrubośćLini)).BeginInit();
             this.kpgbPokazFigur.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kpnumKąty)).BeginInit();
             this.SuspendLayout();
             // 
             // kppbRysownica
@@ -99,6 +102,8 @@
             // 
             // kpgbWybierzFigurę
             // 
+            this.kpgbWybierzFigurę.Controls.Add(this.kpnumKąty);
+            this.kpgbWybierzFigurę.Controls.Add(this.label6);
             this.kpgbWybierzFigurę.Controls.Add(this.kpbtnCofnij);
             this.kpgbWybierzFigurę.Controls.Add(this.kprdbFillPie);
             this.kpgbWybierzFigurę.Controls.Add(this.kprdbDrawArc);
@@ -229,7 +234,7 @@
             // kprdbLiniaCiągłaKreślonaMyszą
             // 
             this.kprdbLiniaCiągłaKreślonaMyszą.AutoSize = true;
-            this.kprdbLiniaCiągłaKreślonaMyszą.Location = new System.Drawing.Point(140, 116);
+            this.kprdbLiniaCiągłaKreślonaMyszą.Location = new System.Drawing.Point(140, 133);
             this.kprdbLiniaCiągłaKreślonaMyszą.Name = "kprdbLiniaCiągłaKreślonaMyszą";
             this.kprdbLiniaCiągłaKreślonaMyszą.Size = new System.Drawing.Size(128, 30);
             this.kprdbLiniaCiągłaKreślonaMyszą.TabIndex = 9;
@@ -372,7 +377,7 @@
             // 
             // kptbGrubośćLini
             // 
-            this.kptbGrubośćLini.Location = new System.Drawing.Point(120, 70);
+            this.kptbGrubośćLini.Location = new System.Drawing.Point(129, 80);
             this.kptbGrubośćLini.Name = "kptbGrubośćLini";
             this.kptbGrubośćLini.Size = new System.Drawing.Size(148, 45);
             this.kptbGrubośćLini.TabIndex = 2;
@@ -571,6 +576,37 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(156, 114);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(73, 13);
+            this.label6.TabIndex = 21;
+            this.label6.Text = "Liczba kątów:";
+            // 
+            // kpnumKąty
+            // 
+            this.kpnumKąty.Location = new System.Drawing.Point(235, 112);
+            this.kpnumKąty.Maximum = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
+            this.kpnumKąty.Minimum = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            this.kpnumKąty.Name = "kpnumKąty";
+            this.kpnumKąty.Size = new System.Drawing.Size(43, 20);
+            this.kpnumKąty.TabIndex = 22;
+            this.kpnumKąty.Value = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            // 
             // ProjektIndywidualnyNr2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -607,6 +643,7 @@
             this.kpgbPokazFigur.ResumeLayout(false);
             this.kpgbPokazFigur.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kpnumKąty)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -661,5 +698,7 @@
         private System.Windows.Forms.Label kplblY;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.NumericUpDown kpnumKąty;
     }
 }
