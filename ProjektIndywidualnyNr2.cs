@@ -16,6 +16,36 @@ namespace ProjektNr2_Plutka_62026
 {
     public partial class ProjektIndywidualnyNr2 : Form
     {
+        struct OpisKrzywejBeziera
+        {
+
+            public Point kpPunktP0;
+            public Point kpPunktP1;
+            public Point kpPunktP2;
+            public Point kpPunktP3;
+
+            public ushort kpNumerPunktuKontrolnego;
+            public float kpPromieńPunktuKontrolnego;
+        }
+        OpisKrzywejBeziera kpKrzywaBeziera;
+        Font FontOpisuPunktów = new Font("Arial", 10, FontStyle.Italic);
+
+        struct OpisKrzywejKardynalnej
+        {
+
+            public PointF kpPunkt01;
+            public PointF kpPunkt02;
+            public PointF kpPunkt03;
+            public PointF kpPunkt04;
+            public PointF kpPunkt05;
+
+            public ushort kpNumerPunktuKontrolnego;
+            public float kpPromieńPunktuKontrolnego;
+        }
+        OpisKrzywejKardynalnej kpKrzywaKardynalna;
+
+
+
         Point kpPunkt = Point.Empty;
         Graphics kpRysownica;
         Pen kpPióro;
@@ -117,25 +147,35 @@ namespace ProjektNr2_Plutka_62026
             if (e.Button == MouseButtons.Left)
             {
                 if (kprdbPunkt.Checked)
-                    
+                {
                     kpRysownica.FillEllipse(kpPędzel,
                         kpPunkt.X - kpPromienPunktu,
                         kpPunkt.Y - kpPromienPunktu,
                         2 * kpPromienPunktu,
                         2 * kpPromienPunktu);
+                }
+
+
                 if (kprdbLiniaProsta.Checked)
+                {
                     kpRysownica.DrawLine(kpPióro,
                         kpPunkt.X,
                         kpPunkt.Y,
                         e.Location.X,
                         e.Location.Y);
+                }
+
+
                 if (kprdbLiniaCiągłaKreślonaMyszą.Checked)
+                {
                     kpRysownica.DrawLine(kpPióro,
                         kpPunkt.X,
                         kpPunkt.Y,
                         e.Location.X,
                         e.Location.Y);
-               
+                }
+
+
                 if (kprdbProstokąt.Checked)
                 {
                     ushort kpStopieńWielokąta = 4;
@@ -143,7 +183,418 @@ namespace ProjektNr2_Plutka_62026
                         kpRysownica.DrawRectangle(kpPióro, kpLewyGórnyNarożnikX, kpLewyGórnyNarożnikY,
                             kpSzerokość, kpWysokość);
                 }
-                
+
+
+                if (kprdbKwadrat.Checked)
+                {
+                    ushort kpStopieńWielokąta = 4;
+                    int R = kpSzerokość;
+                    double kpKątPołożeniaPierwszegoWierzchołka = 0.0;
+                    double kpKątMiędzyWierzchołkamiWielokąta = 360.0 / kpStopieńWielokąta;
+                    Point[] kpWierzchołkiWielokąta = new Point[kpStopieńWielokąta];
+                    for (int i = 0; i < kpStopieńWielokąta; i++)
+                    {
+                        kpWierzchołkiWielokąta[i].X = kpLewyGórnyNarożnikX +
+                          (int)(R * Math.Cos(Math.PI * (kpKątPołożeniaPierwszegoWierzchołka +
+                            i * kpKątMiędzyWierzchołkamiWielokąta) / 180));
+
+                        kpWierzchołkiWielokąta[i].Y = kpLewyGórnyNarożnikY +
+                          (int)(R * Math.Sin(Math.PI * (kpKątPołożeniaPierwszegoWierzchołka +
+                            i * kpKątMiędzyWierzchołkamiWielokąta) / 180));
+
+                    }
+                    kpRysownica.DrawPolygon(kpPióro, kpWierzchołkiWielokąta);
+                }
+
+
+                if (kprdbOkrąg.Checked)
+                {
+                    ushort kpStopieńWielokąta = 360;
+                    int R = kpSzerokość;
+                    double kpKątPołożeniaPierwszegoWierzchołka = 0.0;
+                    double kpKątMiędzyWierzchołkamiWielokąta = 360.0 / kpStopieńWielokąta;
+                    Point[] kpWierzchołkiWielokąta = new Point[kpStopieńWielokąta];
+                    for (int i = 0; i < kpStopieńWielokąta; i++)
+                    {
+                        kpWierzchołkiWielokąta[i].X = kpLewyGórnyNarożnikX +
+                          (int)(R * Math.Cos(Math.PI * (kpKątPołożeniaPierwszegoWierzchołka +
+                            i * kpKątMiędzyWierzchołkamiWielokąta) / 180));
+
+                        kpWierzchołkiWielokąta[i].Y = kpLewyGórnyNarożnikY +
+                          (int)(R * Math.Sin(Math.PI * (kpKątPołożeniaPierwszegoWierzchołka +
+                            i * kpKątMiędzyWierzchołkamiWielokąta) / 180));
+
+                    }
+                    kpRysownica.DrawPolygon(kpPióro, kpWierzchołkiWielokąta);
+                }
+
+
+                if (kprdbKoło.Checked)
+                {
+                    ushort kpStopieńWielokąta = 360;
+                    int R = kpSzerokość;
+                    double kpKątPołożeniaPierwszegoWierzchołka = 0.0;
+                    double kpKątMiędzyWierzchołkamiWielokąta = 360.0 / kpStopieńWielokąta;
+                    Point[] kpWierzchołkiWielokąta = new Point[kpStopieńWielokąta];
+                    for (int i = 0; i < kpStopieńWielokąta; i++)
+                    {
+                        kpWierzchołkiWielokąta[i].X = kpLewyGórnyNarożnikX +
+                          (int)(R * Math.Cos(Math.PI * (kpKątPołożeniaPierwszegoWierzchołka +
+                            i * kpKątMiędzyWierzchołkamiWielokąta) / 180));
+
+                        kpWierzchołkiWielokąta[i].Y = kpLewyGórnyNarożnikY +
+                          (int)(R * Math.Sin(Math.PI * (kpKątPołożeniaPierwszegoWierzchołka +
+                            i * kpKątMiędzyWierzchołkamiWielokąta) / 180));
+
+                    }
+                    kpPędzel.Color = kpbtnKolorWypełnienia.BackColor;
+                    kpRysownica.FillPolygon(kpPędzel, kpWierzchołkiWielokąta);
+                }
+
+
+                if (kprdbElipsa.Checked)
+                {
+                    ushort kpStopieńWielokąta = 360;
+                    for (int i = 0; i < kpStopieńWielokąta; i++)
+                        kpRysownica.DrawEllipse(kpPióro, kpLewyGórnyNarożnikX, kpLewyGórnyNarożnikY,
+                           kpSzerokość, kpWysokość);
+                }
+
+
+                if (kprdbKrzywaBeziera.Checked)
+                {
+                    if (kpgbWybierzFigurę.Enabled)
+                    {
+                        kpgbWybierzFigurę.Enabled = false;
+                        kpKrzywaBeziera.kpNumerPunktuKontrolnego = 0;
+                        kpKrzywaBeziera.kpPromieńPunktuKontrolnego = 5;
+                        kpKrzywaBeziera.kpPunktP0 = e.Location;
+
+                        using (SolidBrush kpPędzel = new SolidBrush(Color.Black))
+                        {
+                            kpRysownica.FillEllipse(kpPędzel,
+                                e.Location.X - kpKrzywaBeziera.kpPromieńPunktuKontrolnego,
+                                e.Location.Y - kpKrzywaBeziera.kpPromieńPunktuKontrolnego,
+                                2 * kpKrzywaBeziera.kpPromieńPunktuKontrolnego,
+                                2 * kpKrzywaBeziera.kpPromieńPunktuKontrolnego);
+                            kpRysownica.DrawString("p" + kpKrzywaBeziera.kpNumerPunktuKontrolnego.ToString(),
+                                FontOpisuPunktów, kpPędzel, e.Location);
+                        }
+                    }
+                    else
+                    {
+                        kpKrzywaBeziera.kpNumerPunktuKontrolnego++;
+                        switch (kpKrzywaBeziera.kpNumerPunktuKontrolnego)
+                        {
+                            case 1: kpKrzywaBeziera.kpPunktP1 = e.Location; break;
+                            case 2: kpKrzywaBeziera.kpPunktP2 = e.Location; break;
+                            case 3: kpKrzywaBeziera.kpPunktP3 = e.Location; break;
+                        }
+                        if (kpKrzywaBeziera.kpNumerPunktuKontrolnego < 3)
+                        {
+                            using (SolidBrush kpPędzel = new SolidBrush(Color.Red))
+                            {
+                                kpRysownica.FillEllipse(kpPędzel,
+                                 e.Location.X - kpKrzywaBeziera.kpPromieńPunktuKontrolnego,
+                                e.Location.Y - kpKrzywaBeziera.kpPromieńPunktuKontrolnego,
+                                2 * kpKrzywaBeziera.kpPromieńPunktuKontrolnego,
+                                2 * kpKrzywaBeziera.kpPromieńPunktuKontrolnego);
+                                kpRysownica.DrawString("p" + kpKrzywaBeziera.kpNumerPunktuKontrolnego.ToString(),
+                                    FontOpisuPunktów, kpPędzel, e.Location);
+                            }
+                        }
+                        else
+                        {
+                            using (SolidBrush kpPędzel = new SolidBrush(Color.Black))
+                            {
+                                kpRysownica.FillEllipse(kpPędzel,
+                                 e.Location.X - kpKrzywaBeziera.kpPromieńPunktuKontrolnego,
+                                e.Location.Y - kpKrzywaBeziera.kpPromieńPunktuKontrolnego,
+                                2 * kpKrzywaBeziera.kpPromieńPunktuKontrolnego,
+                                2 * kpKrzywaBeziera.kpPromieńPunktuKontrolnego);
+                                kpRysownica.DrawString("p" + kpKrzywaBeziera.kpNumerPunktuKontrolnego.ToString(),
+                                    FontOpisuPunktów, kpPędzel, e.Location);
+                            }
+                            kpRysownica.DrawBezier(kpPióro,
+                                kpKrzywaBeziera.kpPunktP0,
+                                kpKrzywaBeziera.kpPunktP1,
+                                kpKrzywaBeziera.kpPunktP2,
+                                kpKrzywaBeziera.kpPunktP3);
+                            kpgbWybierzFigurę.Enabled = true;
+                        }
+                    }
+                }
+
+
+                if (kprdbKrzywaKardynalna.Checked)
+                {
+
+                    if (kpgbWybierzFigurę.Enabled)
+                    {
+                        kpgbWybierzFigurę.Enabled = false;
+                        kpKrzywaKardynalna.kpNumerPunktuKontrolnego = 0;
+                        kpKrzywaKardynalna.kpPromieńPunktuKontrolnego = 4;
+                        kpKrzywaKardynalna.kpPunkt01 = e.Location;
+
+                        using (SolidBrush kpPędzel = new SolidBrush(Color.Black))
+                        {
+                            kpRysownica.FillEllipse(kpPędzel,
+                                e.Location.X - kpKrzywaKardynalna.kpPromieńPunktuKontrolnego,
+                                e.Location.Y - kpKrzywaKardynalna.kpPromieńPunktuKontrolnego,
+                                2 * kpKrzywaKardynalna.kpPromieńPunktuKontrolnego,
+                                2 * kpKrzywaKardynalna.kpPromieńPunktuKontrolnego);
+                            kpRysownica.DrawString("p" + kpKrzywaKardynalna.kpNumerPunktuKontrolnego.ToString(),
+                                FontOpisuPunktów, kpPędzel, e.Location);
+                        }
+                    }
+                    else
+                    {
+                        kpKrzywaKardynalna.kpNumerPunktuKontrolnego++;
+                        switch (kpKrzywaKardynalna.kpNumerPunktuKontrolnego)
+                        {
+                            case 1: kpKrzywaKardynalna.kpPunkt02 = e.Location; break;
+                            case 2: kpKrzywaKardynalna.kpPunkt03 = e.Location; break;
+                            case 3: kpKrzywaKardynalna.kpPunkt04 = e.Location; break;
+                            case 4: kpKrzywaKardynalna.kpPunkt05 = e.Location; break;
+                        }
+                        if (kpKrzywaKardynalna.kpNumerPunktuKontrolnego < 4)
+                        {
+                            using (SolidBrush kpPędzel = new SolidBrush(Color.Red))
+                            {
+                                kpRysownica.FillEllipse(kpPędzel,
+                                 e.Location.X - kpKrzywaKardynalna.kpPromieńPunktuKontrolnego,
+                                e.Location.Y - kpKrzywaKardynalna.kpPromieńPunktuKontrolnego,
+                                2 * kpKrzywaKardynalna.kpPromieńPunktuKontrolnego,
+                                2 * kpKrzywaKardynalna.kpPromieńPunktuKontrolnego);
+                                kpRysownica.DrawString("p" + kpKrzywaKardynalna.kpNumerPunktuKontrolnego.ToString(),
+                                    FontOpisuPunktów, kpPędzel, e.Location);
+                            }
+                        }
+                        else
+                        {
+                            using (SolidBrush kpPędzel = new SolidBrush(Color.Black))
+                            {
+                                kpRysownica.FillEllipse(kpPędzel,
+                                 e.Location.X - kpKrzywaKardynalna.kpPromieńPunktuKontrolnego,
+                                e.Location.Y - kpKrzywaKardynalna.kpPromieńPunktuKontrolnego,
+                                2 * kpKrzywaKardynalna.kpPromieńPunktuKontrolnego,
+                                2 * kpKrzywaKardynalna.kpPromieńPunktuKontrolnego);
+                                kpRysownica.DrawString("p" + kpKrzywaKardynalna.kpNumerPunktuKontrolnego.ToString(),
+                                    FontOpisuPunktów, kpPędzel, e.Location);
+                            }
+                            PointF[] points = {
+                                kpKrzywaKardynalna.kpPunkt01,
+                                kpKrzywaKardynalna.kpPunkt02,
+                                kpKrzywaKardynalna.kpPunkt03,
+                                kpKrzywaKardynalna.kpPunkt04,
+                                kpKrzywaKardynalna.kpPunkt05};
+                            kpRysownica.DrawCurve(kpPióro, points, 1.0f);
+                            kpgbWybierzFigurę.Enabled = true;
+                        }
+                    }
+
+
+                }
+
+
+                if (kprdbFillRectangle.Checked)
+                {
+                    ushort kpStopieńWielokąta = 4;
+                    for (int i = 0; i < kpStopieńWielokąta; i++)
+                        kpPędzel.Color = kpbtnKolorWypełnienia.BackColor;
+                    kpRysownica.FillRectangle(kpPędzel, kpLewyGórnyNarożnikX, kpLewyGórnyNarożnikY,
+                            kpSzerokość, kpWysokość);
+                }
+
+
+                if (kprdbFillElipse.Checked)
+                {
+                    ushort kpStopieńWielokąta = 360;
+                    for (int i = 0; i < kpStopieńWielokąta; i++)
+                        kpPędzel.Color = kpbtnKolorWypełnienia.BackColor;
+                    kpRysownica.FillEllipse(kpPędzel, kpLewyGórnyNarożnikX, kpLewyGórnyNarożnikY,
+                           kpSzerokość, kpWysokość);
+                }
+
+
+                if (kprdbDrawClosedCurve.Checked)
+                {
+
+                    if (kpgbWybierzFigurę.Enabled)
+                    {
+                        kpgbWybierzFigurę.Enabled = false;
+                        kpKrzywaKardynalna.kpNumerPunktuKontrolnego = 0;
+                        kpKrzywaKardynalna.kpPromieńPunktuKontrolnego = 4;
+                        kpKrzywaKardynalna.kpPunkt01 = e.Location;
+
+                        using (SolidBrush kpPędzel = new SolidBrush(Color.Black))
+                        {
+                            kpRysownica.FillEllipse(kpPędzel,
+                                e.Location.X - kpKrzywaKardynalna.kpPromieńPunktuKontrolnego,
+                                e.Location.Y - kpKrzywaKardynalna.kpPromieńPunktuKontrolnego,
+                                2 * kpKrzywaKardynalna.kpPromieńPunktuKontrolnego,
+                                2 * kpKrzywaKardynalna.kpPromieńPunktuKontrolnego);
+                            kpRysownica.DrawString("p" + kpKrzywaKardynalna.kpNumerPunktuKontrolnego.ToString(),
+                                FontOpisuPunktów, kpPędzel, e.Location);
+                        }
+                    }
+                    else
+                    {
+                        kpKrzywaKardynalna.kpNumerPunktuKontrolnego++;
+                        switch (kpKrzywaKardynalna.kpNumerPunktuKontrolnego)
+                        {
+                            case 1: kpKrzywaKardynalna.kpPunkt02 = e.Location; break;
+                            case 2: kpKrzywaKardynalna.kpPunkt03 = e.Location; break;
+                            case 3: kpKrzywaKardynalna.kpPunkt04 = e.Location; break;
+                            case 4: kpKrzywaKardynalna.kpPunkt05 = e.Location; break;
+                        }
+                        if (kpKrzywaKardynalna.kpNumerPunktuKontrolnego < 4)
+                        {
+                            using (SolidBrush kpPędzel = new SolidBrush(Color.Red))
+                            {
+                                kpRysownica.FillEllipse(kpPędzel,
+                                 e.Location.X - kpKrzywaKardynalna.kpPromieńPunktuKontrolnego,
+                                e.Location.Y - kpKrzywaKardynalna.kpPromieńPunktuKontrolnego,
+                                2 * kpKrzywaKardynalna.kpPromieńPunktuKontrolnego,
+                                2 * kpKrzywaKardynalna.kpPromieńPunktuKontrolnego);
+                                kpRysownica.DrawString("p" + kpKrzywaKardynalna.kpNumerPunktuKontrolnego.ToString(),
+                                    FontOpisuPunktów, kpPędzel, e.Location);
+                            }
+                        }
+                        else
+                        {
+                            using (SolidBrush kpPędzel = new SolidBrush(Color.Black))
+                            {
+                                kpRysownica.FillEllipse(kpPędzel,
+                                 e.Location.X - kpKrzywaKardynalna.kpPromieńPunktuKontrolnego,
+                                e.Location.Y - kpKrzywaKardynalna.kpPromieńPunktuKontrolnego,
+                                2 * kpKrzywaKardynalna.kpPromieńPunktuKontrolnego,
+                                2 * kpKrzywaKardynalna.kpPromieńPunktuKontrolnego);
+                                kpRysownica.DrawString("p" + kpKrzywaKardynalna.kpNumerPunktuKontrolnego.ToString(),
+                                    FontOpisuPunktów, kpPędzel, e.Location);
+                            }
+                            PointF[] points = {
+                                kpKrzywaKardynalna.kpPunkt01,
+                                kpKrzywaKardynalna.kpPunkt02,
+                                kpKrzywaKardynalna.kpPunkt03,
+                                kpKrzywaKardynalna.kpPunkt04,
+                                kpKrzywaKardynalna.kpPunkt05};
+                            kpRysownica.DrawClosedCurve(kpPióro, points);
+                            kpgbWybierzFigurę.Enabled = true;
+                        }
+                    }
+                }
+
+
+                if (kprdbFillClosedCurve.Checked)
+                {
+
+                    if (kpgbWybierzFigurę.Enabled)
+                    {
+                        kpgbWybierzFigurę.Enabled = false;
+                        kpKrzywaKardynalna.kpNumerPunktuKontrolnego = 0;
+                        kpKrzywaKardynalna.kpPromieńPunktuKontrolnego = 4;
+                        kpKrzywaKardynalna.kpPunkt01 = e.Location;
+
+                        using (SolidBrush kpPędzel = new SolidBrush(Color.Black))
+                        {
+                            kpRysownica.FillEllipse(kpPędzel,
+                                e.Location.X - kpKrzywaKardynalna.kpPromieńPunktuKontrolnego,
+                                e.Location.Y - kpKrzywaKardynalna.kpPromieńPunktuKontrolnego,
+                                2 * kpKrzywaKardynalna.kpPromieńPunktuKontrolnego,
+                                2 * kpKrzywaKardynalna.kpPromieńPunktuKontrolnego);
+                            kpRysownica.DrawString("p" + kpKrzywaKardynalna.kpNumerPunktuKontrolnego.ToString(),
+                                FontOpisuPunktów, kpPędzel, e.Location);
+                        }
+                    }
+                    else
+                    {
+                        kpKrzywaKardynalna.kpNumerPunktuKontrolnego++;
+                        switch (kpKrzywaKardynalna.kpNumerPunktuKontrolnego)
+                        {
+                            case 1: kpKrzywaKardynalna.kpPunkt02 = e.Location; break;
+                            case 2: kpKrzywaKardynalna.kpPunkt03 = e.Location; break;
+                            case 3: kpKrzywaKardynalna.kpPunkt04 = e.Location; break;
+                            case 4: kpKrzywaKardynalna.kpPunkt05 = e.Location; break;
+                        }
+                        if (kpKrzywaKardynalna.kpNumerPunktuKontrolnego < 4)
+                        {
+                            using (SolidBrush kpPędzel = new SolidBrush(Color.Red))
+                            {
+                                kpRysownica.FillEllipse(kpPędzel,
+                                 e.Location.X - kpKrzywaKardynalna.kpPromieńPunktuKontrolnego,
+                                e.Location.Y - kpKrzywaKardynalna.kpPromieńPunktuKontrolnego,
+                                2 * kpKrzywaKardynalna.kpPromieńPunktuKontrolnego,
+                                2 * kpKrzywaKardynalna.kpPromieńPunktuKontrolnego);
+                                kpRysownica.DrawString("p" + kpKrzywaKardynalna.kpNumerPunktuKontrolnego.ToString(),
+                                    FontOpisuPunktów, kpPędzel, e.Location);
+                            }
+                        }
+                        else
+                        {
+                            using (SolidBrush kpPędzel = new SolidBrush(Color.Black))
+                            {
+                                kpRysownica.FillEllipse(kpPędzel,
+                                 e.Location.X - kpKrzywaKardynalna.kpPromieńPunktuKontrolnego,
+                                e.Location.Y - kpKrzywaKardynalna.kpPromieńPunktuKontrolnego,
+                                2 * kpKrzywaKardynalna.kpPromieńPunktuKontrolnego,
+                                2 * kpKrzywaKardynalna.kpPromieńPunktuKontrolnego);
+                                kpRysownica.DrawString("p" + kpKrzywaKardynalna.kpNumerPunktuKontrolnego.ToString(),
+                                    FontOpisuPunktów, kpPędzel, e.Location);
+                            }
+                            PointF[] points = {
+                                kpKrzywaKardynalna.kpPunkt01,
+                                kpKrzywaKardynalna.kpPunkt02,
+                                kpKrzywaKardynalna.kpPunkt03,
+                                kpKrzywaKardynalna.kpPunkt04,
+                                kpKrzywaKardynalna.kpPunkt05};
+                            kpPędzel.Color = kpbtnKolorWypełnienia.BackColor;
+                            kpRysownica.FillClosedCurve(kpPędzel, points);
+                            kpgbWybierzFigurę.Enabled = true;
+                        }
+                    }
+                }
+
+
+                if (kprdbDrawPie.Checked)
+                {
+
+                    //Rectangle rect = new Rectangle(
+                    //kpLewyGórnyNarożnikY, kpLewyGórnyNarożnikX, kpWysokość, kpSzerokość);
+                    //kpRysownica.DrawPie(kpPióro, rect, 0.0f, 90.0f);
+
+                }
+
+
+                if (kprdbFillPie.Checked)
+                {
+
+                    Rectangle rect = new Rectangle(
+       kpLewyGórnyNarożnikY, kpLewyGórnyNarożnikX, kpWysokość, kpSzerokość);
+                    kpPędzel.Color = kpbtnKolorWypełnienia.BackColor;
+                    kpRysownica.FillPie(kpPędzel, rect, 0.0f, 90.0f);
+
+                }
+
+
+                if (kprdbDrawArc.Checked)
+                {
+                    ushort kpStopieńWielokąta = 1000;
+                    int R = kpSzerokość;
+                    double kpKątPołożeniaPierwszegoWierzchołka = 90.0;
+                    double kpKątMiędzyWierzchołkamiWielokąta = 90.0 / kpStopieńWielokąta;
+                    Point[] kpWierzchołkiWielokąta = new Point[kpStopieńWielokąta];
+                    for (int i = 0; i < kpStopieńWielokąta; i++)
+                    {
+                        kpWierzchołkiWielokąta[i].X = kpLewyGórnyNarożnikX + (int)(R * Math.Cos(Math.PI
+                            * (kpKątPołożeniaPierwszegoWierzchołka + i * kpKątMiędzyWierzchołkamiWielokąta) / 180.0));
+
+                        kpWierzchołkiWielokąta[i].Y = kpLewyGórnyNarożnikY + (int)(R * Math.Sin(Math.PI
+                            * (kpKątPołożeniaPierwszegoWierzchołka + i * kpKątMiędzyWierzchołkamiWielokąta) / 180.0));
+
+                    }
+                    kpRysownica.DrawPolygon(kpPióro, kpWierzchołkiWielokąta);
+                }
             }
             kppbRysownica.Refresh();
 
