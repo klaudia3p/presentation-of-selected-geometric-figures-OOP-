@@ -11,6 +11,8 @@ using System.Windows.Forms;
 using static ProjektNr2_Plutka_62026.FiguryGeometryczne;
 
 using System.Data.SqlClient;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Net;
 
 namespace ProjektNr2_Plutka_62026
 {
@@ -654,6 +656,8 @@ namespace ProjektNr2_Plutka_62026
         private void kptbGrubośćLini_Scroll(object sender, EventArgs e)
         {
 
+            int kplineWidth = kptbGrubośćLini.Value;
+            kpPióro.Width = kplineWidth;
         }
 
         private void kpbtnKolorLini_Click(object sender, EventArgs e)

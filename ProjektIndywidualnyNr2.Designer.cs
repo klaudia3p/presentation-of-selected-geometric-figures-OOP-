@@ -411,9 +411,12 @@
             // kptbGrubośćLini
             // 
             this.kptbGrubośćLini.Location = new System.Drawing.Point(129, 80);
+            this.kptbGrubośćLini.Maximum = 5;
+            this.kptbGrubośćLini.Minimum = 1;
             this.kptbGrubośćLini.Name = "kptbGrubośćLini";
-            this.kptbGrubośćLini.Size = new System.Drawing.Size(148, 45);
+            this.kptbGrubośćLini.Size = new System.Drawing.Size(139, 45);
             this.kptbGrubośćLini.TabIndex = 2;
+            this.kptbGrubośćLini.Value = 1;
             this.kptbGrubośćLini.Scroll += new System.EventHandler(this.kptbGrubośćLini_Scroll);
             // 
             // kpbtnKolorWypełnienia
