@@ -650,7 +650,28 @@ namespace ProjektNr2_Plutka_62026
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            string kpWybranyStyl = comboBox1.SelectedItem.ToString();
+           
+            switch (kpWybranyStyl)
+            {
+                case "Solid":
+                    kpPióro.DashStyle = DashStyle.Solid;
+                    break;
+                case "Dash":
+                    kpPióro.DashStyle = DashStyle.Dash;
+                    break;
+                case "Dot":
+                    kpPióro.DashStyle = DashStyle.Dot;
+                    break;
+                case "DashDot":
+                    kpPióro.DashStyle = DashStyle.DashDot;
+                    break;
+                case "DashDotDot":
+                    kpPióro.DashStyle = DashStyle.DashDotDot;
+                    break;
+                default:
+                    break;
+            }
         }
 
         private void kptbGrubośćLini_Scroll(object sender, EventArgs e)
