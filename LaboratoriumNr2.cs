@@ -87,7 +87,7 @@ namespace ProjektNr2_Plutka_62026
             //utworzenie kolekcji wybranych figur geom
             CheckedListBox.CheckedItemCollection WybraneFG = chlbFiguryGeometryczne.CheckedItems;
             //tworzenie egzemplarzy fg i wpisanie do tfg ich referencji oraz wykreslenie
-            for (ushort i = 1; i <= N; i++)
+            for (ushort i = 0; i < N; i++)
             {
                 Xp = rnd.Next(Margines, Xmax- Margines);
                 Yp = rnd.Next(Margines, Ymax - Margines);
@@ -203,5 +203,31 @@ namespace ProjektNr2_Plutka_62026
             else
                 e.Cancel = true;
         }
+
+        private void btnPrzesuńdoNowegoXY_Click(object sender, EventArgs e)
+        {
+            //deklaracej= pomocnicze
+            Random rnd = new Random();
+            int Xmax, Ymax;
+            int Xn, Yn;
+            //wyczyszczenie powierzchni graficznej
+            Rysownica.Clear(pbRysownica.BackColor);
+            //odczytanie rozmiaru powierzchni graficznej
+            Xmax = pbRysownica.Width;
+            Ymax = pbRysownica.Height;
+            //przesuniecie wsszytskich fig geom do nowego polozenia
+            for (int i=0; i<TFG.Length; i++)
+            {
+                //wylososwanie nowego polozenia
+                Xn = rnd.Next(Margines, Xmax - Margines);
+                Yn = rnd.Next(Margines, Ymax - Margines);
+                //przesuniecie z wykresleniem itej fg
+                TFG[i].PrzesuńDoNowegoXY(pbRysownica, Rysownica, Xn, Yn);
+            }
+            //odswiezenie powierzchni graficznej
+            pbRysownica.Refresh();
+
+        }//od btn
+
     }
 }

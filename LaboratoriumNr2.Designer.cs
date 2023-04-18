@@ -37,6 +37,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.btnPrzesuńdoNowegoXY = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pbRysownica)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
@@ -75,7 +76,7 @@
             // 
             this.btnStart.Enabled = false;
             this.btnStart.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.btnStart.Location = new System.Drawing.Point(34, 352);
+            this.btnStart.Location = new System.Drawing.Point(21, 187);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(103, 37);
             this.btnStart.TabIndex = 3;
@@ -119,11 +120,23 @@
             // 
             this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
             // 
+            // btnPrzesuńdoNowegoXY
+            // 
+            this.btnPrzesuńdoNowegoXY.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.btnPrzesuńdoNowegoXY.Location = new System.Drawing.Point(8, 230);
+            this.btnPrzesuńdoNowegoXY.Name = "btnPrzesuńdoNowegoXY";
+            this.btnPrzesuńdoNowegoXY.Size = new System.Drawing.Size(166, 80);
+            this.btnPrzesuńdoNowegoXY.TabIndex = 6;
+            this.btnPrzesuńdoNowegoXY.Text = "Przesunięcie wszystkich figur \r\ndo nowego położenia";
+            this.btnPrzesuńdoNowegoXY.UseVisualStyleBackColor = true;
+            this.btnPrzesuńdoNowegoXY.Click += new System.EventHandler(this.btnPrzesuńdoNowegoXY_Click);
+            // 
             // LaboratoriumNr2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1005, 472);
+            this.Controls.Add(this.btnPrzesuńdoNowegoXY);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.chlbFiguryGeometryczne);
             this.Controls.Add(this.btnStart);
@@ -151,5 +164,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.Button btnPrzesuńdoNowegoXY;
     }
 }

@@ -18,13 +18,13 @@ namespace ProjektNr2_Plutka_62026
             //pomocnoiczr deklaracje
             const int PromieńPunktu = 5;
             //deklaracja typu wyliczeniowego
-            public enum FiguryGeometryczne: byte 
-            { Punkt, Linia, Elipsa, Prostokąt, Okrąg, Kwadrat};
+            public enum FiguryGeometryczne : byte
+            { Punkt, Linia, Elipsa, Prostokąt, Okrąg, Kwadrat };
             //deklaracje atrybutów których wartości opisują konkretny egzemplarz figury geometrycznej
             public FiguryGeometryczne Figura
-            { 
+            {
                 get;
-             protected set; 
+                protected set;
             } //tylko dla tej klasy
             //atrybut widocznisci
             public bool Widoczny
@@ -81,7 +81,7 @@ namespace ProjektNr2_Plutka_62026
                 StylLini = DashStyle.Solid;
                 KolorWypełnienia = Color.LightCoral;
             }
-            public Punkt(int X, int Y, Color Kolor): this(X,Y)
+            public Punkt(int X, int Y, Color Kolor) : this(X, Y)
             {
                 //uaktualnienie koloru
                 this.Kolor = Kolor;
@@ -112,7 +112,7 @@ namespace ProjektNr2_Plutka_62026
 
 
                 //WERSJA 2
-                using (SolidBrush Pędzel2 = new SolidBrush (Kolor))
+                using (SolidBrush Pędzel2 = new SolidBrush(Kolor))
                 {
                     //wykreślenie punktu
                     Rysownica.FillEllipse(Pędzel2,
@@ -140,11 +140,25 @@ namespace ProjektNr2_Plutka_62026
                     }
             }
 
-        } //koniec klasy punkt
+            public virtual void PrzesuńDoNowegoXY(Control Kontrolka, Graphics Rysownica, int Xn, int Yn)
+            {//nowe polozenie puktu
+                X = Xn; Y = Yn;
+                //wykreslenie punktu w nowym polozeniu
+                Wykreśl(Rysownica);
 
 
-        //deklaracja klasy potomnej
-        public class Linia: Punkt
+
+            }
+
+
+
+
+    } //koniec klasy punkt
+
+
+
+    //deklaracja klasy potomnej
+    public class Linia: Punkt
         {
             //dodanie deklaracji niezbednych dla wykreslenia lini
             int Xk, Yk;
