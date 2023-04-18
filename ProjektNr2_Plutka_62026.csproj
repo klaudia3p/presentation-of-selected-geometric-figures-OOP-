@@ -53,6 +53,7 @@
     <Compile Include="KokpitProjektuNr2_Plutka_62026.Designer.cs">
       <DependentUpon>KokpitProjektuNr2_Plutka_62026.cs</DependentUpon>
     </Compile>
+    <Compile Include="KPFiguryGeometryczne.cs" />
     <Compile Include="LaboratoriumNr2.cs">
       <SubType>Form</SubType>
     </Compile>
