@@ -123,7 +123,17 @@ namespace ProjektNr2_Plutka_62026
                             int Yk = rnd.Next(Margines, Ymax- Margines);
                             //utworzenie egzemplarza lini i wpisanie jej referencji do TFG
                             TFG[IndexTFG] = new Linia(Xp, Yp, Xk, Yk, Kolor, StylLini, GrubośćLini);
+                            TFG[IndexTFG].Wykreśl(Rysownica);
                             //przesuniecie  
+                            IndexTFG++;
+                            break;
+                        }
+                    case "Elipsa":
+                        {
+                            int OśMała = rnd.Next(Margines,Xmax/4);
+                            int OśDuża = rnd.Next(Margines, Ymax/6);
+                            TFG[IndexTFG] = new Elipsa(Xp, Yp, OśMała, OśDuża, Kolor, StylLini, GrubośćLini);
+                            TFG[IndexTFG].Wykreśl(Rysownica);
                             IndexTFG++;
                             break;
                         }

@@ -146,10 +146,7 @@ namespace ProjektNr2_Plutka_62026
                 //wykreslenie punktu w nowym polozeniu
                 Wykreśl(Rysownica);
 
-
-
             }
-
 
 
 
@@ -203,6 +200,79 @@ namespace ProjektNr2_Plutka_62026
                         Pióro.DashStyle = StylLini;
                         //wymazanie lini
                         Rysownica.DrawLine(Pióro, X, Y, Xk, Yk);
+                        //zgaszenie atrybutu widoczności
+                        Widoczny = false;
+                    }
+            }
+            public virtual void PrzesuńDoNowegoXY(Control Kontrolka, Graphics Rysownica, int Xn, int Yn)
+            {//deklaracje pom  dla wyzn przyrostu dx i dy oraz zmiany wspolrzednych lini
+                int Dx, Dy;
+                //wyznaczenie przyrostu Dx
+                if (Xn > X)
+                    Dx = Xn - X;
+                else
+                    Dx = X - Xn;
+
+                //wyznaczenie przyrostu Dy
+                if (Xn > Y)
+                    Dy = Yn - Y;
+                else
+                    Dy = Y - Yn;
+                //przesuniecie poczatku lini do nowego polozenia(Xn, Yn)
+                X = Xn;
+                Y = Yn;
+                //przesuniecie konca lini do PrzesuńDoNowegoXY polozenia(Dx Dy)
+                Xk = (Xk + Dx) % Kontrolka.Width;
+                Yk = (Yk + Dy) % Kontrolka.Height;
+                //wykreslenie lini w nowym polozeniu
+                Wykreśl(Rysownica);
+
+            }
+        }//koniec linii
+
+        public class Elipsa: Punkt
+        {
+            //dodanie nowych atrybutow niezbednych dla wykreslenia elipsy
+            protected int OśDuża, OśMała;
+            //deklaracja konstruktora
+            public Elipsa(int x, int y, int ośDuża, int ośMała, Color KolorLini, DashStyle StylLini, float GrubośćLini): base(x,y,KolorLini)
+            {
+                //ustawienie znacznika elipsy
+                Figura = FiguryGeometryczne.Elipsa;
+                //ustawienie atrybutu widocznosci
+                Widoczny = false;
+                //przechowanie w egzemplarzu klasy wartosci pozostalych parametrow konstruktora klasy elipsa
+
+                OśDuża = ośDuża;
+                OśMała = ośMała;
+                this.StylLini = StylLini;
+                this.GrubośćLini = GrubośćLini;
+
+            }
+            //nadpisanie metod wirtualnych klasy punkt
+            public override void Wykreśl(Graphics Rysownica)
+            {
+                //wykrereslenie elispsy
+                using (Pen Pióro = new Pen(Kolor, GrubośćLini))
+                {
+                    //ustawienie stylu lini
+                    Pióro.DashStyle = StylLini;
+                    //wykreslenie elipsy
+                    Rysownica.DrawEllipse(Pióro, X - OśDuża / 2, Y - OśMała / 2, OśDuża, OśMała);
+                    //zmiana atrybuty widocznosci
+                    Widoczny=true;
+                }
+            }
+            public override void Wymaż(Control Kontrolka, Graphics Rysownica)
+            {
+                //sprawdzenie atrybutu widocznosci
+                if (Widoczny)
+                    using (Pen Pióro = new Pen(Kontrolka.BackColor, GrubośćLini))
+                    {
+                        //ustawieniei stylu lini
+                        Pióro.DashStyle = StylLini;
+                        //wymazanie lini
+                        Rysownica.DrawEllipse(Pióro, X - OśDuża / 2, Y - OśMała / 2, OśDuża, OśMała);
                         //zgaszenie atrybutu widoczności
                         Widoczny = false;
                     }

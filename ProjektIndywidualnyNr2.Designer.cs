@@ -450,6 +450,7 @@
             this.kpbtnPrzesuńFigury.TabIndex = 6;
             this.kpbtnPrzesuńFigury.Text = "Przesuń figury geometryczne do nowej \r\nlokalizacji";
             this.kpbtnPrzesuńFigury.UseVisualStyleBackColor = true;
+            this.kpbtnPrzesuńFigury.Click += new System.EventHandler(this.kpbtnPrzesuńFigury_Click);
             // 
             // kpbtnPokazFigur
             // 

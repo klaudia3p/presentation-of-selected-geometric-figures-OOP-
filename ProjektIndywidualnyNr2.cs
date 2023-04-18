@@ -773,5 +773,10 @@ namespace ProjektNr2_Plutka_62026
             g.FillRectangle(new SolidBrush(color), rect);
             kppbRysownica.Image = bmp;
         }
+
+        private void kpbtnPrzesuńFigury_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
