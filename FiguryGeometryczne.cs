@@ -156,9 +156,10 @@ namespace ProjektNr2_Plutka_62026
 
     //deklaracja klasy potomnej
     public class Linia: Punkt
-        {
+    {
             //dodanie deklaracji niezbednych dla wykreslenia lini
             int Xk, Yk;
+            int Xp, Yp;
             //deklaracje konstruktorów  
             public  Linia (int Xp, int Yp, int Xk, int Yk):base(Xp,Yp)
             {
@@ -228,7 +229,7 @@ namespace ProjektNr2_Plutka_62026
                 Wykreśl(Rysownica);
 
             }
-        }//koniec linii
+    }//koniec linii
 
         public class Elipsa: Punkt
         {
