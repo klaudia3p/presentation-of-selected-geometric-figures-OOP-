@@ -8,11 +8,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static ProjektNr2_Plutka_62026.FiguryGeometryczne;
+using static ProjektNr2_Plutka_62026.KPFiguryGeometryczne;
 
 using System.Data.SqlClient;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.Net;
+using System.Drawing.Printing;
 
 namespace ProjektNr2_Plutka_62026
 {
@@ -47,12 +48,13 @@ namespace ProjektNr2_Plutka_62026
         OpisKrzywejKardynalnej kpKrzywaKardynalna;
 
 
-
+        const int kpMargines = 10;
         Point kpPunkt = Point.Empty;
         Graphics kpRysownica;
         Pen kpPióro;
         SolidBrush kpPędzel;
         const ushort kpPromienPunktu = 2;
+        List<kpPunkt> kpLFG = new List<kpPunkt>();
         public ProjektIndywidualnyNr2()
         {
             InitializeComponent();
@@ -137,21 +139,30 @@ namespace ProjektNr2_Plutka_62026
             {
                 if (kprdbPunkt.Checked)
                 {
-                    kpRysownica.FillEllipse(kpPędzel,
-                        kpPunkt.X - kpPromienPunktu,
-                        kpPunkt.Y - kpPromienPunktu,
-                        2 * kpPromienPunktu,
-                        2 * kpPromienPunktu);
+                    //kpRysownica.FillEllipse(kpPędzel,
+                    //    kpPunkt.X - kpPromienPunktu,
+                    //    kpPunkt.Y - kpPromienPunktu,
+                    //    2 * kpPromienPunktu,
+                    //    2 * kpPromienPunktu);
+                    kpLFG.Add(new KPFiguryGeometryczne.kpPunkt(kpPunkt.X, kpPunkt.Y,
+                        kptxtKolorLini.BackColor));
+                    kpLFG[kpLFG.Count - 1].kpWykreśl(kpRysownica);
+
+
                 }
 
 
                 if (kprdbLiniaProsta.Checked)
                 {
-                    kpRysownica.DrawLine(kpPióro,
-                        kpPunkt.X,
-                        kpPunkt.Y,
-                        e.Location.X,
-                        e.Location.Y);
+                    //kpRysownica.DrawLine(kpPióro,
+                    //    kpPunkt.X,
+                    //    kpPunkt.Y,
+                    //    e.Location.X,
+                    //    e.Location.Y);
+                    //kpLFG.Add(new kpLiniaProsta(kpPunkt.X, kpPunkt.Y, e.Location.X, e.Location.Y,
+                    //    kptxtKolorLini.BackColor, (DashStyle)kpcbStylLini.SelectedIndex,
+                    //    kptbGrubośćLini.Value));
+                    //kpLFG[kpLFG.Count - 1].kpWykreśl(kpRysownica);
                 }
 
 
@@ -243,10 +254,13 @@ namespace ProjektNr2_Plutka_62026
 
                 if (kprdbElipsa.Checked)
                 {
-                    ushort kpStopieńWielokąta = 360;
-                    for (int i = 0; i < kpStopieńWielokąta; i++)
-                        kpRysownica.DrawEllipse(kpPióro, kpLewyGórnyNarożnikX, kpLewyGórnyNarożnikY,
-                           kpSzerokość, kpWysokość);
+                    //ushort kpStopieńWielokąta = 360;
+                    //for (int i = 0; i < kpStopieńWielokąta; i++)
+                    //    kpRysownica.DrawEllipse(kpPióro, kpLewyGórnyNarożnikX, kpLewyGórnyNarożnikY,
+                    ////       kpSzerokość, kpWysokość);
+                    //kpLFG.Add(new kpElipsa(kpPunkt.X, kpPunkt.Y, kpSzerokość, kpWysokość, kptxtKolorLini.BackColor,
+                    //    (DashStyle)kpcbStylLini.SelectedIndex, kptbGrubośćLini.Value));
+                    //kpLFG[kpLFG.Count - 1].kpWykreśl(kpRysownica);
                 }
 
 
@@ -650,7 +664,7 @@ namespace ProjektNr2_Plutka_62026
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string kpWybranyStyl = comboBox1.SelectedItem.ToString();
+            string kpWybranyStyl = kpcbStylLini.SelectedItem.ToString();
            
             switch (kpWybranyStyl)
             {
@@ -756,6 +770,32 @@ namespace ProjektNr2_Plutka_62026
 
         private void kpbtnPokazFigur_Click(object sender, EventArgs e)
         {
+            //wyczyszczenie rysownicy
+            kpRysownica.Clear(kppbRysownica.BackColor);
+            if(kprdbPokazAutomatyczny.Checked)
+            {
+                //wpisanie numeru figury startowej
+                kptxtNumerFiguryIndeks.Text = 0.ToString();
+                //uaktywniwne
+                timer1.Enabled = true;
+                //uaktywnienie przyciusku Wylącz pokaz
+                kpbtnWyłączPokazSlajdów.Enabled = true;
+                kpbtnPokazFigur.Enabled = false;
+            }
+            else
+            {//uaktywniwnie przysiskow nastepny i poprzedni
+                kpbtnNastępny.Enabled = true;
+                kpbtnPoprzedni.Enabled = true;
+                //odczytanie numeru figury wpisanej do  txt
+                int N= ushort.Parse(kptxtNumerFiguryIndeks.Text);
+
+                //wykreslenie pierwszyej figury
+                kpLFG[N].kpPrzesuńDoNowegoXY(kppbRysownica, kpRysownica, 
+                    kppbRysownica.Width/2, kppbRysownica.Height/2);
+                kpbtnWyłączPokazSlajdów.Enabled = true;
+                kpbtnPokazFigur.Enabled = false;
+
+            }
         }
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
@@ -775,7 +815,41 @@ namespace ProjektNr2_Plutka_62026
         }
 
         private void kpbtnPrzesuńFigury_Click(object sender, EventArgs e)
+        {//deklaracja pomocnicze
+            int Xn, Yn;
+            Random kprnd = new Random();
+
+            //wyczyszczenie powierzchni graficznej
+            kpRysownica.Clear(kppbRysownica.BackColor);
+            //okreslenie rozmiarow powierzchni graficznej
+            int Xmax = kppbRysownica.Width;
+            int Ymax = kppbRysownica.Height;
+            //przesuwnaoe f geom z listy LFG
+            for(int i = 0; i<kpLFG.Count; i++)
+            {
+                //wylososwanie nowego polozenia
+                Xn = kprnd.Next(kpMargines, Xmax - kpMargines);
+                Yn = kprnd.Next(kpMargines, Ymax - kpMargines);
+                //przesuniecie do nowego polozenia
+                kpLFG[i].kpPrzesuńDoNowegoXY(kppbRysownica, kpRysownica, Xn, Yn);
+            }
+            kppbRysownica.Refresh();
+        }
+
+        private void kptxtNumerFiguryIndeks_TextChanged(object sender, EventArgs e)
         {
+            ushort N;
+            if (!ushort.TryParse(kptxtNumerFiguryIndeks.Text, out N))
+            {
+                errorProvider1.SetError(kptxtNumerFiguryIndeks, "ERROR: w zapisie numeru indeksu figury geometrycznej wystąpił niedozwolony znak");
+                return;
+            }
+            //sprawdzenie n na dozwolona gorna wartosc
+            if(N> kpLFG.Count)
+            {
+                errorProvider1.SetError(kptxtNumerFiguryIndeks, "ERROR:  podano zbyt wysoką wartość(Przekroczono liczbę figur geometrycznych w LFG)");
+                return;
+            }
 
         }
     }

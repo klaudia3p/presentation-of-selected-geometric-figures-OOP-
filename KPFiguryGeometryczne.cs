@@ -129,6 +129,7 @@ namespace ProjektNr2_Plutka_62026
 
         }//kpPunkt
 
+
     }//KPFiguryGeom
 
 }//class Projekt

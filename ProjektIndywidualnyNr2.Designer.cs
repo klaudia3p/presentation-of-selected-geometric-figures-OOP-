@@ -54,7 +54,8 @@
             this.kprdbElipsa = new System.Windows.Forms.RadioButton();
             this.kprdbPunkt = new System.Windows.Forms.RadioButton();
             this.kpgbAtrybutyGraficzne = new System.Windows.Forms.GroupBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.kptxtKolorLini = new System.Windows.Forms.TextBox();
+            this.kpcbStylLini = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.kptbGrubośćLini = new System.Windows.Forms.TrackBar();
             this.kpbtnKolorWypełnienia = new System.Windows.Forms.Button();
@@ -78,6 +79,7 @@
             this.kplblY = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.kppbRysownica)).BeginInit();
             this.kpgbWybierzFigurę.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kpnumKąty)).BeginInit();
@@ -369,7 +371,8 @@
             // 
             // kpgbAtrybutyGraficzne
             // 
-            this.kpgbAtrybutyGraficzne.Controls.Add(this.comboBox1);
+            this.kpgbAtrybutyGraficzne.Controls.Add(this.kptxtKolorLini);
+            this.kpgbAtrybutyGraficzne.Controls.Add(this.kpcbStylLini);
             this.kpgbAtrybutyGraficzne.Controls.Add(this.label2);
             this.kpgbAtrybutyGraficzne.Controls.Add(this.kptbGrubośćLini);
             this.kpgbAtrybutyGraficzne.Controls.Add(this.kpbtnKolorWypełnienia);
@@ -381,22 +384,29 @@
             this.kpgbAtrybutyGraficzne.TabStop = false;
             this.kpgbAtrybutyGraficzne.Text = "Atrybuty Graficzne";
             // 
-            // comboBox1
+            // kptxtKolorLini
             // 
-            this.comboBox1.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
+            this.kptxtKolorLini.Location = new System.Drawing.Point(7, 54);
+            this.kptxtKolorLini.Name = "kptxtKolorLini";
+            this.kptxtKolorLini.Size = new System.Drawing.Size(100, 20);
+            this.kptxtKolorLini.TabIndex = 5;
+            // 
+            // kpcbStylLini
+            // 
+            this.kpcbStylLini.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.kpcbStylLini.FormattingEnabled = true;
+            this.kpcbStylLini.Items.AddRange(new object[] {
             "Solid",
             "Dash",
             "Dot",
             "DashDot",
             "DashDotDot"});
-            this.comboBox1.Location = new System.Drawing.Point(129, 20);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(139, 23);
-            this.comboBox1.TabIndex = 4;
-            this.comboBox1.Text = "Wybierz styl lini";
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.kpcbStylLini.Location = new System.Drawing.Point(129, 20);
+            this.kpcbStylLini.Name = "kpcbStylLini";
+            this.kpcbStylLini.Size = new System.Drawing.Size(139, 23);
+            this.kpcbStylLini.TabIndex = 4;
+            this.kpcbStylLini.Text = "Wybierz styl lini";
+            this.kpcbStylLini.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // label2
             // 
@@ -512,6 +522,7 @@
             this.kptxtNumerFiguryIndeks.Name = "kptxtNumerFiguryIndeks";
             this.kptxtNumerFiguryIndeks.Size = new System.Drawing.Size(100, 20);
             this.kptxtNumerFiguryIndeks.TabIndex = 10;
+            this.kptxtNumerFiguryIndeks.TextChanged += new System.EventHandler(this.kptxtNumerFiguryIndeks_TextChanged);
             // 
             // kpbtnWyłączPokazSlajdów
             // 
@@ -619,6 +630,11 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
+            // 
             // ProjektIndywidualnyNr2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -691,7 +707,7 @@
         private System.Windows.Forms.TrackBar kptbGrubośćLini;
         private System.Windows.Forms.Button kpbtnKolorWypełnienia;
         private System.Windows.Forms.Button kpbtnKolorLini;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox kpcbStylLini;
         private System.Windows.Forms.Button kpbtnPrzesuńFigury;
         private System.Windows.Forms.Button kpbtnPokazFigur;
         private System.Windows.Forms.GroupBox kpgbPokazFigur;
@@ -713,5 +729,7 @@
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.NumericUpDown kpnumKąty;
+        private System.Windows.Forms.TextBox kptxtKolorLini;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
     }
 }
