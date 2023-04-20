@@ -173,10 +173,11 @@ namespace ProjektNr2_Plutka_62026
 
                 if (kprdbProstokąt.Checked)
                 {
-                    ushort kpStopieńWielokąta = 4;
-                    for (int i = 0; i < kpStopieńWielokąta; i++)
-                        kpRysownica.DrawRectangle(kpPióro, kpLewyGórnyNarożnikX, kpLewyGórnyNarożnikY,
-                            kpSzerokość, kpWysokość);
+                    kpLFG.Add(new kpProstokąt(kpPunkt.X, kpPunkt.Y, kpSzerokość, kpWysokość, kptxtKolorLini.BackColor,
+                        (DashStyle)kpcbStylLini.SelectedIndex, kptbGrubośćLini.Value));
+                    kpLFG[kpLFG.Count - 1].kpWykreśl(kpRysownica);
+                    kppbRysownica.Refresh();
+
                 }
 
 
@@ -372,11 +373,12 @@ namespace ProjektNr2_Plutka_62026
 
                 if (kprdbFillRectangle.Checked)
                 {
-                    ushort kpStopieńWielokąta = 4;
-                    for (int i = 0; i < kpStopieńWielokąta; i++)
-                        kpPędzel.Color = kpbtnKolorWypełnienia.BackColor;
-                    kpRysownica.FillRectangle(kpPędzel, kpLewyGórnyNarożnikX, kpLewyGórnyNarożnikY,
-                            kpSzerokość, kpWysokość);
+
+                    kpLFG.Add(new kpFillRectangle(kpPunkt.X, kpPunkt.Y, kpSzerokość, kpWysokość, kpbtnKolorWypełnienia.BackColor,
+                        (DashStyle)kpcbStylLini.SelectedIndex, kptbGrubośćLini.Value));
+                    kpLFG[kpLFG.Count - 1].kpWykreśl(kpRysownica);
+                    kppbRysownica.Refresh();
+
                 }
 
 

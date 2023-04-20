@@ -297,9 +297,76 @@ namespace ProjektNr2_Plutka_62026
                         kpWidoczny = false;
                     }
             }
-        }
+        }//kolo
+        public class kpProstokąt : kpPunkt
+        {
+            protected int kpOśDuża, kpOśMała;
+            public kpProstokąt(int kpx, int kpy, int kpośDuża, int kpośMała, Color kpKolorLini,
+                DashStyle kpStylLini, float kpGrubośćLini) : base(kpx, kpy, kpKolorLini)
+            {
+                kpFigura = kpFiguryGeometryczne.kpProstokąt;
+                kpWidoczny = false;
+                kpOśDuża = kpośDuża;
+                kpOśMała = kpośMała;
+                this.kpStylLini = kpStylLini;
+                this.kpGrubośćLini = kpGrubośćLini;
 
+            }
+            public override void kpWykreśl(Graphics kpRysownica)
+            {
+                using (Pen kpPióro = new Pen(kpKolor, kpGrubośćLini))
+                {
+                    kpPióro.DashStyle = kpStylLini;
+                    kpRysownica.DrawRectangle(kpPióro, kpX - kpOśDuża / 2,
+                        kpY - kpOśMała / 2, kpOśDuża, kpOśMała);
+                    kpWidoczny = true;
+                }
+            }
+            public override void kpWymaż(Control kpKontrolka, Graphics kpRysownica)
+            {
+                if (kpWidoczny)
+                    using (Pen kpPióro = new Pen(kpKontrolka.BackColor, kpGrubośćLini))
+                    {
+                        kpPióro.DashStyle = kpStylLini;
+                        kpRysownica.DrawRectangle(kpPióro, kpX - kpOśDuża / 2, kpY - kpOśMała / 2, kpOśDuża, kpOśMała);
+                        kpWidoczny = false;
+                    }
+            }
+        }//prostokat
+        public class kpFillRectangle : kpPunkt
+        {
+            protected int kpOśDuża, kpOśMała;
+            public kpFillRectangle(int kpx, int kpy, int kpośDuża, int kpośMała, Color kpKolor,
+                DashStyle kpStylLini, float kpGrubośćLini) : base(kpx, kpy, kpKolor)
+            {
+                kpFigura = kpFiguryGeometryczne.kpFillRectangle;
+                kpWidoczny = false;
+                kpOśDuża = kpośDuża;
+                kpOśMała = kpośMała;
+                this.kpStylLini = kpStylLini;
+                this.kpGrubośćLini = kpGrubośćLini;
+
+            }
+            public override void kpWykreśl(Graphics kpRysownica)
+            {
+                using (SolidBrush kpPędzel = new SolidBrush(kpKolor))
+                {
+                    kpRysownica.FillRectangle(kpPędzel, kpX - kpOśDuża / 2,
+                        kpY - kpOśMała / 2, kpOśDuża, kpOśMała);
+                    kpWidoczny = true;
+                }
+            }
+            public override void kpWymaż(Control kpKontrolka, Graphics kpRysownica)
+            {
+                if (kpWidoczny)
+                    using (SolidBrush kpPędzel = new SolidBrush(kpKontrolka.BackColor))
+                    {
+                        kpRysownica.FillRectangle(kpPędzel, kpX - kpOśDuża / 2, kpY - kpOśMała / 2, kpOśDuża, kpOśMała);
+                        kpWidoczny = false;
+                    }
+            }
+        }
 
     }//KPFiguryGeom
 
-}//class Projekt
+    }//class Projekt
