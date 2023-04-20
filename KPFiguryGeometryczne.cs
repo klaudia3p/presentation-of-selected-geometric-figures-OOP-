@@ -365,7 +365,42 @@ namespace ProjektNr2_Plutka_62026
                         kpWidoczny = false;
                     }
             }
-        }
+        }//fillRectangle
+        public class kpKwadrat : kpPunkt
+        {
+            protected int kpOśDuża, kpOśMała;
+            public kpKwadrat(int kpx, int kpy, int kpośDuża, int kpośMała, Color kpKolorLini,
+                DashStyle kpStylLini, float kpGrubośćLini) : base(kpx, kpy, kpKolorLini)
+            {
+                kpFigura = kpFiguryGeometryczne.kpKwadrat;
+                kpWidoczny = false;
+                kpOśDuża = kpośDuża;
+                kpOśMała = kpośMała;
+                this.kpStylLini = kpStylLini;
+                this.kpGrubośćLini = kpGrubośćLini;
+
+            }
+            public override void kpWykreśl(Graphics kpRysownica)
+            {
+                using (Pen kpPióro = new Pen(kpKolor, kpGrubośćLini))
+                {
+                    kpPióro.DashStyle = kpStylLini;
+                    kpRysownica.DrawRectangle(kpPióro, kpX - kpOśDuża / 2,
+                        kpY - kpOśMała / 2, kpOśDuża, kpOśDuża);
+                    kpWidoczny = true;
+                }
+            }
+            public override void kpWymaż(Control kpKontrolka, Graphics kpRysownica)
+            {
+                if (kpWidoczny)
+                    using (Pen kpPióro = new Pen(kpKontrolka.BackColor, kpGrubośćLini))
+                    {
+                        kpPióro.DashStyle = kpStylLini;
+                        kpRysownica.DrawRectangle(kpPióro, kpX - kpOśDuża / 2, kpY - kpOśMała / 2, kpOśDuża, kpOśDuża);
+                        kpWidoczny = false;
+                    }
+            }
+        }//kwadrat
 
     }//KPFiguryGeom
 
