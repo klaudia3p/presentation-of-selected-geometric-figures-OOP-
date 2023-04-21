@@ -226,6 +226,7 @@ namespace ProjektNr2_Plutka_62026
                         kpWidoczny = false;
                     }
             }
+
         }//elipsa
         public class kpOkrąg : kpPunkt
         {
@@ -396,12 +397,166 @@ namespace ProjektNr2_Plutka_62026
                     using (Pen kpPióro = new Pen(kpKontrolka.BackColor, kpGrubośćLini))
                     {
                         kpPióro.DashStyle = kpStylLini;
-                        kpRysownica.DrawRectangle(kpPióro, kpX - kpOśDuża / 2, kpY - kpOśMała / 2, kpOśDuża, kpOśDuża);
+                        kpRysownica.DrawRectangle(kpPióro, kpX - kpOśDuża / 2, 
+                            kpY - kpOśMała / 2, kpOśDuża, kpOśDuża);
                         kpWidoczny = false;
                     }
             }
         }//kwadrat
+        public class kpFillEllipse : kpPunkt
+        {
+            protected int kpOśDuża, kpOśMała;
+            public kpFillEllipse(int kpx, int kpy, int kpośDuża, int kpośMała, Color kpKolorLini,
+                DashStyle kpStylLini, float kpGrubośćLini) : base(kpx, kpy, kpKolorLini)
+            {
+                kpFigura = kpFiguryGeometryczne.kpFillEllipse;
+                kpWidoczny = false;
+                kpOśDuża = kpośDuża;
+                kpOśMała = kpośMała;
+                this.kpStylLini = kpStylLini;
+                this.kpGrubośćLini = kpGrubośćLini;
 
+            }
+            public override void kpWykreśl(Graphics kpRysownica)
+            {
+                using (SolidBrush kpPędzel = new SolidBrush(kpKolor))
+                {
+                    kpRysownica.FillEllipse(kpPędzel, kpX - kpOśDuża / 2,
+                        kpY - kpOśMała / 2, kpOśDuża, kpOśMała);
+                    kpWidoczny = true;
+                }
+            }
+            public override void kpWymaż(Control kpKontrolka, Graphics kpRysownica)
+            {
+                if (kpWidoczny)
+                    using (SolidBrush kpPędzel = new SolidBrush(kpKontrolka.BackColor))
+                    {
+                        kpRysownica.FillEllipse(kpPędzel, kpX - kpOśDuża / 2, kpY - kpOśMała / 2, kpOśDuża, kpOśMała);
+                        kpWidoczny = false;
+                    }
+            }
+        }//fillellipse
+        public class kpDrawPie : kpPunkt
+        {
+            protected int kpOśDuża, kpOśMała;
+            Rectangle rectl;
+            public kpDrawPie(int kpX, int kpY, int kpośDuża,int kpośMała, Color kpKolorLini, 
+                DashStyle kpStylLini, float kpGrubośćLini) : base(kpX, kpY, kpKolorLini)
+            {
+                kpFigura = kpFiguryGeometryczne.kpDrawPie;
+                kpWidoczny = false;
+                kpOśDuża = kpośDuża;
+                kpOśMała = kpośMała;
+                this.kpStylLini = kpStylLini;
+                this.kpGrubośćLini = kpGrubośćLini;
+                Rectangle rect = new Rectangle(kpX,kpY,kpośDuża,kpośMała);
+                rectl = rect;
+            }
+            public override void kpWykreśl(Graphics kpRysownica)
+            {
+                using (Pen kpPióro = new Pen(kpKolor, kpGrubośćLini))
+                {
+                    kpPióro.DashStyle = kpStylLini;
+                    kpRysownica.DrawPie(kpPióro,rectl,0.0f,90.0f);
+                    kpWidoczny = true;
+                }
+            }
+            public override void kpWymaż(Control kpKontrolka, Graphics kpRysownica)
+            {
+                if (kpWidoczny)
+                    using (Pen kpPióro = new Pen(kpKontrolka.BackColor, kpGrubośćLini))
+                    {
+                        kpPióro.DashStyle = kpStylLini;
+                        kpRysownica.DrawPie(kpPióro, rectl, 0.0f, 90.0f);
+                        kpWidoczny = false;
+                    }
+            }
+            public virtual void kpPrzesuńDoNowegoXY(Control kpKontrolka, Graphics kpRysownica, int kpXn, int kpYn)
+            {
+                kpX = kpXn; kpY = kpYn;
+                kpWykreśl(kpRysownica);
+
+            }
+        }//drawpie
+        public class kpFillPie : kpPunkt
+        {
+            protected int kpOśDuża, kpOśMała;
+            Rectangle rectl;
+            public kpFillPie(int kpX, int kpY, int kpośDuża, int kpośMała, Color kpKolorLini,
+                DashStyle kpStylLini, float kpGrubośćLini) : base(kpX, kpY, kpKolorLini)
+            {
+                kpFigura = kpFiguryGeometryczne.kpFillPie;
+                kpWidoczny = false;
+                kpOśDuża = kpośDuża;
+                kpOśMała = kpośMała;
+                this.kpStylLini = kpStylLini;
+                this.kpGrubośćLini = kpGrubośćLini;
+                Rectangle rect = new Rectangle(kpX, kpY, kpośDuża, kpośMała);
+                rectl = rect;
+            }
+            public override void kpWykreśl(Graphics kpRysownica)
+            {
+                using (SolidBrush kpPędzel = new SolidBrush(kpKolor))
+                {
+                    kpRysownica.FillPie(kpPędzel, rectl, 0.0f, 90.0f);
+                    kpWidoczny = true;
+                }
+            }
+            public override void kpWymaż(Control kpKontrolka, Graphics kpRysownica)
+            {
+                if (kpWidoczny)
+                    using (SolidBrush kpPędzel = new SolidBrush(kpKontrolka.BackColor))
+                    {
+                        kpRysownica.FillPie(kpPędzel, rectl, 0.0f, 90.0f);
+                        kpWidoczny = false;
+                    }
+            }
+            public virtual void kpPrzesuńDoNowegoXY(Control kpKontrolka, Graphics kpRysownica, int kpXn, int kpYn)
+            {//nowe polozenie puktu
+                kpX = kpXn; kpY = kpYn;
+                //wykreslenie punktu w nowym polozeniu
+                kpWykreśl(kpRysownica);
+
+            }
+        }//fillpie
+        //public class kpKwadrat : kpPunkt
+        //{
+        //    private Point startPoint;
+        //    private Point endPoint;
+        //    private bool isDrawing;
+        //    public kpKwadrat(int kpx, int kpy, int kpośDuża, int kpośMała, Color kpKolorLini,
+        //        DashStyle kpStylLini, float kpGrubośćLini) : base(kpx, kpy, kpKolorLini)
+        //    {
+        //        kpFigura = kpFiguryGeometryczne.kpKwadrat;
+        //        kpWidoczny = false;
+        //        kpOśDuża = kpośDuża;
+        //        kpOśMała = kpośMała;
+        //        this.kpStylLini = kpStylLini;
+        //        this.kpGrubośćLini = kpGrubośćLini;
+
+        //    }
+        //    public override void kpWykreśl(Graphics kpRysownica)
+        //    {
+        //        using (Pen kpPióro = new Pen(kpKolor, kpGrubośćLini))
+        //        {
+        //            kpPióro.DashStyle = kpStylLini;
+        //            kpRysownica.DrawRectangle(kpPióro, kpX - kpOśDuża / 2,
+        //                kpY - kpOśMała / 2, kpOśDuża, kpOśDuża);
+        //            kpWidoczny = true;
+        //        }
+        //    }
+        //    public override void kpWymaż(Control kpKontrolka, Graphics kpRysownica)
+        //    {
+        //        if (kpWidoczny)
+        //            using (Pen kpPióro = new Pen(kpKontrolka.BackColor, kpGrubośćLini))
+        //            {
+        //                kpPióro.DashStyle = kpStylLini;
+        //                kpRysownica.DrawRectangle(kpPióro, kpX - kpOśDuża / 2,
+        //                    kpY - kpOśMała / 2, kpOśDuża, kpOśDuża);
+        //                kpWidoczny = false;
+        //            }
+        //    }
+        //}//darwarch
     }//KPFiguryGeom
 
     }//class Projekt

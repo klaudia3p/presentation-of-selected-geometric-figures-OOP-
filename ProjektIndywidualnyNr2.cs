@@ -372,11 +372,10 @@ namespace ProjektNr2_Plutka_62026
 
                 if (kprdbFillElipse.Checked)
                 {
-                    ushort kpStopieńWielokąta = 360;
-                    for (int i = 0; i < kpStopieńWielokąta; i++)
-                        kpPędzel.Color = kpbtnKolorWypełnienia.BackColor;
-                    kpRysownica.FillEllipse(kpPędzel, kpLewyGórnyNarożnikX, kpLewyGórnyNarożnikY,
-                           kpSzerokość, kpWysokość);
+                    kpLFG.Add(new kpFillEllipse(kpPunkt.X, kpPunkt.Y, kpSzerokość, kpWysokość, kpbtnKolorWypełnienia.BackColor,
+                      (DashStyle)kpcbStylLini.SelectedIndex, kptbGrubośćLini.Value));
+                    kpLFG[kpLFG.Count - 1].kpWykreśl(kpRysownica);
+                    kppbRysownica.Refresh();
                 }
 
 
@@ -522,9 +521,10 @@ namespace ProjektNr2_Plutka_62026
                 if (kprdbDrawPie.Checked)
                 {
 
-                    //Rectangle rect = new Rectangle(
-                    //kpLewyGórnyNarożnikY, kpLewyGórnyNarożnikX, kpWysokość, kpSzerokość);
-                    //kpRysownica.DrawPie(kpPióro, rect, 0.0f, 90.0f);
+                    kpLFG.Add(new kpDrawPie(kpPunkt.X, kpPunkt.Y,kpWysokość,kpSzerokość, kptxtKolorLini.BackColor,
+                     (DashStyle)kpcbStylLini.SelectedIndex, kptbGrubośćLini.Value));
+                    kpLFG[kpLFG.Count - 1].kpWykreśl(kpRysownica);
+                    kppbRysownica.Refresh();
 
                 }
 
@@ -532,31 +532,31 @@ namespace ProjektNr2_Plutka_62026
                 if (kprdbFillPie.Checked)
                 {
 
-                    Rectangle rect = new Rectangle(
-       kpLewyGórnyNarożnikY, kpLewyGórnyNarożnikX, kpWysokość, kpSzerokość);
-                    kpPędzel.Color = kpbtnKolorWypełnienia.BackColor;
-                    kpRysownica.FillPie(kpPędzel, rect, 0.0f, 90.0f);
+                    kpLFG.Add(new kpFillPie(kpPunkt.X, kpPunkt.Y, kpWysokość, kpSzerokość, kpbtnKolorWypełnienia.BackColor,
+                                 (DashStyle)kpcbStylLini.SelectedIndex, kptbGrubośćLini.Value));
+                    kpLFG[kpLFG.Count - 1].kpWykreśl(kpRysownica);
+                    kppbRysownica.Refresh();
 
                 }
 
 
                 if (kprdbDrawArc.Checked)
                 {
-                    ushort kpStopieńWielokąta = 1000;
-                    int R = kpSzerokość;
-                    double kpKątPołożeniaPierwszegoWierzchołka = 90.0;
-                    double kpKątMiędzyWierzchołkamiWielokąta = 90.0 / kpStopieńWielokąta;
-                    Point[] kpWierzchołkiWielokąta = new Point[kpStopieńWielokąta];
-                    for (int i = 0; i < kpStopieńWielokąta; i++)
-                    {
-                        kpWierzchołkiWielokąta[i].X = kpLewyGórnyNarożnikX + (int)(R * Math.Cos(Math.PI
-                            * (kpKątPołożeniaPierwszegoWierzchołka + i * kpKątMiędzyWierzchołkamiWielokąta) / 180.0));
+                //    ushort kpStopieńWielokąta = 1000;
+                //    int R = kpSzerokość;
+                //    double kpKątPołożeniaPierwszegoWierzchołka = 90.0;
+                //    double kpKątMiędzyWierzchołkamiWielokąta = 90.0 / kpStopieńWielokąta;
+                //    Point[] kpWierzchołkiWielokąta = new Point[kpStopieńWielokąta];
+                //    for (int i = 0; i < kpStopieńWielokąta; i++)
+                //    {
+                //        kpWierzchołkiWielokąta[i].X = kpLewyGórnyNarożnikX + (int)(R * Math.Cos(Math.PI
+                //            * (kpKątPołożeniaPierwszegoWierzchołka + i * kpKątMiędzyWierzchołkamiWielokąta) / 180.0));
 
-                        kpWierzchołkiWielokąta[i].Y = kpLewyGórnyNarożnikY + (int)(R * Math.Sin(Math.PI
-                            * (kpKątPołożeniaPierwszegoWierzchołka + i * kpKątMiędzyWierzchołkamiWielokąta) / 180.0));
+                //        kpWierzchołkiWielokąta[i].Y = kpLewyGórnyNarożnikY + (int)(R * Math.Sin(Math.PI
+                //            * (kpKątPołożeniaPierwszegoWierzchołka + i * kpKątMiędzyWierzchołkamiWielokąta) / 180.0));
 
-                    }
-                    kpRysownica.DrawPolygon(kpPióro, kpWierzchołkiWielokąta);
+                //    }
+                //    kpRysownica.DrawPolygon(kpPióro, kpWierzchołkiWielokąta);
                 }
 
                 if (kprdbWielokątForemny.Checked)
