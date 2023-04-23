@@ -7,6 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static ProjektNr2_Plutka_62026.FiguryGeometryczne;
+using static ProjektNr2_Plutka_62026.KPFiguryGeometryczne;
+using System.Reflection;
 
 namespace ProjektNr2_Plutka_62026
 {
@@ -555,6 +557,230 @@ namespace ProjektNr2_Plutka_62026
                     }
             }
         }//darwarc
+        public class kpWielokątForemny : kpPunkt
+        {
+            protected int kpOśDuża, kpOśMała;
+            Point[] WierzchołkiWielokąta;
+            public kpWielokątForemny(int kpx, int kpy, int kpośDuża, int kpośMała, Color kpKolorLini,
+                DashStyle kpStylLini, float kpGrubośćLini) : base(kpx, kpy, kpKolorLini)
+            {
+                kpFigura = kpFiguryGeometryczne.kpWielokątForemny;
+                kpWidoczny = false;
+                kpOśDuża = kpośDuża;
+                kpOśMała = kpośMała;
+                this.kpStylLini = kpStylLini;
+                this.kpGrubośćLini = kpGrubośćLini;
+                
+
+            }
+            public override void kpWykreśl(Graphics kpRysownica)
+            {
+                ushort StopieńWielokąta = 5;
+                int R = kpOśMała;
+                double KątPołożeniaPierwszegoWierzchołka = 0.0;
+                double KątMiędzyWierzchołkamiWielokąta = 360.0 / StopieńWielokąta;
+                Point[] WierzchołkiWielokąta = new Point[StopieńWielokąta];
+                for (int i = 0; i < StopieńWielokąta; i++)
+                {
+                    WierzchołkiWielokąta[i].X = kpX-kpOśDuża/2 +
+                      (int)(R * Math.Cos(Math.PI * (KątPołożeniaPierwszegoWierzchołka +
+                        i * KątMiędzyWierzchołkamiWielokąta) / 180));
+
+                    WierzchołkiWielokąta[i].Y = kpY-kpOśMała/2 +
+                      (int)(R * Math.Sin(Math.PI * (KątPołożeniaPierwszegoWierzchołka +
+                        i * KątMiędzyWierzchołkamiWielokąta) / 180));
+                }
+                using (Pen kpPióro = new Pen(kpKolor, kpGrubośćLini))
+                {
+                    kpPióro.DashStyle = kpStylLini;
+                    kpRysownica.DrawPolygon(kpPióro, WierzchołkiWielokąta);
+                    kpWidoczny = true;
+                }
+            }
+            public override void kpWymaż(Control kpKontrolka, Graphics kpRysownica)
+            {
+                if (kpWidoczny)
+                    using (Pen kpPióro = new Pen(kpKontrolka.BackColor, kpGrubośćLini))
+                    {
+                        kpPióro.DashStyle = kpStylLini;
+                        kpRysownica.DrawPolygon(kpPióro, WierzchołkiWielokąta);
+                        kpWidoczny = false;
+                    }
+            }
+        }//wielokat foremny
+        public class kpWielokątWypełniony : kpPunkt
+        {
+            protected int kpOśDuża, kpOśMała;
+            Point[] WierzchołkiWielokąta;
+            public kpWielokątWypełniony(int kpx, int kpy, int kpośDuża, int kpośMała, Color kpKolorLini,
+                DashStyle kpStylLini, float kpGrubośćLini) : base(kpx, kpy, kpKolorLini)
+            {
+                kpFigura = kpFiguryGeometryczne.kpWielokątWypełniony;
+                kpWidoczny = false;
+                kpOśDuża = kpośDuża;
+                kpOśMała = kpośMała;
+                this.kpStylLini = kpStylLini;
+                this.kpGrubośćLini = kpGrubośćLini;
+
+
+            }
+            public override void kpWykreśl(Graphics kpRysownica)
+            {
+                ushort StopieńWielokąta = 5;
+                int R = kpOśMała;
+                double KątPołożeniaPierwszegoWierzchołka = 0.0;
+                double KątMiędzyWierzchołkamiWielokąta = 360.0 / StopieńWielokąta;
+                Point[] WierzchołkiWielokąta = new Point[StopieńWielokąta];
+                for (int i = 0; i < StopieńWielokąta; i++)
+                {
+                    WierzchołkiWielokąta[i].X = kpX - kpOśDuża / 2 +
+                      (int)(R * Math.Cos(Math.PI * (KątPołożeniaPierwszegoWierzchołka +
+                        i * KątMiędzyWierzchołkamiWielokąta) / 180));
+
+                    WierzchołkiWielokąta[i].Y = kpY - kpOśMała / 2 +
+                      (int)(R * Math.Sin(Math.PI * (KątPołożeniaPierwszegoWierzchołka +
+                        i * KątMiędzyWierzchołkamiWielokąta) / 180));
+                }
+                using (SolidBrush kpPędzel = new SolidBrush(kpKolor))
+                {
+                    kpRysownica.FillPolygon(kpPędzel, WierzchołkiWielokąta);
+                    kpWidoczny = true;
+                }
+            }
+            public override void kpWymaż(Control kpKontrolka, Graphics kpRysownica)
+            {
+                if (kpWidoczny)
+                    using (SolidBrush kpPędzel = new SolidBrush(kpKontrolka.BackColor))
+                    {
+                        kpRysownica.FillPolygon(kpPędzel, WierzchołkiWielokąta);
+                        kpWidoczny = false;
+                    }
+            }
+        }//wielokat wypelniony
+        public class kpLiniaCiągłaKreślonaMyszą : kpPunkt
+        {
+            int kpXk, kpYk;
+            int kpXp, kpYp;
+            public kpLiniaCiągłaKreślonaMyszą(int kpXp, int kpYp, int kpXk, int kpYk) : base(kpXp, kpYp)
+            {
+                this.kpXk = kpXk;
+                this.kpYk = kpYk;
+                kpFigura = kpFiguryGeometryczne.kpLiniaProsta;
+            }
+            public kpLiniaCiągłaKreślonaMyszą(int kpXp, int kpYp, int kpXk, int kpYk, Color kpKolorLini,
+                DashStyle kpStylLini, float kpGrubośćLini) : base(kpXp, kpYp, kpKolorLini)
+            {
+
+                kpFigura = kpFiguryGeometryczne.kpLiniaCiągłaKreślonaMyszą;
+                this.kpXk = kpXk;
+                this.kpYk = kpYk;
+                this.kpStylLini = kpStylLini;
+                this.kpGrubośćLini = kpGrubośćLini;
+
+            }
+            public override void kpWykreśl(Graphics kpRysownica)
+            {
+                using (Pen kpPióro = new Pen(kpKolor, kpGrubośćLini))
+                {
+                    kpPióro.DashStyle = kpStylLini;
+                    kpRysownica.DrawLine(kpPióro, kpX, kpY, kpXk, kpYk);
+                    kpWidoczny = true;
+                }
+            }
+            public override void kpWymaż(Control kpKontrolka, Graphics kpRysownica)
+            {
+                if (kpWidoczny)
+                {
+                    using (Pen kpPióro = new Pen(kpKontrolka.BackColor, kpGrubośćLini))
+                    {
+                        kpPióro.DashStyle = kpStylLini;
+                        kpRysownica.DrawLine(kpPióro, kpX, kpY, kpXk, kpYk);
+                        kpWidoczny = false;
+                    }
+                }
+            }
+            public virtual void kpPrzesuńDoNowegoXY(Control kpKontrolka, Graphics kpRysownica, int kpXn, int kpYn)
+            {
+                int kpDx, kpDy;
+                if (kpXn > kpX)
+                    kpDx = kpXn - kpX;
+                else
+                    kpDx = kpX - kpXn;
+                if (kpXn > kpY)
+                    kpDy = kpYn - kpY;
+                else
+                    kpDy = kpY - kpYn;
+                kpX = kpXn;
+                kpY = kpYn;
+                kpXk = (kpXk + kpDx) % kpKontrolka.Width;
+                kpYk = (kpYk + kpDy) % kpKontrolka.Height;
+                kpWykreśl(kpRysownica);
+            }
+
+        }//linia ciagla kreslona mysza
+        public class kpKrzywaBeziera : kpPunkt
+        {
+            int kpXk, kpYk;
+            int kpXp, kpYp;
+            public kpKrzywaBeziera(int kpXp, int kpYp, int kpXk, int kpYk) : base(kpXp, kpYp)
+            {
+                this.kpXk = kpXk;
+                this.kpYk = kpYk;
+                kpFigura = kpFiguryGeometryczne.kpLiniaProsta;
+            }
+            public kpKrzywaBeziera(int kpXp, int kpYp, int kpXk, int kpYk, Color kpKolorLini,
+                DashStyle kpStylLini, float kpGrubośćLini) : base(kpXp, kpYp, kpKolorLini)
+            {
+
+                kpFigura = kpFiguryGeometryczne.kpKrzywaBeziera;
+                this.kpXk = kpXk;
+                this.kpYk = kpYk;
+                this.kpStylLini = kpStylLini;
+                this.kpGrubośćLini = kpGrubośćLini;
+
+            }
+            public override void kpWykreśl(Graphics kpRysownica)
+            {
+                using (Pen kpPióro = new Pen(kpKolor, kpGrubośćLini))
+                {
+                    kpPióro.DashStyle = kpStylLini;
+                    kpRysownica.DrawLine(kpPióro, kpX, kpY, kpXk, kpYk);
+                    kpWidoczny = true;
+                }
+            }
+            public override void kpWymaż(Control kpKontrolka, Graphics kpRysownica)
+            {
+                if (kpWidoczny)
+                {
+                    using (Pen kpPióro = new Pen(kpKontrolka.BackColor, kpGrubośćLini))
+                    {
+                        kpPióro.DashStyle = kpStylLini;
+                        kpRysownica.DrawLine(kpPióro, kpX, kpY, kpXk, kpYk);
+                        kpWidoczny = false;
+                    }
+                }
+            }
+            public virtual void kpPrzesuńDoNowegoXY(Control kpKontrolka, Graphics kpRysownica, int kpXn, int kpYn)
+            {
+                int kpDx, kpDy;
+                if (kpXn > kpX)
+                    kpDx = kpXn - kpX;
+                else
+                    kpDx = kpX - kpXn;
+                if (kpXn > kpY)
+                    kpDy = kpYn - kpY;
+                else
+                    kpDy = kpY - kpYn;
+                kpX = kpXn;
+                kpY = kpYn;
+                kpXk = (kpXk + kpDx) % kpKontrolka.Width;
+                kpYk = (kpYk + kpDy) % kpKontrolka.Height;
+                kpWykreśl(kpRysownica);
+            }
+
+
+        }//krzywa beziera
+
     }//KPFiguryGeom
 
     }//class Projekt

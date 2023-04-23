@@ -14,6 +14,7 @@ using System.Data.SqlClient;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.Net;
 using System.Drawing.Printing;
+using static ProjektNr2_Plutka_62026.KPFiguryGeometryczne.kpPunkt;
 
 namespace ProjektNr2_Plutka_62026
 {
@@ -32,6 +33,7 @@ namespace ProjektNr2_Plutka_62026
         }
         OpisKrzywejBeziera kpKrzywaBeziera;
         Font FontOpisuPunktów = new Font("Arial", 10, FontStyle.Italic);
+
 
         struct OpisKrzywejKardynalnej
         {
@@ -163,11 +165,17 @@ namespace ProjektNr2_Plutka_62026
 
                 if (kprdbLiniaCiągłaKreślonaMyszą.Checked)
                 {
-                    kpRysownica.DrawLine(kpPióro,
-                        kpPunkt.X,
-                        kpPunkt.Y,
-                        e.Location.X,
-                        e.Location.Y);
+                    //    kpRysownica.DrawLine(kpPióro,
+                    //        kpPunkt.X,
+                    //        kpPunkt.Y,
+                    //        e.Location.X,
+                    //        e.Location.Y);
+                    kpLFG.Add(new kpLiniaCiągłaKreślonaMyszą(kpPunkt.X, kpPunkt.Y, e.Location.X, e.Location.Y,
+                           kptxtKolorLini.BackColor, (DashStyle)kpcbStylLini.SelectedIndex,
+                           kptbGrubośćLini.Value));
+                    kpPióro.Color = kptxtKolorLini.BackColor;
+                    kpLFG[kpLFG.Count - 1].kpWykreśl(kpRysownica);
+                    kppbRysownica.Refresh();
                 }
 
 
@@ -285,6 +293,12 @@ namespace ProjektNr2_Plutka_62026
                             kpgbWybierzFigurę.Enabled = true;
                         }
                     }
+                    kpLFG.Add(new kpKrzywaBeziera(kpPunkt.X, kpPunkt.Y, e.Location.X, e.Location.Y,
+                       kptxtKolorLini.BackColor, (DashStyle)kpcbStylLini.SelectedIndex,
+                       kptbGrubośćLini.Value));
+                    kpPióro.Color = kptxtKolorLini.BackColor;
+                    kpLFG[kpLFG.Count - 1].kpWykreśl(kpRysownica);
+                    kppbRysownica.Refresh();
                 }
 
 
@@ -550,46 +564,23 @@ namespace ProjektNr2_Plutka_62026
 
                 if (kprdbWielokątForemny.Checked)
                 {
-                    
-                    ushort StopieńWielokąta = (ushort)kpnumKąty.Value;
-                    int R = kpSzerokość;
-                    double KątPołożeniaPierwszegoWierzchołka = 0.0;
-                    double KątMiędzyWierzchołkamiWielokąta = 360.0 / StopieńWielokąta;
-                    Point[] WierzchołkiWielokąta = new Point[StopieńWielokąta];
-                    for (int i = 0; i < StopieńWielokąta; i++)
-                    {
-                        WierzchołkiWielokąta[i].X = kpLewyGórnyNarożnikX +
-                          (int)(R * Math.Cos(Math.PI * (KątPołożeniaPierwszegoWierzchołka +
-                            i * KątMiędzyWierzchołkamiWielokąta) / 180));
 
-                        WierzchołkiWielokąta[i].Y = kpLewyGórnyNarożnikY +
-                          (int)(R * Math.Sin(Math.PI * (KątPołożeniaPierwszegoWierzchołka +
-                            i * KątMiędzyWierzchołkamiWielokąta) / 180));
-                    }
+                    kpLFG.Add(new kpWielokątForemny(kpPunkt.X, kpPunkt.Y, kpSzerokość, kpWysokość, kptxtKolorLini.BackColor,
+                          (DashStyle)kpcbStylLini.SelectedIndex, kptbGrubośćLini.Value));
+                    kpLFG[kpLFG.Count - 1].kpWykreśl(kpRysownica);
                    
-                    kpRysownica.DrawPolygon(kpPióro, WierzchołkiWielokąta);
+                    kppbRysownica.Refresh();
 
-                }
+            }
 
                 if (kprdbWielokątWypełniony.Checked)
                 {
-                    ushort StopieńWielokąta = (ushort)kpnumKąty.Value;
-                    int R = kpSzerokość;
-                    double KątPołożeniaPierwszegoWierzchołka = 0.0;
-                    double KątMiędzyWierzchołkamiWielokąta = 360.0 / StopieńWielokąta;
-                    Point[] WierzchołkiWielokąta = new Point[StopieńWielokąta];
-                    for (int i = 0; i < StopieńWielokąta; i++)
-                    {
-                        WierzchołkiWielokąta[i].X = kpLewyGórnyNarożnikX +
-                          (int)(R * Math.Cos(Math.PI * (KątPołożeniaPierwszegoWierzchołka +
-                            i * KątMiędzyWierzchołkamiWielokąta) / 180));
 
-                        WierzchołkiWielokąta[i].Y = kpLewyGórnyNarożnikY +
-                          (int)(R * Math.Sin(Math.PI * (KątPołożeniaPierwszegoWierzchołka +
-                            i * KątMiędzyWierzchołkamiWielokąta) / 180));
-                    }
-                    kpPędzel.Color = kpbtnKolorWypełnienia.BackColor;
-                    kpRysownica.FillPolygon(kpPędzel, WierzchołkiWielokąta);
+                    kpLFG.Add(new kpWielokątWypełniony(kpPunkt.X, kpPunkt.Y, kpSzerokość, kpWysokość,kpbtnKolorWypełnienia.BackColor,
+                          (DashStyle)kpcbStylLini.SelectedIndex, kptbGrubośćLini.Value));
+                    kpLFG[kpLFG.Count - 1].kpWykreśl(kpRysownica);
+
+                    kppbRysownica.Refresh();
                 }
             }
             kppbRysownica.Refresh();
@@ -799,6 +790,11 @@ namespace ProjektNr2_Plutka_62026
                 errorProvider1.SetError(kptxtNumerFiguryIndeks, "ERROR:  podano zbyt wysoką wartość(Przekroczono liczbę figur geometrycznych w LFG)");
                 return;
             }
+
+        }
+
+        private void kppbRysownica_MouseClick(object sender, MouseEventArgs e)
+        {
 
         }
     }

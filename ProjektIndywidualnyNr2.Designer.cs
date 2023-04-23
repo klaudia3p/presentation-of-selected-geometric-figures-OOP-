@@ -31,8 +31,6 @@
             this.components = new System.ComponentModel.Container();
             this.kppbRysownica = new System.Windows.Forms.PictureBox();
             this.kpgbWybierzFigurę = new System.Windows.Forms.GroupBox();
-            this.kpnumKąty = new System.Windows.Forms.NumericUpDown();
-            this.label6 = new System.Windows.Forms.Label();
             this.kpbtnCofnij = new System.Windows.Forms.Button();
             this.kprdbFillPie = new System.Windows.Forms.RadioButton();
             this.kprdbDrawArc = new System.Windows.Forms.RadioButton();
@@ -82,7 +80,6 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.kppbRysownica)).BeginInit();
             this.kpgbWybierzFigurę.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.kpnumKąty)).BeginInit();
             this.kpgbAtrybutyGraficzne.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kptbGrubośćLini)).BeginInit();
             this.kpgbPokazFigur.SuspendLayout();
@@ -98,14 +95,13 @@
             this.kppbRysownica.Size = new System.Drawing.Size(770, 454);
             this.kppbRysownica.TabIndex = 0;
             this.kppbRysownica.TabStop = false;
+            this.kppbRysownica.MouseClick += new System.Windows.Forms.MouseEventHandler(this.kppbRysownica_MouseClick);
             this.kppbRysownica.MouseDown += new System.Windows.Forms.MouseEventHandler(this.kppbRysownica_MouseDown);
             this.kppbRysownica.MouseMove += new System.Windows.Forms.MouseEventHandler(this.kppbRysownica_MouseMove);
             this.kppbRysownica.MouseUp += new System.Windows.Forms.MouseEventHandler(this.kppbRysownica_MouseUp);
             // 
             // kpgbWybierzFigurę
             // 
-            this.kpgbWybierzFigurę.Controls.Add(this.kpnumKąty);
-            this.kpgbWybierzFigurę.Controls.Add(this.label6);
             this.kpgbWybierzFigurę.Controls.Add(this.kpbtnCofnij);
             this.kpgbWybierzFigurę.Controls.Add(this.kprdbFillPie);
             this.kpgbWybierzFigurę.Controls.Add(this.kprdbDrawArc);
@@ -133,39 +129,6 @@
             this.kpgbWybierzFigurę.TabStop = false;
             this.kpgbWybierzFigurę.Text = "Wybierz figurę lub linię krzywą";
             // 
-            // kpnumKąty
-            // 
-            this.kpnumKąty.Location = new System.Drawing.Point(235, 112);
-            this.kpnumKąty.Maximum = new decimal(new int[] {
-            20,
-            0,
-            0,
-            0});
-            this.kpnumKąty.Minimum = new decimal(new int[] {
-            3,
-            0,
-            0,
-            0});
-            this.kpnumKąty.Name = "kpnumKąty";
-            this.kpnumKąty.Size = new System.Drawing.Size(43, 20);
-            this.kpnumKąty.TabIndex = 22;
-            this.kpnumKąty.Value = new decimal(new int[] {
-            3,
-            0,
-            0,
-            0});
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label6.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
-            this.label6.Location = new System.Drawing.Point(156, 114);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(79, 13);
-            this.label6.TabIndex = 21;
-            this.label6.Text = "Liczba kątów:";
-            // 
             // kpbtnCofnij
             // 
             this.kpbtnCofnij.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
@@ -179,7 +142,7 @@
             // kprdbFillPie
             // 
             this.kprdbFillPie.AutoSize = true;
-            this.kprdbFillPie.Location = new System.Drawing.Point(140, 236);
+            this.kprdbFillPie.Location = new System.Drawing.Point(140, 220);
             this.kprdbFillPie.Name = "kprdbFillPie";
             this.kprdbFillPie.Size = new System.Drawing.Size(55, 17);
             this.kprdbFillPie.TabIndex = 18;
@@ -189,7 +152,7 @@
             // kprdbDrawArc
             // 
             this.kprdbDrawArc.AutoSize = true;
-            this.kprdbDrawArc.Location = new System.Drawing.Point(140, 212);
+            this.kprdbDrawArc.Location = new System.Drawing.Point(140, 197);
             this.kprdbDrawArc.Name = "kprdbDrawArc";
             this.kprdbDrawArc.Size = new System.Drawing.Size(69, 17);
             this.kprdbDrawArc.TabIndex = 17;
@@ -199,7 +162,7 @@
             // kprdbKrzywaKardynalna
             // 
             this.kprdbKrzywaKardynalna.AutoSize = true;
-            this.kprdbKrzywaKardynalna.Location = new System.Drawing.Point(140, 188);
+            this.kprdbKrzywaKardynalna.Location = new System.Drawing.Point(140, 174);
             this.kprdbKrzywaKardynalna.Name = "kprdbKrzywaKardynalna";
             this.kprdbKrzywaKardynalna.Size = new System.Drawing.Size(115, 17);
             this.kprdbKrzywaKardynalna.TabIndex = 16;
@@ -209,7 +172,7 @@
             // kprdbFillElipse
             // 
             this.kprdbFillElipse.AutoSize = true;
-            this.kprdbFillElipse.Location = new System.Drawing.Point(140, 164);
+            this.kprdbFillElipse.Location = new System.Drawing.Point(140, 151);
             this.kprdbFillElipse.Name = "kprdbFillElipse";
             this.kprdbFillElipse.Size = new System.Drawing.Size(68, 17);
             this.kprdbFillElipse.TabIndex = 15;
@@ -269,7 +232,7 @@
             // kprdbLiniaCiągłaKreślonaMyszą
             // 
             this.kprdbLiniaCiągłaKreślonaMyszą.AutoSize = true;
-            this.kprdbLiniaCiągłaKreślonaMyszą.Location = new System.Drawing.Point(140, 133);
+            this.kprdbLiniaCiągłaKreślonaMyszą.Location = new System.Drawing.Point(140, 116);
             this.kprdbLiniaCiągłaKreślonaMyszą.Name = "kprdbLiniaCiągłaKreślonaMyszą";
             this.kprdbLiniaCiągłaKreślonaMyszą.Size = new System.Drawing.Size(128, 30);
             this.kprdbLiniaCiągłaKreślonaMyszą.TabIndex = 9;
@@ -666,7 +629,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.kppbRysownica)).EndInit();
             this.kpgbWybierzFigurę.ResumeLayout(false);
             this.kpgbWybierzFigurę.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.kpnumKąty)).EndInit();
             this.kpgbAtrybutyGraficzne.ResumeLayout(false);
             this.kpgbAtrybutyGraficzne.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kptbGrubośćLini)).EndInit();
@@ -727,8 +689,6 @@
         private System.Windows.Forms.Label kplblY;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.ErrorProvider errorProvider1;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.NumericUpDown kpnumKąty;
         private System.Windows.Forms.TextBox kptxtKolorLini;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
     }
