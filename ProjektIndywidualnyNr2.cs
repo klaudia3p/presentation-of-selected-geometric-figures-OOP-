@@ -542,21 +542,10 @@ namespace ProjektNr2_Plutka_62026
 
                 if (kprdbDrawArc.Checked)
                 {
-                //    ushort kpStopieńWielokąta = 1000;
-                //    int R = kpSzerokość;
-                //    double kpKątPołożeniaPierwszegoWierzchołka = 90.0;
-                //    double kpKątMiędzyWierzchołkamiWielokąta = 90.0 / kpStopieńWielokąta;
-                //    Point[] kpWierzchołkiWielokąta = new Point[kpStopieńWielokąta];
-                //    for (int i = 0; i < kpStopieńWielokąta; i++)
-                //    {
-                //        kpWierzchołkiWielokąta[i].X = kpLewyGórnyNarożnikX + (int)(R * Math.Cos(Math.PI
-                //            * (kpKątPołożeniaPierwszegoWierzchołka + i * kpKątMiędzyWierzchołkamiWielokąta) / 180.0));
-
-                //        kpWierzchołkiWielokąta[i].Y = kpLewyGórnyNarożnikY + (int)(R * Math.Sin(Math.PI
-                //            * (kpKątPołożeniaPierwszegoWierzchołka + i * kpKątMiędzyWierzchołkamiWielokąta) / 180.0));
-
-                //    }
-                //    kpRysownica.DrawPolygon(kpPióro, kpWierzchołkiWielokąta);
+                    kpLFG.Add(new kpDrawArc(kpPunkt.X, kpPunkt.Y, kpSzerokość, kpWysokość,0, 90, kptxtKolorLini.BackColor,
+                        (DashStyle)kpcbStylLini.SelectedIndex, kptbGrubośćLini.Value));
+                    kpLFG[kpLFG.Count - 1].kpWykreśl(kpRysownica);
+                    kppbRysownica.Refresh();
                 }
 
                 if (kprdbWielokątForemny.Checked)
