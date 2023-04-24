@@ -777,7 +777,7 @@ namespace ProjektNr2_Plutka_62026
 
         private void kpbtnPrzesuńFigury_Click(object sender, EventArgs e)
         {//deklaracja pomocnicze
-            int Xn, Yn;
+            int kpXn, kpYn;
             Random kprnd = new Random();
 
             //wyczyszczenie powierzchni graficznej
@@ -789,10 +789,10 @@ namespace ProjektNr2_Plutka_62026
             for(int i = 0; i<kpLFG.Count; i++)
             {
                 //wylososwanie nowego polozenia
-                Xn = kprnd.Next(kpMargines, Xmax - kpMargines);
-                Yn = kprnd.Next(kpMargines, Ymax - kpMargines);
+                kpXn = kprnd.Next(kpMargines, Xmax - kpMargines);
+                kpYn = kprnd.Next(kpMargines, Ymax - kpMargines);
                 //przesuniecie do nowego polozenia
-                kpLFG[i].kpPrzesuńDoNowegoXY(kppbRysownica, kpRysownica, Xn, Yn);
+                kpLFG[i].kpPrzesuńDoNowegoXY(kppbRysownica, kpRysownica, kpXn, kpYn);
             }
             kppbRysownica.Refresh();
         }

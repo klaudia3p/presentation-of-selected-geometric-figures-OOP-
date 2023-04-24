@@ -475,12 +475,6 @@ namespace ProjektNr2_Plutka_62026
                         kpWidoczny = false;
                     }
             }
-            public virtual void kpPrzesuńDoNowegoXY(Control kpKontrolka, Graphics kpRysownica, int kpXn, int kpYn)
-            {
-                kpX = kpXn; kpY = kpYn;
-                kpWykreśl(kpRysownica);
-
-            }
         }//drawpie
         public class kpFillPie : kpPunkt
         {
@@ -515,13 +509,7 @@ namespace ProjektNr2_Plutka_62026
                         kpWidoczny = false;
                     }
             }
-            public virtual void kpPrzesuńDoNowegoXY(Control kpKontrolka, Graphics kpRysownica, int kpXn, int kpYn)
-            {//nowe polozenie puktu
-                kpX = kpXn; kpY = kpYn;
-                //wykreslenie punktu w nowym polozeniu
-                kpWykreśl(kpRysownica);
-
-            }
+          
         }//fillpie
         public class kpDrawArc : kpPunkt
         {
