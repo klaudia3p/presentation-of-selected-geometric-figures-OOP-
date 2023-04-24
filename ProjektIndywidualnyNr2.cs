@@ -251,6 +251,7 @@ namespace ProjektNr2_Plutka_62026
                                 FontOpisuPunktów, kpPędzel, e.Location);
                         }
                     }
+
                     else
                     {
                         kpKrzywaBeziera.kpNumerPunktuKontrolnego++;
@@ -290,17 +291,20 @@ namespace ProjektNr2_Plutka_62026
                                 kpKrzywaBeziera.kpPunktP1,
                                 kpKrzywaBeziera.kpPunktP2,
                                 kpKrzywaBeziera.kpPunktP3);
+
+
+
                             kpgbWybierzFigurę.Enabled = true;
                         }
                     }
                     kpLFG.Add(new kpKrzywaBeziera(kpPunkt.X, kpPunkt.Y, e.Location.X, e.Location.Y,
-                       kptxtKolorLini.BackColor, (DashStyle)kpcbStylLini.SelectedIndex,
-                       kptbGrubośćLini.Value));
+                  kptxtKolorLini.BackColor, (DashStyle)kpcbStylLini.SelectedIndex,
+                  kptbGrubośćLini.Value));
                     kpPióro.Color = kptxtKolorLini.BackColor;
                     kpLFG[kpLFG.Count - 1].kpWykreśl(kpRysownica);
                     kppbRysownica.Refresh();
-                }
 
+                }
 
                 if (kprdbKrzywaKardynalna.Checked)
                 {

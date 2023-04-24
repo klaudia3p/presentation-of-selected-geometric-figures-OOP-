@@ -9,6 +9,8 @@ using System.Windows.Forms;
 using static ProjektNr2_Plutka_62026.FiguryGeometryczne;
 using static ProjektNr2_Plutka_62026.KPFiguryGeometryczne;
 using System.Reflection;
+using System.Runtime.CompilerServices;
+using System.Net;
 
 namespace ProjektNr2_Plutka_62026
 {
@@ -18,14 +20,14 @@ namespace ProjektNr2_Plutka_62026
         {
             const int kpPromieńPunktu = 5;
             public enum kpFiguryGeometryczne : byte
-            { kpPunkt, kpLiniaProsta, kpElipsa, kpProstokąt, kpOkrąg, kpKwadrat, kpKoło, kpWielokątForemny, 
+            { kpPunkt, kpLiniaProsta, kpElipsa, kpProstokąt, kpOkrąg, kpKwadrat, kpKoło, kpWielokątForemny,
                 kpWielokątWypełniony, kpKrzywaBeziera, kpLiniaCiągłaKreślonaMyszą, kpFillRectangle,
-            kpDrawClosedCurve, kpFillEllipse, kpKrzywaKardynalna, kpDrawArc, kpFillPie, kpDrawPie, kpFillClosedCurve};
+                kpDrawClosedCurve, kpFillEllipse, kpKrzywaKardynalna, kpDrawArc, kpFillPie, kpDrawPie, kpFillClosedCurve };
             public kpFiguryGeometryczne kpFigura
             {
                 get;
                 protected set;
-            } 
+            }
             public bool kpWidoczny
             {
                 get;
@@ -90,7 +92,7 @@ namespace ProjektNr2_Plutka_62026
             public virtual void kpWykreśl(Graphics kpRysownica)
             {
                 //WERSJA 1
-               
+
                 SolidBrush kpPędzel = new SolidBrush(kpKolor);
                 kpRysownica.FillEllipse(kpPędzel,
                     kpX - kpŚrednicaPunktu / 2,
@@ -166,14 +168,14 @@ namespace ProjektNr2_Plutka_62026
             public override void kpWymaż(Control kpKontrolka, Graphics kpRysownica)
             {
                 if (kpWidoczny)
-               {
+                {
                     using (Pen kpPióro = new Pen(kpKontrolka.BackColor, kpGrubośćLini))
-                   {
-                     kpPióro.DashStyle = kpStylLini;
-                    kpRysownica.DrawLine(kpPióro, kpX, kpY, kpXk, kpYk);
-                      kpWidoczny = false;
-                  }
-              }
+                    {
+                        kpPióro.DashStyle = kpStylLini;
+                        kpRysownica.DrawLine(kpPióro, kpX, kpY, kpXk, kpYk);
+                        kpWidoczny = false;
+                    }
+                }
             }
             public virtual void kpPrzesuńDoNowegoXY(Control kpKontrolka, Graphics kpRysownica, int kpXn, int kpYn)
             {
@@ -197,7 +199,7 @@ namespace ProjektNr2_Plutka_62026
         public class kpElipsa : kpPunkt
         {
             protected int kpOśDuża, kpOśMała;
-            public kpElipsa(int kpx, int kpy, int kpośDuża, int kpośMała, Color kpKolorLini, 
+            public kpElipsa(int kpx, int kpy, int kpośDuża, int kpośMała, Color kpKolorLini,
                 DashStyle kpStylLini, float kpGrubośćLini) : base(kpx, kpy, kpKolorLini)
             {
                 kpFigura = kpFiguryGeometryczne.kpElipsa;
@@ -213,7 +215,7 @@ namespace ProjektNr2_Plutka_62026
                 using (Pen kpPióro = new Pen(kpKolor, kpGrubośćLini))
                 {
                     kpPióro.DashStyle = kpStylLini;
-                    kpRysownica.DrawEllipse(kpPióro, kpX - kpOśDuża / 2, 
+                    kpRysownica.DrawEllipse(kpPióro, kpX - kpOśDuża / 2,
                         kpY - kpOśMała / 2, kpOśDuża, kpOśMała);
                     kpWidoczny = true;
                 }
@@ -265,7 +267,7 @@ namespace ProjektNr2_Plutka_62026
                     }
             }
         }//okrag
-        public class kpKoło: kpPunkt
+        public class kpKoło : kpPunkt
         {
             protected int kpOśDuża, kpOśMała;
             public kpKoło(int kpx, int kpy, int kpośDuża, int kpośMała, Color kpKolor,
@@ -284,7 +286,7 @@ namespace ProjektNr2_Plutka_62026
                 using (SolidBrush kpPędzel = new SolidBrush(kpKolor))
                 {
                     kpRysownica.FillEllipse(kpPędzel, kpX - kpOśDuża / 2,
-                        kpY - kpOśMała / 2, 
+                        kpY - kpOśMała / 2,
                         kpOśDuża, kpOśDuża);
                     kpWidoczny = true;
                 }
@@ -294,7 +296,7 @@ namespace ProjektNr2_Plutka_62026
                 if (kpWidoczny)
                     using (SolidBrush kpPędzel = new SolidBrush(kpKontrolka.BackColor))
                     {
-                        kpRysownica.FillEllipse(kpPędzel, kpX - kpOśDuża / 2, 
+                        kpRysownica.FillEllipse(kpPędzel, kpX - kpOśDuża / 2,
                             kpY - kpOśMała / 2,
                             kpOśDuża, kpOśDuża);
                         kpWidoczny = false;
@@ -399,7 +401,7 @@ namespace ProjektNr2_Plutka_62026
                     using (Pen kpPióro = new Pen(kpKontrolka.BackColor, kpGrubośćLini))
                     {
                         kpPióro.DashStyle = kpStylLini;
-                        kpRysownica.DrawRectangle(kpPióro, kpX - kpOśDuża / 2, 
+                        kpRysownica.DrawRectangle(kpPióro, kpX - kpOśDuża / 2,
                             kpY - kpOśMała / 2, kpOśDuża, kpOśDuża);
                         kpWidoczny = false;
                     }
@@ -442,7 +444,7 @@ namespace ProjektNr2_Plutka_62026
         {
             protected int kpOśDuża, kpOśMała;
             Rectangle rectl;
-            public kpDrawPie(int kpX, int kpY, int kpośDuża,int kpośMała, Color kpKolorLini, 
+            public kpDrawPie(int kpX, int kpY, int kpośDuża, int kpośMała, Color kpKolorLini,
                 DashStyle kpStylLini, float kpGrubośćLini) : base(kpX, kpY, kpKolorLini)
             {
                 kpFigura = kpFiguryGeometryczne.kpDrawPie;
@@ -451,7 +453,7 @@ namespace ProjektNr2_Plutka_62026
                 kpOśMała = kpośMała;
                 this.kpStylLini = kpStylLini;
                 this.kpGrubośćLini = kpGrubośćLini;
-                Rectangle rect = new Rectangle(kpX,kpY,kpośDuża,kpośMała);
+                Rectangle rect = new Rectangle(kpX, kpY, kpośDuża, kpośMała);
                 rectl = rect;
             }
             public override void kpWykreśl(Graphics kpRysownica)
@@ -459,7 +461,7 @@ namespace ProjektNr2_Plutka_62026
                 using (Pen kpPióro = new Pen(kpKolor, kpGrubośćLini))
                 {
                     kpPióro.DashStyle = kpStylLini;
-                    kpRysownica.DrawPie(kpPióro,rectl,0.0f,90.0f);
+                    kpRysownica.DrawPie(kpPióro, rectl, 0.0f, 90.0f);
                     kpWidoczny = true;
                 }
             }
@@ -542,7 +544,7 @@ namespace ProjektNr2_Plutka_62026
                 using (Pen kpPióro = new Pen(kpKolor, kpGrubośćLini))
                 {
                     kpPióro.DashStyle = kpStylLini;
-                    kpRysownica.DrawArc(kpPióro, kpX,kpY, kpOśDuża, kpOśDuża,kpSweepAngle,kpStartAngle);
+                    kpRysownica.DrawArc(kpPióro, kpX, kpY, kpOśDuża, kpOśDuża, kpSweepAngle, kpStartAngle);
                     kpWidoczny = true;
                 }
             }
@@ -570,7 +572,7 @@ namespace ProjektNr2_Plutka_62026
                 kpOśMała = kpośMała;
                 this.kpStylLini = kpStylLini;
                 this.kpGrubośćLini = kpGrubośćLini;
-                
+
 
             }
             public override void kpWykreśl(Graphics kpRysownica)
@@ -582,11 +584,11 @@ namespace ProjektNr2_Plutka_62026
                 Point[] WierzchołkiWielokąta = new Point[StopieńWielokąta];
                 for (int i = 0; i < StopieńWielokąta; i++)
                 {
-                    WierzchołkiWielokąta[i].X = kpX-kpOśDuża/2 +
+                    WierzchołkiWielokąta[i].X = kpX - kpOśDuża / 2 +
                       (int)(R * Math.Cos(Math.PI * (KątPołożeniaPierwszegoWierzchołka +
                         i * KątMiędzyWierzchołkamiWielokąta) / 180));
 
-                    WierzchołkiWielokąta[i].Y = kpY-kpOśMała/2 +
+                    WierzchołkiWielokąta[i].Y = kpY - kpOśMała / 2 +
                       (int)(R * Math.Sin(Math.PI * (KątPołożeniaPierwszegoWierzchołka +
                         i * KątMiędzyWierzchołkamiWielokąta) / 180));
                 }
@@ -720,14 +722,16 @@ namespace ProjektNr2_Plutka_62026
         }//linia ciagla kreslona mysza
         public class kpKrzywaBeziera : kpPunkt
         {
+
+
             int kpXk, kpYk;
             int kpXp, kpYp;
             public kpKrzywaBeziera(int kpXp, int kpYp, int kpXk, int kpYk) : base(kpXp, kpYp)
-            {
-                this.kpXk = kpXk;
-                this.kpYk = kpYk;
-                kpFigura = kpFiguryGeometryczne.kpLiniaProsta;
-            }
+           {
+               this.kpXk = kpXk;
+               this.kpYk = kpYk;
+                kpFigura = kpFiguryGeometryczne.kpKrzywaBeziera;
+           }
             public kpKrzywaBeziera(int kpXp, int kpYp, int kpXk, int kpYk, Color kpKolorLini,
                 DashStyle kpStylLini, float kpGrubośćLini) : base(kpXp, kpYp, kpKolorLini)
             {
@@ -739,16 +743,19 @@ namespace ProjektNr2_Plutka_62026
                 this.kpGrubośćLini = kpGrubośćLini;
 
             }
-            public override void kpWykreśl(Graphics kpRysownica)
+
+
+            public void kpWykreśl(Point endPoint, Graphics kpRysownica)
             {
                 using (Pen kpPióro = new Pen(kpKolor, kpGrubośćLini))
                 {
                     kpPióro.DashStyle = kpStylLini;
-                    kpRysownica.DrawLine(kpPióro, kpX, kpY, kpXk, kpYk);
+
                     kpWidoczny = true;
                 }
             }
-            public override void kpWymaż(Control kpKontrolka, Graphics kpRysownica)
+
+public override void kpWymaż(Control kpKontrolka, Graphics kpRysownica)
             {
                 if (kpWidoczny)
                 {
@@ -760,7 +767,7 @@ namespace ProjektNr2_Plutka_62026
                     }
                 }
             }
-            public virtual void kpPrzesuńDoNowegoXY(Control kpKontrolka, Graphics kpRysownica, int kpXn, int kpYn)
+        public virtual void kpPrzesuńDoNowegoXY(Control kpKontrolka, Graphics kpRysownica, int kpXn, int kpYn)
             {
                 int kpDx, kpDy;
                 if (kpXn > kpX)
@@ -778,8 +785,9 @@ namespace ProjektNr2_Plutka_62026
                 kpWykreśl(kpRysownica);
             }
 
+    
 
-        }//krzywa beziera
+    }//krzywa beziera
 
     }//KPFiguryGeom
 
