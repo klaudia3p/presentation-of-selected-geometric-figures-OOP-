@@ -372,7 +372,12 @@ namespace ProjektNr2_Plutka_62026
                             kpgbWybierzFigurę.Enabled = true;
                         }
                     }
-
+                    kpLFG.Add(new kpKardynalna(kpPunkt.X, kpPunkt.Y, e.Location.X, e.Location.Y,
+                  kptxtKolorLini.BackColor, (DashStyle)kpcbStylLini.SelectedIndex,
+                  kptbGrubośćLini.Value));
+                    kpPióro.Color = kptxtKolorLini.BackColor;
+                    kpLFG[kpLFG.Count - 1].kpWykreśl(kpRysownica);
+                    kppbRysownica.Refresh();
 
                 }
 
@@ -463,6 +468,12 @@ namespace ProjektNr2_Plutka_62026
                             kpgbWybierzFigurę.Enabled = true;
                         }
                     }
+                    kpLFG.Add(new kpDrawClosedCurve(kpPunkt.X, kpPunkt.Y, e.Location.X, e.Location.Y,
+                  kptxtKolorLini.BackColor, (DashStyle)kpcbStylLini.SelectedIndex,
+                  kptbGrubośćLini.Value));
+                    kpPióro.Color = kptxtKolorLini.BackColor;
+                    kpLFG[kpLFG.Count - 1].kpWykreśl(kpRysownica);
+                    kppbRysownica.Refresh();
                 }
 
 
@@ -533,6 +544,12 @@ namespace ProjektNr2_Plutka_62026
                             kpgbWybierzFigurę.Enabled = true;
                         }
                     }
+                    kpLFG.Add(new kpFillClosedCurve(kpPunkt.X, kpPunkt.Y, e.Location.X, e.Location.Y,
+                  kpbtnKolorWypełnienia.BackColor, (DashStyle)kpcbStylLini.SelectedIndex,
+                  kptbGrubośćLini.Value));
+                    kpPióro.Color = kptxtKolorLini.BackColor;
+                    kpLFG[kpLFG.Count - 1].kpWykreśl(kpRysownica);
+                    kppbRysownica.Refresh();
                 }
 
 
