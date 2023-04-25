@@ -397,7 +397,7 @@ namespace ProjektNr2_Plutka_62026
         }
 
         private void timer1_Tick(object sender, EventArgs e)
-        //{
+        {
         //    //wymazanie aktualnej wykreslonej figury
         //    Rysownica.Clear(pbRysownica.BackColor);
         //    //ustalenie rozmiaru powierzchni graficznej
