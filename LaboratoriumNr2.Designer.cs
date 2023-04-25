@@ -38,15 +38,26 @@
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.btnPrzesuńdoNowegoXY = new System.Windows.Forms.Button();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.btnWłączPokazFigur = new System.Windows.Forms.Button();
+            this.btnWyłączPokaz = new System.Windows.Forms.Button();
+            this.gpbTrybPokazu = new System.Windows.Forms.GroupBox();
+            this.rdbPokazZegarowy = new System.Windows.Forms.RadioButton();
+            this.rdbPokazManualny = new System.Windows.Forms.RadioButton();
+            this.btnPoprzednia = new System.Windows.Forms.Button();
+            this.btnNastępna = new System.Windows.Forms.Button();
+            this.txtBIndeks = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pbRysownica)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
+            this.gpbTrybPokazu.SuspendLayout();
             this.SuspendLayout();
             // 
             // pbRysownica
             // 
             this.pbRysownica.BackColor = System.Drawing.SystemColors.Info;
             this.pbRysownica.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pbRysownica.Location = new System.Drawing.Point(180, 93);
+            this.pbRysownica.Location = new System.Drawing.Point(180, 12);
             this.pbRysownica.Name = "pbRysownica";
             this.pbRysownica.Size = new System.Drawing.Size(611, 341);
             this.pbRysownica.TabIndex = 0;
@@ -74,9 +85,8 @@
             // 
             // btnStart
             // 
-            this.btnStart.Enabled = false;
             this.btnStart.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.btnStart.Location = new System.Drawing.Point(21, 187);
+            this.btnStart.Location = new System.Drawing.Point(34, 187);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(103, 37);
             this.btnStart.TabIndex = 3;
@@ -131,11 +141,123 @@
             this.btnPrzesuńdoNowegoXY.UseVisualStyleBackColor = true;
             this.btnPrzesuńdoNowegoXY.Click += new System.EventHandler(this.btnPrzesuńdoNowegoXY_Click);
             // 
+            // timer1
+            // 
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // btnWłączPokazFigur
+            // 
+            this.btnWłączPokazFigur.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.btnWłączPokazFigur.Location = new System.Drawing.Point(8, 316);
+            this.btnWłączPokazFigur.Name = "btnWłączPokazFigur";
+            this.btnWłączPokazFigur.Size = new System.Drawing.Size(166, 54);
+            this.btnWłączPokazFigur.TabIndex = 7;
+            this.btnWłączPokazFigur.Text = "Włączenie pokazu figur";
+            this.btnWłączPokazFigur.UseVisualStyleBackColor = true;
+            this.btnWłączPokazFigur.Click += new System.EventHandler(this.btnWłączPokazFigur_Click);
+            // 
+            // btnWyłączPokaz
+            // 
+            this.btnWyłączPokaz.Enabled = false;
+            this.btnWyłączPokaz.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.btnWyłączPokaz.Location = new System.Drawing.Point(8, 377);
+            this.btnWyłączPokaz.Name = "btnWyłączPokaz";
+            this.btnWyłączPokaz.Size = new System.Drawing.Size(166, 57);
+            this.btnWyłączPokaz.TabIndex = 8;
+            this.btnWyłączPokaz.Text = "Wyłączenie pokazu figur";
+            this.btnWyłączPokaz.UseVisualStyleBackColor = true;
+            this.btnWyłączPokaz.Click += new System.EventHandler(this.btnWyłączPokaz_Click);
+            // 
+            // gpbTrybPokazu
+            // 
+            this.gpbTrybPokazu.Controls.Add(this.rdbPokazManualny);
+            this.gpbTrybPokazu.Controls.Add(this.rdbPokazZegarowy);
+            this.gpbTrybPokazu.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.gpbTrybPokazu.Location = new System.Drawing.Point(8, 440);
+            this.gpbTrybPokazu.Name = "gpbTrybPokazu";
+            this.gpbTrybPokazu.Size = new System.Drawing.Size(417, 56);
+            this.gpbTrybPokazu.TabIndex = 9;
+            this.gpbTrybPokazu.TabStop = false;
+            this.gpbTrybPokazu.Text = "Tryb pokazu figur geometrycznych";
+            // 
+            // rdbPokazZegarowy
+            // 
+            this.rdbPokazZegarowy.AutoSize = true;
+            this.rdbPokazZegarowy.Checked = true;
+            this.rdbPokazZegarowy.Location = new System.Drawing.Point(13, 26);
+            this.rdbPokazZegarowy.Name = "rdbPokazZegarowy";
+            this.rdbPokazZegarowy.Size = new System.Drawing.Size(190, 23);
+            this.rdbPokazZegarowy.TabIndex = 0;
+            this.rdbPokazZegarowy.TabStop = true;
+            this.rdbPokazZegarowy.Text = "Automatyczny Zegarowy";
+            this.rdbPokazZegarowy.UseVisualStyleBackColor = true;
+            this.rdbPokazZegarowy.CheckedChanged += new System.EventHandler(this.rdbPokazZegarowy_CheckedChanged);
+            // 
+            // rdbPokazManualny
+            // 
+            this.rdbPokazManualny.AutoSize = true;
+            this.rdbPokazManualny.Location = new System.Drawing.Point(229, 25);
+            this.rdbPokazManualny.Name = "rdbPokazManualny";
+            this.rdbPokazManualny.Size = new System.Drawing.Size(186, 23);
+            this.rdbPokazManualny.TabIndex = 1;
+            this.rdbPokazManualny.Text = "Manualny(przyciskowy)";
+            this.rdbPokazManualny.UseVisualStyleBackColor = true;
+            this.rdbPokazManualny.CheckedChanged += new System.EventHandler(this.rdbPokazManualny_CheckedChanged);
+            // 
+            // btnPoprzednia
+            // 
+            this.btnPoprzednia.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.btnPoprzednia.Location = new System.Drawing.Point(44, 509);
+            this.btnPoprzednia.Name = "btnPoprzednia";
+            this.btnPoprzednia.Size = new System.Drawing.Size(130, 34);
+            this.btnPoprzednia.TabIndex = 10;
+            this.btnPoprzednia.Text = "Poprzednia";
+            this.btnPoprzednia.UseVisualStyleBackColor = true;
+            this.btnPoprzednia.Click += new System.EventHandler(this.btnPoprzednia_Click);
+            // 
+            // btnNastępna
+            // 
+            this.btnNastępna.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.btnNastępna.Location = new System.Drawing.Point(249, 509);
+            this.btnNastępna.Name = "btnNastępna";
+            this.btnNastępna.Size = new System.Drawing.Size(134, 34);
+            this.btnNastępna.TabIndex = 11;
+            this.btnNastępna.Text = "Następna";
+            this.btnNastępna.UseVisualStyleBackColor = true;
+            this.btnNastępna.Click += new System.EventHandler(this.btnNastępna_Click);
+            // 
+            // txtBIndeks
+            // 
+            this.txtBIndeks.Enabled = false;
+            this.txtBIndeks.Location = new System.Drawing.Point(461, 488);
+            this.txtBIndeks.Name = "txtBIndeks";
+            this.txtBIndeks.Size = new System.Drawing.Size(100, 20);
+            this.txtBIndeks.TabIndex = 12;
+            this.txtBIndeks.TextChanged += new System.EventHandler(this.txtBIndeks_TextChanged);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label3.Location = new System.Drawing.Point(463, 466);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(98, 19);
+            this.label3.TabIndex = 13;
+            this.label3.Text = "Indeks figury";
+            // 
             // LaboratoriumNr2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1005, 472);
+            this.ClientSize = new System.Drawing.Size(1005, 562);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.txtBIndeks);
+            this.Controls.Add(this.btnNastępna);
+            this.Controls.Add(this.btnPoprzednia);
+            this.Controls.Add(this.gpbTrybPokazu);
+            this.Controls.Add(this.btnWyłączPokaz);
+            this.Controls.Add(this.btnWłączPokazFigur);
             this.Controls.Add(this.btnPrzesuńdoNowegoXY);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.chlbFiguryGeometryczne);
@@ -149,6 +271,8 @@
             this.Load += new System.EventHandler(this.LaboratoriumNr2_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pbRysownica)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
+            this.gpbTrybPokazu.ResumeLayout(false);
+            this.gpbTrybPokazu.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -165,5 +289,15 @@
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.Button btnPrzesuńdoNowegoXY;
+        private System.Windows.Forms.GroupBox gpbTrybPokazu;
+        private System.Windows.Forms.Button btnWyłączPokaz;
+        private System.Windows.Forms.Button btnWłączPokazFigur;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Button btnNastępna;
+        private System.Windows.Forms.Button btnPoprzednia;
+        private System.Windows.Forms.RadioButton rdbPokazManualny;
+        private System.Windows.Forms.RadioButton rdbPokazZegarowy;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox txtBIndeks;
     }
 }

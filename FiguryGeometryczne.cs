@@ -7,6 +7,7 @@ using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static ProjektNr2_Plutka_62026.FiguryGeometryczne;
 
 namespace ProjektNr2_Plutka_62026
 {
@@ -150,26 +151,26 @@ namespace ProjektNr2_Plutka_62026
 
 
 
-    } //koniec klasy punkt
+        } //koniec klasy punkt
 
 
 
-    //deklaracja klasy potomnej
-    public class Linia: Punkt
-    {
+        //deklaracja klasy potomnej
+        public class Linia : Punkt
+        {
             //dodanie deklaracji niezbednych dla wykreslenia lini
             int Xk, Yk;
             int Xp, Yp;
             //deklaracje konstruktorów  
-            public  Linia (int Xp, int Yp, int Xk, int Yk):base(Xp,Yp)
+            public Linia(int Xp, int Yp, int Xk, int Yk) : base(Xp, Yp)
             {
                 this.Xk = Xk;
                 this.Yk = Yk;
                 //ustawienie znacznika Linia
                 Figura = FiguryGeometryczne.Linia;
             }
-            public Linia(int Xp, int Yp, int Xk, int Yk, Color KolorLini, 
-                DashStyle StylLini, float GrubośćLini):base(Xp,Yp,KolorLini)
+            public Linia(int Xp, int Yp, int Xk, int Yk, Color KolorLini,
+                DashStyle StylLini, float GrubośćLini) : base(Xp, Yp, KolorLini)
             {
                 //ustawinenie znacznika linia
                 Figura = FiguryGeometryczne.Linia;
@@ -195,7 +196,7 @@ namespace ProjektNr2_Plutka_62026
             public override void Wymaż(Control Kontrolka, Graphics Rysownica)
             {
                 if (Widoczny)
-                    using(Pen Pióro = new Pen(Kontrolka.BackColor, GrubośćLini))
+                    using (Pen Pióro = new Pen(Kontrolka.BackColor, GrubośćLini))
                     {
                         //ustawieniei stylu lini
                         Pióro.DashStyle = StylLini;
@@ -229,14 +230,14 @@ namespace ProjektNr2_Plutka_62026
                 Wykreśl(Rysownica);
 
             }
-    }//koniec linii
+        }//koniec linii
 
-        public class Elipsa: Punkt
+        public class Elipsa : Punkt
         {
             //dodanie nowych atrybutow niezbednych dla wykreslenia elipsy
             protected int OśDuża, OśMała;
             //deklaracja konstruktora
-            public Elipsa(int x, int y, int ośDuża, int ośMała, Color KolorLini, DashStyle StylLini, float GrubośćLini): base(x,y,KolorLini)
+            public Elipsa(int x, int y, int ośDuża, int ośMała, Color KolorLini, DashStyle StylLini, float GrubośćLini) : base(x, y, KolorLini)
             {
                 //ustawienie znacznika elipsy
                 Figura = FiguryGeometryczne.Elipsa;
@@ -261,7 +262,7 @@ namespace ProjektNr2_Plutka_62026
                     //wykreslenie elipsy
                     Rysownica.DrawEllipse(Pióro, X - OśDuża / 2, Y - OśMała / 2, OśDuża, OśMała);
                     //zmiana atrybuty widocznosci
-                    Widoczny=true;
+                    Widoczny = true;
                 }
             }
             public override void Wymaż(Control Kontrolka, Graphics Rysownica)
@@ -279,5 +280,29 @@ namespace ProjektNr2_Plutka_62026
                     }
             }
         }
+
+        public class Okrąg : Elipsa
+        {
+            //deklaracja atrybutu promien
+            public int Promień
+            {
+                get { return OśDuża; }
+                set
+                {
+                    OśDuża = value;
+                    OśMała = value;
+                }
+            }
+            //konstruyktor
+            public Okrąg(int x, int y, int Promień, Color KolorLini, DashStyle StylLini, 
+                float GrubośćLini) : base(x, y, 2 * Promień, 2 * Promień, KolorLini, StylLini, GrubośćLini)
+            {
+                Figura = FiguryGeometryczne.Okrąg;
+            }
+
+        }
     }
+    //deklaracja klasy okrag
+   
 }
+

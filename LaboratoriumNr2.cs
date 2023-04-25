@@ -137,7 +137,16 @@ namespace ProjektNr2_Plutka_62026
                             IndexTFG++;
                             break;
                         }
-                        default:
+                    case "Okrąg":
+                        {
+                            int Promień =rnd.Next(Margines,Xmax/4);
+                            //utworzenie gzemplarza okregu i wpisanie jego referencji do tfg
+                            TFG[IndexTFG] = new Okrąg(Xp, Yp, Promień, Kolor, StylLini, GrubośćLini);
+                            TFG[IndexTFG].Wykreśl(Rysownica);
+                            IndexTFG++;
+                            break;
+                        }
+                    default:
                         {
                             MessageBox.Show("UWAGA: tej figury jeszcze nie wykreślam :(");
                             break;
@@ -151,7 +160,11 @@ namespace ProjektNr2_Plutka_62026
             pbRysownica.Refresh();
             //ustwienie stanu braku aktywnosci dla przycisku start
             btnStart.Enabled = false;
+            btnPrzesuńdoNowegoXY.Enabled = true;
+
             //uaktywnienie innych przyciskow i kontrolek
+            btnWłączPokazFigur.Enabled = true;
+            gpbTrybPokazu.Enabled = true;
 
 
         }
@@ -239,5 +252,164 @@ namespace ProjektNr2_Plutka_62026
 
         }//od btn
 
+        private void btnWyłączPokaz_Click(object sender, EventArgs e)
+        {
+            //wyczyszczenie rysownicy
+            Rysownica.Clear(pbRysownica.BackColor);
+            timer1.Enabled = false;
+            btnWyłączPokaz.Enabled = false;
+            btnWłączPokazFigur.Enabled= true;
+            //ustalen ie rozmiaru powierzchni graficznej
+            int Xmax = pbRysownica.Width;
+            int Ymax = pbRysownica.Height;
+            int Yn, Xn;
+            Random rnd = new Random();
+            //wykreslenie wszystkich figur w nowym polozeniu
+            for (int i=0;i<TFG.Length; i++)
+            {
+                //nowe polozenie
+                Xn = rnd.Next(Margines, Xmax - Margines);
+                Yn = rnd.Next(Margines, Ymax - Margines);
+                TFG[i].PrzesuńDoNowegoXY(pbRysownica, Rysownica, Xn, Yn);
+            }
+            pbRysownica.Refresh();
+            //usatwienie aktywnosci da 
+            btnNastępna.Enabled = false;
+            btnPoprzednia.Enabled = false;
+            txtBIndeks.Enabled = false;
+            rdbPokazZegarowy.Checked = true;
+
+        }
+
+        private void btnNastępna_Click(object sender, EventArgs e)
+        {
+            int N = int.Parse(txtBIndeks.Text);
+            //wymazanie figury o numerze N
+            TFG[N].Wymaż(pbRysownica, Rysownica);
+            //wyznaczenie numeru kolejnej figury w pokazie
+            if (N == (TFG.Length - 1))
+                N = 0;
+            else N++;
+            //ustalen ie rozmiaru powierzchni graficznej
+            int Xmax = pbRysownica.Width;
+            int Ymax = pbRysownica.Height;
+            //przesuniecie z wykreslenien=m figury o numerze n
+            TFG[N].PrzesuńDoNowegoXY(pbRysownica, Rysownica, Xmax / 2, Ymax / 2);
+            pbRysownica.Refresh();
+            //wpisanie aktualnego numeru N do kontrolki txtBIndex
+            txtBIndeks.Text = N.ToString();
+            Rysownica.Clear(pbRysownica.BackColor);
+            pbRysownica.Refresh();
+        }
+
+        private void btnPoprzednia_Click(object sender, EventArgs e)
+        {
+            int N = int.Parse(txtBIndeks.Text);
+            //wymazanie figury o numerze N
+            TFG[N].Wymaż(pbRysownica, Rysownica);
+            //wyznaczenie numeru poprzedniej figury w pokazie
+            if (N == 0 )
+                N= TFG.Length - 1;
+            else N--;
+            //ustalen ie rozmiaru powierzchni graficznej
+            int Xmax = pbRysownica.Width;
+            int Ymax = pbRysownica.Height;
+            //przesuniecie z wykreslenien=m figury o numerze n
+            TFG[N].PrzesuńDoNowegoXY(pbRysownica, Rysownica, Xmax / 2, Ymax / 2);
+            pbRysownica.Refresh();
+            //wpisanie aktualnego numeru N do kontrolki txtBIndex
+            txtBIndeks.Text = N.ToString();
+            Rysownica.Clear(pbRysownica.BackColor);
+            pbRysownica.Refresh();
+        }
+
+        private void txtBIndeks_TextChanged(object sender, EventArgs e)
+        {
+            ushort N;
+            errorProvider1.Dispose();
+            if (!ushort.TryParse(txtBIndeks.Text,  out N))
+            {
+                //jest blad
+                errorProvider1.SetError(txtBIndeks, "ERROR: w podanym zapisie numeru indeksu figury wystąpił niedozwolony znak!");
+                return;
+
+            }
+            //sprawdzenie czy nie nastapilo wyjscie poza zakres indeksu
+            if((N>(TFG.Length - 1)))
+                {
+                //jest blad
+                errorProvider1.SetError(txtBIndeks, "ERROR: podany indeks wykracza poza zakres indeksu TFG!");
+                return;
+
+            }
+
+        }
+
+        private void rdbPokazManualny_CheckedChanged(object sender, EventArgs e)
+        {
+            //uaktywnienie kontrolki textbox
+            txtBIndeks.Enabled = true;
+            txtBIndeks.Text = 0.ToString();
+
+        }
+
+        private void rdbPokazZegarowy_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnWłączPokazFigur_Click(object sender, EventArgs e)
+        {
+            //wyczyszczenie powierzchni graficznej
+            Rysownica.Clear(pbRysownica.BackColor);
+            pbRysownica.Refresh();
+            //rozpoznanie wybranego pokazu figur
+            if(rdbPokazZegarowy.Checked)
+            {
+                //ustawienie num fig do pokazu w polu timer
+                timer1.Tag = 0.ToString();
+                timer1.Enabled = true;
+                //wykreslenie pierwszej figury w pokazie
+
+            }
+            else
+            {
+                int N;
+                N = int.Parse(txtBIndeks.Text);
+                //ustalenie rozmiaru powierzchni graficznej
+                int Xmax = pbRysownica.Width;
+                int Ymax = pbRysownica.Height;
+                //przesuniecie i wykrslenie pierwszej figury w pokazie
+                TFG[N].PrzesuńDoNowegoXY(pbRysownica, Rysownica, Xmax / 2, Ymax / 2);
+                pbRysownica.Refresh();
+                //uaktywniwnie przcyciskow Nastepny i poprzednie
+                btnNastępna.Enabled = true;
+                btnPoprzednia.Enabled = true;
+
+            }
+            //ustawienie braku aktywnosci dla obslugiwanego przycisku
+            btnWłączPokazFigur.Enabled = false;
+            gpbTrybPokazu.Enabled = true;
+            rdbPokazZegarowy.Enabled = true;
+            rdbPokazManualny.Enabled = true;
+            //aktywnosc dla przyciusku
+            btnWyłączPokaz.Enabled = true;
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        //{
+        //    //wymazanie aktualnej wykreslonej figury
+        //    Rysownica.Clear(pbRysownica.BackColor);
+        //    //ustalenie rozmiaru powierzchni graficznej
+        //    int Xmax = pbRysownica.Width;
+        //    int Ymax = pbRysownica.Height;
+        //    //przesuniecie wykreslenie figury geom ktoerj nr byl zapisany w polu time
+        //    TFG[(int)timer1.Tag].PrzesuńDoNowegoXY(pbRysownica, Rysownica, Xmax / 2, Ymax / 2);
+
+        //    pbRysownica.Refresh();
+        //    //wpisanie do pola tag nr nastepnej figury do wykreslenia
+        //    timer1.Tag = ((int)timer1.Tag + 1) % (TFG.Length-1);  
+            
+        }
     }
 }
