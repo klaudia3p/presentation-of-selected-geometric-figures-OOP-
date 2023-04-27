@@ -855,5 +855,26 @@ namespace ProjektNr2_Plutka_62026
             kpRysownica.Clear(kppbRysownica.BackColor);
             kppbRysownica.Refresh();
         }
+
+        private void kpbtnNastępny_Click(object sender, EventArgs e)
+        {
+            int N = int.Parse(kptxtNumerFiguryIndeks.Text);
+            //wymazanie figury o numerze N
+            kpLFG[N].kpWymaż(kppbRysownica, kpRysownica);
+            //wyznaczenie numeru kolejnej figury w pokazie
+            if (N == (kpLFG.Count - 1))
+                N = 0;
+            else N++;
+            //ustalen ie rozmiaru powierzchni graficznej
+            int Xmax = kppbRysownica.Width;
+            int Ymax = kppbRysownica.Height;
+            //przesuniecie z wykreslenien=m figury o numerze n
+            kpLFG[N].kpPrzesuńDoNowegoXY(kppbRysownica, kpRysownica, Xmax / 2, Ymax / 2);
+            kppbRysownica.Refresh();
+            //wpisanie aktualnego numeru N do kontrolki txtBIndex
+            kptxtNumerFiguryIndeks.Text = N.ToString();
+            kpRysownica.Clear(kppbRysownica.BackColor);
+            kppbRysownica.Refresh();
+        }
     }
 }

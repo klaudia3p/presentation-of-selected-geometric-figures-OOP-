@@ -520,6 +520,7 @@
             this.kpbtnNastępny.TabIndex = 13;
             this.kpbtnNastępny.Text = "Następny";
             this.kpbtnNastępny.UseVisualStyleBackColor = true;
+            this.kpbtnNastępny.Click += new System.EventHandler(this.kpbtnNastępny_Click);
             // 
             // kpbtnZapisz
             // 
