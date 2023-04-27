@@ -360,6 +360,11 @@ namespace ProjektNr2_Plutka_62026
 
         private void btnWłączPokazFigur_Click(object sender, EventArgs e)
         {
+            gpbTrybPokazu.Enabled = true;
+            rdbPokazZegarowy.Enabled = true;
+            rdbPokazManualny.Enabled = true;
+            //aktywnosc dla przyciusku
+            btnWyłączPokaz.Enabled = true;
             //wyczyszczenie powierzchni graficznej
             Rysownica.Clear(pbRysownica.BackColor);
             pbRysownica.Refresh();
@@ -389,27 +394,25 @@ namespace ProjektNr2_Plutka_62026
             }
             //ustawienie braku aktywnosci dla obslugiwanego przycisku
             btnWłączPokazFigur.Enabled = false;
-            gpbTrybPokazu.Enabled = true;
-            rdbPokazZegarowy.Enabled = true;
-            rdbPokazManualny.Enabled = true;
-            //aktywnosc dla przyciusku
-            btnWyłączPokaz.Enabled = true;
+           
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-        //    //wymazanie aktualnej wykreslonej figury
-        //    Rysownica.Clear(pbRysownica.BackColor);
-        //    //ustalenie rozmiaru powierzchni graficznej
-        //    int Xmax = pbRysownica.Width;
-        //    int Ymax = pbRysownica.Height;
-        //    //przesuniecie wykreslenie figury geom ktoerj nr byl zapisany w polu time
-        //    TFG[(int)timer1.Tag].PrzesuńDoNowegoXY(pbRysownica, Rysownica, Xmax / 2, Ymax / 2);
+            //wymazanie aktualnej wykreslonej figury
+            Rysownica.Clear(pbRysownica.BackColor);
+            //ustalenie rozmiaru powierzchni graficznej
+            int Xmax = pbRysownica.Width;
+            int Ymax = pbRysownica.Height;
+            //wyznaczeni indeksu do pokazu
+            int N = int.Parse(timer1.Tag.ToString());
+            //przesuniecie wykreslenie figury geom ktoerj nr byl zapisany w polu time
+            TFG[N].PrzesuńDoNowegoXY(pbRysownica, Rysownica, Xmax / 2, Ymax / 2);
 
-        //    pbRysownica.Refresh();
-        //    //wpisanie do pola tag nr nastepnej figury do wykreslenia
-        //    timer1.Tag = ((int)timer1.Tag + 1) % (TFG.Length-1);  
-            
+            pbRysownica.Refresh();
+            //wpisanie do pola tag nr nastepnej figury do wykreslenia
+            timer1.Tag = (N+1) % (TFG.Length - 1);
+
         }
     }
 }

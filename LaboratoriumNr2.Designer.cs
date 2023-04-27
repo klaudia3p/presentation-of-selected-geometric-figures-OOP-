@@ -42,8 +42,8 @@
             this.btnWłączPokazFigur = new System.Windows.Forms.Button();
             this.btnWyłączPokaz = new System.Windows.Forms.Button();
             this.gpbTrybPokazu = new System.Windows.Forms.GroupBox();
-            this.rdbPokazZegarowy = new System.Windows.Forms.RadioButton();
             this.rdbPokazManualny = new System.Windows.Forms.RadioButton();
+            this.rdbPokazZegarowy = new System.Windows.Forms.RadioButton();
             this.btnPoprzednia = new System.Windows.Forms.Button();
             this.btnNastępna = new System.Windows.Forms.Button();
             this.txtBIndeks = new System.Windows.Forms.TextBox();
@@ -173,6 +173,7 @@
             // 
             this.gpbTrybPokazu.Controls.Add(this.rdbPokazManualny);
             this.gpbTrybPokazu.Controls.Add(this.rdbPokazZegarowy);
+            this.gpbTrybPokazu.Enabled = false;
             this.gpbTrybPokazu.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.gpbTrybPokazu.Location = new System.Drawing.Point(8, 440);
             this.gpbTrybPokazu.Name = "gpbTrybPokazu";
@@ -181,10 +182,23 @@
             this.gpbTrybPokazu.TabStop = false;
             this.gpbTrybPokazu.Text = "Tryb pokazu figur geometrycznych";
             // 
+            // rdbPokazManualny
+            // 
+            this.rdbPokazManualny.AutoSize = true;
+            this.rdbPokazManualny.Enabled = false;
+            this.rdbPokazManualny.Location = new System.Drawing.Point(229, 25);
+            this.rdbPokazManualny.Name = "rdbPokazManualny";
+            this.rdbPokazManualny.Size = new System.Drawing.Size(186, 23);
+            this.rdbPokazManualny.TabIndex = 1;
+            this.rdbPokazManualny.Text = "Manualny(przyciskowy)";
+            this.rdbPokazManualny.UseVisualStyleBackColor = true;
+            this.rdbPokazManualny.CheckedChanged += new System.EventHandler(this.rdbPokazManualny_CheckedChanged);
+            // 
             // rdbPokazZegarowy
             // 
             this.rdbPokazZegarowy.AutoSize = true;
             this.rdbPokazZegarowy.Checked = true;
+            this.rdbPokazZegarowy.Enabled = false;
             this.rdbPokazZegarowy.Location = new System.Drawing.Point(13, 26);
             this.rdbPokazZegarowy.Name = "rdbPokazZegarowy";
             this.rdbPokazZegarowy.Size = new System.Drawing.Size(190, 23);
@@ -194,19 +208,9 @@
             this.rdbPokazZegarowy.UseVisualStyleBackColor = true;
             this.rdbPokazZegarowy.CheckedChanged += new System.EventHandler(this.rdbPokazZegarowy_CheckedChanged);
             // 
-            // rdbPokazManualny
-            // 
-            this.rdbPokazManualny.AutoSize = true;
-            this.rdbPokazManualny.Location = new System.Drawing.Point(229, 25);
-            this.rdbPokazManualny.Name = "rdbPokazManualny";
-            this.rdbPokazManualny.Size = new System.Drawing.Size(186, 23);
-            this.rdbPokazManualny.TabIndex = 1;
-            this.rdbPokazManualny.Text = "Manualny(przyciskowy)";
-            this.rdbPokazManualny.UseVisualStyleBackColor = true;
-            this.rdbPokazManualny.CheckedChanged += new System.EventHandler(this.rdbPokazManualny_CheckedChanged);
-            // 
             // btnPoprzednia
             // 
+            this.btnPoprzednia.Enabled = false;
             this.btnPoprzednia.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.btnPoprzednia.Location = new System.Drawing.Point(44, 509);
             this.btnPoprzednia.Name = "btnPoprzednia";
@@ -218,6 +222,7 @@
             // 
             // btnNastępna
             // 
+            this.btnNastępna.Enabled = false;
             this.btnNastępna.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.btnNastępna.Location = new System.Drawing.Point(249, 509);
             this.btnNastępna.Name = "btnNastępna";
