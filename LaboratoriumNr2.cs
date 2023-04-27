@@ -350,6 +350,8 @@ namespace ProjektNr2_Plutka_62026
             //uaktywnienie kontrolki textbox
             txtBIndeks.Enabled = true;
             txtBIndeks.Text = 0.ToString();
+            btnNastępna.Enabled = true;
+            btnPoprzednia.Enabled = true;
 
         }
 

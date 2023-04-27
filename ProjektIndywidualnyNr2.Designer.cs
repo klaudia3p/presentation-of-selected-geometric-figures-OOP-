@@ -440,6 +440,7 @@
             // 
             this.kpgbPokazFigur.Controls.Add(this.radioButton1);
             this.kpgbPokazFigur.Controls.Add(this.kprdbPokazAutomatyczny);
+            this.kpgbPokazFigur.Enabled = false;
             this.kpgbPokazFigur.Location = new System.Drawing.Point(214, 530);
             this.kpgbPokazFigur.Name = "kpgbPokazFigur";
             this.kpgbPokazFigur.Size = new System.Drawing.Size(281, 61);
@@ -450,11 +451,11 @@
             // radioButton1
             // 
             this.radioButton1.AutoSize = true;
+            this.radioButton1.Enabled = false;
             this.radioButton1.Location = new System.Drawing.Point(134, 19);
             this.radioButton1.Name = "radioButton1";
             this.radioButton1.Size = new System.Drawing.Size(136, 30);
             this.radioButton1.TabIndex = 1;
-            this.radioButton1.TabStop = true;
             this.radioButton1.Text = "Manualny\r\n(sterowany przyciskami)";
             this.radioButton1.UseVisualStyleBackColor = true;
             this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
@@ -462,6 +463,8 @@
             // kprdbPokazAutomatyczny
             // 
             this.kprdbPokazAutomatyczny.AutoSize = true;
+            this.kprdbPokazAutomatyczny.Checked = true;
+            this.kprdbPokazAutomatyczny.Enabled = false;
             this.kprdbPokazAutomatyczny.Location = new System.Drawing.Point(6, 19);
             this.kprdbPokazAutomatyczny.Name = "kprdbPokazAutomatyczny";
             this.kprdbPokazAutomatyczny.Size = new System.Drawing.Size(122, 30);
@@ -489,6 +492,7 @@
             // 
             // kpbtnWyłączPokazSlajdów
             // 
+            this.kpbtnWyłączPokazSlajdów.Enabled = false;
             this.kpbtnWyłączPokazSlajdów.Location = new System.Drawing.Point(646, 527);
             this.kpbtnWyłączPokazSlajdów.Name = "kpbtnWyłączPokazSlajdów";
             this.kpbtnWyłączPokazSlajdów.Size = new System.Drawing.Size(156, 23);
@@ -498,6 +502,7 @@
             // 
             // kpbtnPoprzedni
             // 
+            this.kpbtnPoprzedni.Enabled = false;
             this.kpbtnPoprzedni.Location = new System.Drawing.Point(646, 557);
             this.kpbtnPoprzedni.Name = "kpbtnPoprzedni";
             this.kpbtnPoprzedni.Size = new System.Drawing.Size(75, 23);
@@ -507,6 +512,7 @@
             // 
             // kpbtnNastępny
             // 
+            this.kpbtnNastępny.Enabled = false;
             this.kpbtnNastępny.Location = new System.Drawing.Point(727, 558);
             this.kpbtnNastępny.Name = "kpbtnNastępny";
             this.kpbtnNastępny.Size = new System.Drawing.Size(75, 23);
