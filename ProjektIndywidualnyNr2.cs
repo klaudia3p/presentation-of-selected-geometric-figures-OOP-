@@ -724,18 +724,18 @@ namespace ProjektNr2_Plutka_62026
             //kppbRysownica.Image = bmp;
 
             //wymazanie aktualnej wykreslonej figury
-            kpRysownica.Clear(kppbRysownica.BackColor);
-            //ustalenie rozmiaru powierzchni graficznej
-            int Xmax = kppbRysownica.Width;
-            int Ymax = kppbRysownica.Height;
-            //wyznaczeni indeksu do pokazu
-            int N = int.Parse(timer1.Tag.ToString());
-            //przesuniecie wykreslenie figury geom ktoerj nr byl zapisany w polu time
-            kpLFG[N].kpPrzesuńDoNowegoXY(kppbRysownica, kpRysownica, Xmax / 2, Ymax / 2);
+        //    kpRysownica.Clear(kppbRysownica.BackColor);
+        //    //ustalenie rozmiaru powierzchni graficznej
+        //    int Xmax = kppbRysownica.Width;
+        //    int Ymax = kppbRysownica.Height;
+        //    //wyznaczeni indeksu do pokazu
+        //    int N = int.Parse(timer1.Tag.ToString());
+        //    //przesuniecie wykreslenie figury geom ktoerj nr byl zapisany w polu time
+        //    kpLFG[N].kpPrzesuńDoNowegoXY(kppbRysownica, kpRysownica, Xmax / 2, Ymax / 2);
 
-            kppbRysownica.Refresh();
-            //wpisanie do pola tag nr nastepnej figury do wykreslenia
-            timer1.Tag = (N + 1) % (kpLFG.Count - 1);
+        //    kppbRysownica.Refresh();
+        //    //wpisanie do pola tag nr nastepnej figury do wykreslenia
+        //    timer1.Tag = (N + 1) % (kpLFG.Count - 1);
         }
 
         private void ProjektIndywidualnyNr2_Load(object sender, EventArgs e)
@@ -747,9 +747,13 @@ namespace ProjektNr2_Plutka_62026
         {
             kpbtnWyłączPokazSlajdów.Enabled = true;
             kpbtnPokazFigur.Enabled = false;
+            kprdbPokazAutomatyczny.Enabled = true;
+            kprdbManualny.Enabled = true;
+            kpgbPokazFigur.Enabled = true;
             //wyczyszczenie rysownicy
             kpRysownica.Clear(kppbRysownica.BackColor);
-            if(kprdbPokazAutomatyczny.Checked)
+            kppbRysownica.Refresh();
+            if (kprdbPokazAutomatyczny.Checked)
             {
                 //wpisanie numeru figury startowej
                 kptxtNumerFiguryIndeks.Text = 0.ToString();

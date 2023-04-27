@@ -61,7 +61,7 @@
             this.kpbtnPrzesuńFigury = new System.Windows.Forms.Button();
             this.kpbtnPokazFigur = new System.Windows.Forms.Button();
             this.kpgbPokazFigur = new System.Windows.Forms.GroupBox();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.kprdbManualny = new System.Windows.Forms.RadioButton();
             this.kprdbPokazAutomatyczny = new System.Windows.Forms.RadioButton();
             this.label3 = new System.Windows.Forms.Label();
             this.kptxtNumerFiguryIndeks = new System.Windows.Forms.TextBox();
@@ -438,7 +438,7 @@
             // 
             // kpgbPokazFigur
             // 
-            this.kpgbPokazFigur.Controls.Add(this.radioButton1);
+            this.kpgbPokazFigur.Controls.Add(this.kprdbManualny);
             this.kpgbPokazFigur.Controls.Add(this.kprdbPokazAutomatyczny);
             this.kpgbPokazFigur.Enabled = false;
             this.kpgbPokazFigur.Location = new System.Drawing.Point(214, 530);
@@ -448,17 +448,17 @@
             this.kpgbPokazFigur.TabStop = false;
             this.kpgbPokazFigur.Text = "Pokaz Figur";
             // 
-            // radioButton1
+            // kprdbManualny
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Enabled = false;
-            this.radioButton1.Location = new System.Drawing.Point(134, 19);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(136, 30);
-            this.radioButton1.TabIndex = 1;
-            this.radioButton1.Text = "Manualny\r\n(sterowany przyciskami)";
-            this.radioButton1.UseVisualStyleBackColor = true;
-            this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
+            this.kprdbManualny.AutoSize = true;
+            this.kprdbManualny.Enabled = false;
+            this.kprdbManualny.Location = new System.Drawing.Point(134, 19);
+            this.kprdbManualny.Name = "kprdbManualny";
+            this.kprdbManualny.Size = new System.Drawing.Size(136, 30);
+            this.kprdbManualny.TabIndex = 1;
+            this.kprdbManualny.Text = "Manualny\r\n(sterowany przyciskami)";
+            this.kprdbManualny.UseVisualStyleBackColor = true;
+            this.kprdbManualny.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
             // 
             // kprdbPokazAutomatyczny
             // 
@@ -596,6 +596,7 @@
             // 
             // timer1
             // 
+            this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // errorProvider1
@@ -682,7 +683,7 @@
         private System.Windows.Forms.Button kpbtnPrzesuńFigury;
         private System.Windows.Forms.Button kpbtnPokazFigur;
         private System.Windows.Forms.GroupBox kpgbPokazFigur;
-        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.RadioButton kprdbManualny;
         private System.Windows.Forms.RadioButton kprdbPokazAutomatyczny;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox kptxtNumerFiguryIndeks;
