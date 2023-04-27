@@ -499,6 +499,7 @@
             this.kpbtnWyłączPokazSlajdów.TabIndex = 11;
             this.kpbtnWyłączPokazSlajdów.Text = "Wyłącz pokaz slajdów";
             this.kpbtnWyłączPokazSlajdów.UseVisualStyleBackColor = true;
+            this.kpbtnWyłączPokazSlajdów.Click += new System.EventHandler(this.kpbtnWyłączPokazSlajdów_Click);
             // 
             // kpbtnPoprzedni
             // 
