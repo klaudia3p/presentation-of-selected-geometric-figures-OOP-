@@ -722,6 +722,20 @@ namespace ProjektNr2_Plutka_62026
             //Graphics g = Graphics.FromImage(bmp);
             //g.FillRectangle(new SolidBrush(color), rect);
             //kppbRysownica.Image = bmp;
+
+            //wymazanie aktualnej wykreslonej figury
+            kpRysownica.Clear(kppbRysownica.BackColor);
+            //ustalenie rozmiaru powierzchni graficznej
+            int Xmax = kppbRysownica.Width;
+            int Ymax = kppbRysownica.Height;
+            //wyznaczeni indeksu do pokazu
+            int N = int.Parse(timer1.Tag.ToString());
+            //przesuniecie wykreslenie figury geom ktoerj nr byl zapisany w polu time
+            kpLFG[N].kpPrzesuńDoNowegoXY(kppbRysownica, kpRysownica, Xmax / 2, Ymax / 2);
+
+            kppbRysownica.Refresh();
+            //wpisanie do pola tag nr nastepnej figury do wykreslenia
+            timer1.Tag = (N + 1) % (kpLFG.Count - 1);
         }
 
         private void ProjektIndywidualnyNr2_Load(object sender, EventArgs e)
@@ -731,17 +745,19 @@ namespace ProjektNr2_Plutka_62026
 
         private void kpbtnPokazFigur_Click(object sender, EventArgs e)
         {
+            kpbtnWyłączPokazSlajdów.Enabled = true;
+            kpbtnPokazFigur.Enabled = false;
             //wyczyszczenie rysownicy
             kpRysownica.Clear(kppbRysownica.BackColor);
             if(kprdbPokazAutomatyczny.Checked)
             {
                 //wpisanie numeru figury startowej
                 kptxtNumerFiguryIndeks.Text = 0.ToString();
+                timer1.Tag = 0.ToString();
                 //uaktywniwne
                 timer1.Enabled = true;
                 //uaktywnienie przyciusku Wylącz pokaz
-                kpbtnWyłączPokazSlajdów.Enabled = true;
-                kpbtnPokazFigur.Enabled = false;
+                
             }
             else
             {//uaktywniwnie przysiskow nastepny i poprzedni
@@ -817,6 +833,27 @@ namespace ProjektNr2_Plutka_62026
         private void kppbRysownica_MouseClick(object sender, MouseEventArgs e)
         {
 
+        }
+
+        private void kpbtnPoprzedni_Click(object sender, EventArgs e)
+        {
+            int N = int.Parse(kptxtNumerFiguryIndeks.Text);
+            //wymazanie figury o numerze N
+            kpLFG[N].kpWymaż(kppbRysownica, kpRysownica);
+            //wyznaczenie numeru poprzedniej figury w pokazie
+            if (N == 0)
+                N = kpLFG.Count - 1;
+            else N--;
+            //ustalen ie rozmiaru powierzchni graficznej
+            int Xmax = kppbRysownica.Width;
+            int Ymax = kppbRysownica.Height;
+            //przesuniecie z wykreslenien=m figury o numerze n
+            kpLFG[N].kpPrzesuńDoNowegoXY(kppbRysownica, kpRysownica, Xmax / 2, Ymax / 2);
+            kppbRysownica.Refresh();
+            //wpisanie aktualnego numeru N do kontrolki txtBIndex
+            kptxtNumerFiguryIndeks.Text = N.ToString();
+            kpRysownica.Clear(kppbRysownica.BackColor);
+            kppbRysownica.Refresh();
         }
     }
 }

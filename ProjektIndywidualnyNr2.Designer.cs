@@ -509,6 +509,7 @@
             this.kpbtnPoprzedni.TabIndex = 12;
             this.kpbtnPoprzedni.Text = "Poprzedni";
             this.kpbtnPoprzedni.UseVisualStyleBackColor = true;
+            this.kpbtnPoprzedni.Click += new System.EventHandler(this.kpbtnPoprzedni_Click);
             // 
             // kpbtnNastępny
             // 
