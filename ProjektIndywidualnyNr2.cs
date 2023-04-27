@@ -723,6 +723,9 @@ namespace ProjektNr2_Plutka_62026
             //g.FillRectangle(new SolidBrush(color), rect);
             //kppbRysownica.Image = bmp;
 
+
+
+
             //wymazanie aktualnej wykreslonej figury
         //    kpRysownica.Clear(kppbRysownica.BackColor);
         //    //ustalenie rozmiaru powierzchni graficznej
@@ -768,7 +771,9 @@ namespace ProjektNr2_Plutka_62026
                 kpbtnNastępny.Enabled = true;
                 kpbtnPoprzedni.Enabled = true;
                 //odczytanie numeru figury wpisanej do  txt
-                int N= ushort.Parse(kptxtNumerFiguryIndeks.Text);
+                int N;
+                N = int.Parse(kptxtNumerFiguryIndeks.Text);
+                //int N= ushort.Parse(kptxtNumerFiguryIndeks.Text);
 
                 //wykreslenie pierwszyej figury
                 kpLFG[N].kpPrzesuńDoNowegoXY(kppbRysownica, kpRysownica, 
@@ -781,18 +786,23 @@ namespace ProjektNr2_Plutka_62026
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
-            Random rand = new Random();
-            int x = rand.Next(kppbRysownica.Width);
-            int y = rand.Next(kppbRysownica.Height);
-            int width = rand.Next(kppbRysownica.Width - x);
-            int height = rand.Next(kppbRysownica.Height - y);
-            Color color = Color.FromArgb(rand.Next(256), rand.Next(256), rand.Next(256));
-            Rectangle rect = new Rectangle(x, y, width, height);
+            //    Random rand = new Random();
+            //    int x = rand.Next(kppbRysownica.Width);
+            //    int y = rand.Next(kppbRysownica.Height);
+            //    int width = rand.Next(kppbRysownica.Width - x);
+            //    int height = rand.Next(kppbRysownica.Height - y);
+            //    Color color = Color.FromArgb(rand.Next(256), rand.Next(256), rand.Next(256));
+            //    Rectangle rect = new Rectangle(x, y, width, height);
 
-            Bitmap bmp = new Bitmap(kppbRysownica.Width, kppbRysownica.Height);
-            Graphics g = Graphics.FromImage(bmp);
-            g.FillRectangle(new SolidBrush(color), rect);
-            kppbRysownica.Image = bmp;
+            //    Bitmap bmp = new Bitmap(kppbRysownica.Width, kppbRysownica.Height);
+            //    Graphics g = Graphics.FromImage(bmp);
+            //    g.FillRectangle(new SolidBrush(color), rect);
+            //    kppbRysownica.Image = bmp;
+            kptxtNumerFiguryIndeks.Enabled = true;
+            kptxtNumerFiguryIndeks.Text = 0.ToString();
+            kpbtnNastępny.Enabled = true;
+            kpbtnPoprzedni.Enabled = true;
+
         }
 
         private void kpbtnPrzesuńFigury_Click(object sender, EventArgs e)
