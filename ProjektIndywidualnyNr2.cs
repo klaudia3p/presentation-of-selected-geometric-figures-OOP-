@@ -51,11 +51,15 @@ namespace ProjektNr2_Plutka_62026
 
 
         const int kpMargines = 10;
-        Point kpPunkt = Point.Empty;
+        const ushort kpMarginesFormularza = 20;
+        Point kpPunkt;
         Graphics kpRysownica;
+        Graphics kpRysownicaTymczasowa;
         Pen kpPióro;
         SolidBrush kpPędzel;
+        Pen kpPióroTymczasowe;
         const ushort kpPromienPunktu = 2;
+
         List<kpPunkt> kpLFG = new List<kpPunkt>();
         public ProjektIndywidualnyNr2()
         {
@@ -883,30 +887,11 @@ namespace ProjektNr2_Plutka_62026
                 errorProvider1.SetError(kptxtNumerFiguryIndeks, "ERROR: w zapisie numeru indeksu figury geometrycznej wystąpił niedozwolony znak");
                 return;
             }
-            //sprawdzenie n na dozwolona gorna wartosc
             if(N> kpLFG.Count)
             {
                 errorProvider1.SetError(kptxtNumerFiguryIndeks, "ERROR:  podano zbyt wysoką wartość(Przekroczono liczbę figur geometrycznych w LFG)");
                 return;
             }
-
-            //ushort N;
-            //errorProvider1.Dispose();
-            //if (!ushort.TryParse(txtBIndeks.Text, out N))
-            //{
-            //    //jest blad
-            //    errorProvider1.SetError(txtBIndeks, "ERROR: w podanym zapisie numeru indeksu figury wystąpił niedozwolony znak!");
-            //    return;
-
-            //}
-            ////sprawdzenie czy nie nastapilo wyjscie poza zakres indeksu
-            //if ((N > (TFG.Length - 1)))
-            //{
-            //    //jest blad
-            //    errorProvider1.SetError(txtBIndeks, "ERROR: podany indeks wykracza poza zakres indeksu TFG!");
-            //    return;
-
-            //}
         }
 
         private void kppbRysownica_MouseClick(object sender, MouseEventArgs e)
@@ -917,111 +902,50 @@ namespace ProjektNr2_Plutka_62026
         private void kpbtnPoprzedni_Click(object sender, EventArgs e)
         {
             int N = int.Parse(kptxtNumerFiguryIndeks.Text);
-            //wymazanie figury o numerze N
             kpLFG[N].kpWymaż(kppbRysownica, kpRysownica);
-            //wyznaczenie numeru poprzedniej figury w pokazie
             if (N > 0)
                 N--;
             else
                 N = kpLFG.Count - 1;
-            //if (N == 0)
-            //    N = kpLFG.Count - 1;
-            //else N--;
-            //ustalen ie rozmiaru powierzchni graficznej
             int Xmax = kppbRysownica.Width;
             int Ymax = kppbRysownica.Height;
-            //przesuniecie z wykreslenien=m figury o numerze n
             kpLFG[N].kpPrzesuńDoNowegoXY(kppbRysownica, kpRysownica, Xmax / 2, Ymax / 2);
             kppbRysownica.Refresh();
-            //wpisanie aktualnego numeru N do kontrolki txtBIndex
             kptxtNumerFiguryIndeks.Text = N.ToString();
-            //kpRysownica.Clear(kppbRysownica.BackColor);
-            //kppbRysownica.Refresh();
-
-            //int N = int.Parse(txtBIndeks.Text);
-            ////wymazanie figury o numerze N
-            //TFG[N].Wymaż(pbRysownica, Rysownica);
-            ////wyznaczenie numeru poprzedniej figury w pokazie
-            //if (N == 0)
-            //    N = TFG.Length - 1;
-            //else N--;
-            ////ustalen ie rozmiaru powierzchni graficznej
-            //int Xmax = pbRysownica.Width;
-            //int Ymax = pbRysownica.Height;
-            ////przesuniecie z wykreslenien=m figury o numerze n
-            //TFG[N].PrzesuńDoNowegoXY(pbRysownica, Rysownica, Xmax / 2, Ymax / 2);
-            //pbRysownica.Refresh();
-            ////wpisanie aktualnego numeru N do kontrolki txtBIndex
-            //txtBIndeks.Text = N.ToString();
-            //Rysownica.Clear(pbRysownica.BackColor);
-            //pbRysownica.Refresh();
         }
 
         private void kpbtnNastępny_Click(object sender, EventArgs e)
         {
             int N = int.Parse(kptxtNumerFiguryIndeks.Text);
-            //wymazanie figury o numerze N
             kpLFG[N].kpWymaż(kppbRysownica, kpRysownica);
-            //wyznaczenie numeru kolejnej figury w pokazie
             if (N == (kpLFG.Count - 1))
                 N = 0;
             else
                 N++;
-            //if (N == (kpLFG.Count - 1))
-            //    N = 0;
-            //else N++;
-            //ustalen ie rozmiaru powierzchni graficznej
             int Xmax = kppbRysownica.Width;
             int Ymax = kppbRysownica.Height;
-            //przesuniecie z wykreslenien=m figury o numerze n
             kpLFG[N].kpPrzesuńDoNowegoXY(kppbRysownica, kpRysownica, Xmax / 2, Ymax / 2);
             kppbRysownica.Refresh();
-            //wpisanie aktualnego numeru N do kontrolki txtBIndex
             kptxtNumerFiguryIndeks.Text = N.ToString();
-            //kpRysownica.Clear(kppbRysownica.BackColor);
-            //kppbRysownica.Refresh();
-
-            //int N = int.Parse(txtBIndeks.Text);
-            ////wymazanie figury o numerze N
-            //TFG[N].Wymaż(pbRysownica, Rysownica);
-            ////wyznaczenie numeru kolejnej figury w pokazie
-            //if (N == (TFG.Length - 1))
-            //    N = 0;
-            //else N++;
-            ////ustalen ie rozmiaru powierzchni graficznej
-            //int Xmax = pbRysownica.Width;
-            //int Ymax = pbRysownica.Height;
-            ////przesuniecie z wykreslenien=m figury o numerze n
-            //TFG[N].PrzesuńDoNowegoXY(pbRysownica, Rysownica, Xmax / 2, Ymax / 2);
-            //pbRysownica.Refresh();
-            ////wpisanie aktualnego numeru N do kontrolki txtBIndex
-            //txtBIndeks.Text = N.ToString();
-            //Rysownica.Clear(pbRysownica.BackColor);
-            //pbRysownica.Refresh();
         }
 
         private void kpbtnWyłączPokazSlajdów_Click(object sender, EventArgs e)
         {
-            //wyczyszczenie rysownicy
             kpRysownica.Clear(kppbRysownica.BackColor);
             timer1.Enabled = false;
             kpbtnWyłączPokazSlajdów.Enabled = false;
             kpbtnPokazFigur.Enabled = true;
-            //ustalen ie rozmiaru powierzchni graficznej
             int Xmax = kppbRysownica.Width;
             int Ymax = kppbRysownica.Height;
             int Yn, Xn;
             Random rnd = new Random();
-            //wykreslenie wszystkich figur w nowym polozeniu
             for (int i = 0; i < kpLFG.Count; i++)
             {
-                //nowe polozenie
                 Xn = rnd.Next(kpMargines, Xmax - kpMargines);
                 Yn = rnd.Next(kpMargines, Ymax - kpMargines);
                 kpLFG[i].kpPrzesuńDoNowegoXY(kppbRysownica, kpRysownica, Xn, Yn);
             }
             kppbRysownica.Refresh();
-            //usatwienie aktywnosci da 
             kpbtnNastępny.Enabled = false;
             kpbtnPoprzedni.Enabled = false;
             kptxtNumerFiguryIndeks.Enabled = false;

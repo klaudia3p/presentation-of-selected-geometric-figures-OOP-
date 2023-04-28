@@ -50,19 +50,26 @@ namespace ProjektNr2_Plutka_62026
 
         private void LaboratoriumNr2_Load(object sender, EventArgs e)
         {
-            //label1.Location =
-            //    new Point(pbRysownica.Location.X - pbRysownica.Width + Margines,
-            //    this.Top + 2 * Margines);
             label2.Location =
                 new Point(pbRysownica.Location.X + pbRysownica.Width + Margines,
                 this.Top + 2 * Margines);
             chlbFiguryGeometryczne.Location =
                 new Point(pbRysownica.Location.X + pbRysownica.Width + Margines,
                 label2.Top + label2.Height + Margines);
-            //txtN.Location =
-            //    new Point(pbRysownica.Location.Y + pbRysownica.Top + Margines,
-            //    label1.Left + label1.Left + Margines);
-
+            
+            btnWłączPokazFigur.Location = new Point(btnStart.Location.X,
+                pbRysownica.Location.Y + pbRysownica.Height + 2 * Margines);
+            gpbTrybPokazu.Location = new Point(btnWłączPokazFigur.Location.X + btnWłączPokazFigur.Width +
+                Margines, btnWłączPokazFigur.Location.Y);
+            btnNastępna.Location = new Point(gpbTrybPokazu.Location.X + gpbTrybPokazu.Width +
+                Margines, gpbTrybPokazu.Location.Y);
+            
+            btnPoprzednia.Location = new Point(btnNastępna.Location.X + btnNastępna.Width +
+            3 * Margines, btnNastępna.Location.Y);
+            label3.Location = new Point(btnPoprzednia.Location.X + btnPoprzednia.Width,
+                pbRysownica.Location.Y + pbRysownica.Height + Margines / 4);
+            txtBIndeks.Location = new Point(btnPoprzednia.Location.X + btnPoprzednia.Width +
+                3 * Margines, btnPoprzednia.Location.Y);
         }
 
         private void btnStart_Click(object sender, EventArgs e)
