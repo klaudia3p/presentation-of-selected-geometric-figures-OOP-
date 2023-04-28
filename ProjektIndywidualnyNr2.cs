@@ -714,57 +714,25 @@ namespace ProjektNr2_Plutka_62026
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            //Random rand = new Random();
-            //int x = rand.Next(kppbRysownica.Width);
-            //int y = rand.Next(kppbRysownica.Height);
-            //int width = rand.Next(kppbRysownica.Width - x);
-            //int height = rand.Next(kppbRysownica.Height - y);
-            //Color color = Color.FromArgb(rand.Next(256), rand.Next(256), rand.Next(256));
-            //Rectangle rect = new Rectangle(x, y, width, height);
-
-            //Bitmap bmp = new Bitmap(kppbRysownica.Width, kppbRysownica.Height);
-            //Graphics g = Graphics.FromImage(bmp);
-            //g.FillRectangle(new SolidBrush(color), rect);
-            //kppbRysownica.Image = bmp;
-
-
-
-
             //wymazanie aktualnej wykreslonej figury
-            //    kpRysownica.Clear(kppbRysownica.BackColor);
+            kpRysownica.Clear(kppbRysownica.BackColor);
             //    //ustalenie rozmiaru powierzchni graficznej
-            //    int Xmax = kppbRysownica.Width;
-            //    int Ymax = kppbRysownica.Height;
+            int Xmax = kppbRysownica.Width;
+            int Ymax = kppbRysownica.Height;
             //    //wyznaczeni indeksu do pokazu
-            //    int N = int.Parse(timer1.Tag.ToString());
+            int N = int.Parse(timer1.Tag.ToString());
             //    //przesuniecie wykreslenie figury geom ktoerj nr byl zapisany w polu time
-            //    kpLFG[N].kpPrzesuńDoNowegoXY(kppbRysownica, kpRysownica, Xmax / 2, Ymax / 2);
+            kpLFG[N].kpPrzesuńDoNowegoXY(kppbRysownica, kpRysownica, Xmax / 2, Ymax / 2);
 
-            //    kppbRysownica.Refresh();
+            kppbRysownica.Refresh();
             //    //wpisanie do pola tag nr nastepnej figury do wykreslenia
-            //    timer1.Tag = (N + 1) % (kpLFG.Count - 1);
-
-
-
-            //wymazanie aktualnej wykreslonej figury
-            //Rysownica.Clear(pbRysownica.BackColor);
-            ////ustalenie rozmiaru powierzchni graficznej
-            //int Xmax = pbRysownica.Width;
-            //int Ymax = pbRysownica.Height;
-            ////wyznaczeni indeksu do pokazu
-            //int N = int.Parse(timer1.Tag.ToString());
-            ////przesuniecie wykreslenie figury geom ktoerj nr byl zapisany w polu time
-            //TFG[N].PrzesuńDoNowegoXY(pbRysownica, Rysownica, Xmax / 2, Ymax / 2);
-
-            //pbRysownica.Refresh();
-            ////wpisanie do pola tag nr nastepnej figury do wykreslenia
-            //timer1.Tag = (N + 1) % (TFG.Length - 1);
+            timer1.Tag = (N + 1) % (kpLFG.Count - 1);
 
         }
 
         private void ProjektIndywidualnyNr2_Load(object sender, EventArgs e)
         {
-            timer1.Start();
+          
         }
 
         private void kpbtnPokazFigur_Click(object sender, EventArgs e)
