@@ -727,18 +727,35 @@ namespace ProjektNr2_Plutka_62026
 
 
             //wymazanie aktualnej wykreslonej figury
-        //    kpRysownica.Clear(kppbRysownica.BackColor);
-        //    //ustalenie rozmiaru powierzchni graficznej
-        //    int Xmax = kppbRysownica.Width;
-        //    int Ymax = kppbRysownica.Height;
-        //    //wyznaczeni indeksu do pokazu
-        //    int N = int.Parse(timer1.Tag.ToString());
-        //    //przesuniecie wykreslenie figury geom ktoerj nr byl zapisany w polu time
-        //    kpLFG[N].kpPrzesuńDoNowegoXY(kppbRysownica, kpRysownica, Xmax / 2, Ymax / 2);
+            //    kpRysownica.Clear(kppbRysownica.BackColor);
+            //    //ustalenie rozmiaru powierzchni graficznej
+            //    int Xmax = kppbRysownica.Width;
+            //    int Ymax = kppbRysownica.Height;
+            //    //wyznaczeni indeksu do pokazu
+            //    int N = int.Parse(timer1.Tag.ToString());
+            //    //przesuniecie wykreslenie figury geom ktoerj nr byl zapisany w polu time
+            //    kpLFG[N].kpPrzesuńDoNowegoXY(kppbRysownica, kpRysownica, Xmax / 2, Ymax / 2);
 
-        //    kppbRysownica.Refresh();
-        //    //wpisanie do pola tag nr nastepnej figury do wykreslenia
-        //    timer1.Tag = (N + 1) % (kpLFG.Count - 1);
+            //    kppbRysownica.Refresh();
+            //    //wpisanie do pola tag nr nastepnej figury do wykreslenia
+            //    timer1.Tag = (N + 1) % (kpLFG.Count - 1);
+
+
+
+            //wymazanie aktualnej wykreslonej figury
+            //Rysownica.Clear(pbRysownica.BackColor);
+            ////ustalenie rozmiaru powierzchni graficznej
+            //int Xmax = pbRysownica.Width;
+            //int Ymax = pbRysownica.Height;
+            ////wyznaczeni indeksu do pokazu
+            //int N = int.Parse(timer1.Tag.ToString());
+            ////przesuniecie wykreslenie figury geom ktoerj nr byl zapisany w polu time
+            //TFG[N].PrzesuńDoNowegoXY(pbRysownica, Rysownica, Xmax / 2, Ymax / 2);
+
+            //pbRysownica.Refresh();
+            ////wpisanie do pola tag nr nastepnej figury do wykreslenia
+            //timer1.Tag = (N + 1) % (TFG.Length - 1);
+
         }
 
         private void ProjektIndywidualnyNr2_Load(object sender, EventArgs e)
@@ -774,30 +791,60 @@ namespace ProjektNr2_Plutka_62026
                 int N;
                 N = int.Parse(kptxtNumerFiguryIndeks.Text);
                 //int N= ushort.Parse(kptxtNumerFiguryIndeks.Text);
-
+                int Xmax = kppbRysownica.Width;
+                int Ymax = kppbRysownica.Height;
                 //wykreslenie pierwszyej figury
-                kpLFG[N].kpPrzesuńDoNowegoXY(kppbRysownica, kpRysownica, 
-                    kppbRysownica.Width/2, kppbRysownica.Height/2);
+                kpLFG[N].kpPrzesuńDoNowegoXY(kppbRysownica, kpRysownica,
+                    Xmax / 2, Ymax / 2);
+                kppbRysownica.Refresh();
                 kpbtnWyłączPokazSlajdów.Enabled = true;
                 kpbtnPokazFigur.Enabled = false;
 
             }
+
+
+
+
+            //gpbTrybPokazu.Enabled = true;
+            //rdbPokazZegarowy.Enabled = true;
+            //rdbPokazManualny.Enabled = true;
+            ////aktywnosc dla przyciusku
+            //btnWyłączPokaz.Enabled = true;
+            ////wyczyszczenie powierzchni graficznej
+            //Rysownica.Clear(pbRysownica.BackColor);
+            //pbRysownica.Refresh();
+            ////rozpoznanie wybranego pokazu figur
+            ///
+            //if (rdbPokazZegarowy.Checked)
+            //{
+            //    //ustawienie num fig do pokazu w polu timer
+            //    timer1.Tag = 0.ToString();
+            //    timer1.Enabled = true;
+            //    //wykreslenie pierwszej figury w pokazie
+
+            //}
+            //else
+            //{
+            //    int N;
+            //    N = int.Parse(txtBIndeks.Text);
+            //    //ustalenie rozmiaru powierzchni graficznej
+            //    int Xmax = pbRysownica.Width;
+            //    int Ymax = pbRysownica.Height;
+            //    //przesuniecie i wykrslenie pierwszej figury w pokazie
+            //    TFG[N].PrzesuńDoNowegoXY(pbRysownica, Rysownica, Xmax / 2, Ymax / 2);
+            //    pbRysownica.Refresh();
+            //    //uaktywniwnie przcyciskow Nastepny i poprzednie
+            //    btnNastępna.Enabled = true;
+            //    btnPoprzednia.Enabled = true;
+
+            //}
+            ////ustawienie braku aktywnosci dla obslugiwanego przycisku
+            //btnWłączPokazFigur.Enabled = false;
+
         }
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
-            //    Random rand = new Random();
-            //    int x = rand.Next(kppbRysownica.Width);
-            //    int y = rand.Next(kppbRysownica.Height);
-            //    int width = rand.Next(kppbRysownica.Width - x);
-            //    int height = rand.Next(kppbRysownica.Height - y);
-            //    Color color = Color.FromArgb(rand.Next(256), rand.Next(256), rand.Next(256));
-            //    Rectangle rect = new Rectangle(x, y, width, height);
-
-            //    Bitmap bmp = new Bitmap(kppbRysownica.Width, kppbRysownica.Height);
-            //    Graphics g = Graphics.FromImage(bmp);
-            //    g.FillRectangle(new SolidBrush(color), rect);
-            //    kppbRysownica.Image = bmp;
             kptxtNumerFiguryIndeks.Enabled = true;
             kptxtNumerFiguryIndeks.Text = 0.ToString();
             kpbtnNastępny.Enabled = true;
@@ -830,6 +877,7 @@ namespace ProjektNr2_Plutka_62026
         private void kptxtNumerFiguryIndeks_TextChanged(object sender, EventArgs e)
         {
             ushort N;
+            errorProvider1.Dispose();
             if (!ushort.TryParse(kptxtNumerFiguryIndeks.Text, out N))
             {
                 errorProvider1.SetError(kptxtNumerFiguryIndeks, "ERROR: w zapisie numeru indeksu figury geometrycznej wystąpił niedozwolony znak");
@@ -842,6 +890,23 @@ namespace ProjektNr2_Plutka_62026
                 return;
             }
 
+            //ushort N;
+            //errorProvider1.Dispose();
+            //if (!ushort.TryParse(txtBIndeks.Text, out N))
+            //{
+            //    //jest blad
+            //    errorProvider1.SetError(txtBIndeks, "ERROR: w podanym zapisie numeru indeksu figury wystąpił niedozwolony znak!");
+            //    return;
+
+            //}
+            ////sprawdzenie czy nie nastapilo wyjscie poza zakres indeksu
+            //if ((N > (TFG.Length - 1)))
+            //{
+            //    //jest blad
+            //    errorProvider1.SetError(txtBIndeks, "ERROR: podany indeks wykracza poza zakres indeksu TFG!");
+            //    return;
+
+            //}
         }
 
         private void kppbRysownica_MouseClick(object sender, MouseEventArgs e)
@@ -855,9 +920,13 @@ namespace ProjektNr2_Plutka_62026
             //wymazanie figury o numerze N
             kpLFG[N].kpWymaż(kppbRysownica, kpRysownica);
             //wyznaczenie numeru poprzedniej figury w pokazie
-            if (N == 0)
+            if (N > 0)
+                N--;
+            else
                 N = kpLFG.Count - 1;
-            else N--;
+            //if (N == 0)
+            //    N = kpLFG.Count - 1;
+            //else N--;
             //ustalen ie rozmiaru powierzchni graficznej
             int Xmax = kppbRysownica.Width;
             int Ymax = kppbRysownica.Height;
@@ -866,8 +935,26 @@ namespace ProjektNr2_Plutka_62026
             kppbRysownica.Refresh();
             //wpisanie aktualnego numeru N do kontrolki txtBIndex
             kptxtNumerFiguryIndeks.Text = N.ToString();
-            kpRysownica.Clear(kppbRysownica.BackColor);
-            kppbRysownica.Refresh();
+            //kpRysownica.Clear(kppbRysownica.BackColor);
+            //kppbRysownica.Refresh();
+
+            //int N = int.Parse(txtBIndeks.Text);
+            ////wymazanie figury o numerze N
+            //TFG[N].Wymaż(pbRysownica, Rysownica);
+            ////wyznaczenie numeru poprzedniej figury w pokazie
+            //if (N == 0)
+            //    N = TFG.Length - 1;
+            //else N--;
+            ////ustalen ie rozmiaru powierzchni graficznej
+            //int Xmax = pbRysownica.Width;
+            //int Ymax = pbRysownica.Height;
+            ////przesuniecie z wykreslenien=m figury o numerze n
+            //TFG[N].PrzesuńDoNowegoXY(pbRysownica, Rysownica, Xmax / 2, Ymax / 2);
+            //pbRysownica.Refresh();
+            ////wpisanie aktualnego numeru N do kontrolki txtBIndex
+            //txtBIndeks.Text = N.ToString();
+            //Rysownica.Clear(pbRysownica.BackColor);
+            //pbRysownica.Refresh();
         }
 
         private void kpbtnNastępny_Click(object sender, EventArgs e)
@@ -878,7 +965,11 @@ namespace ProjektNr2_Plutka_62026
             //wyznaczenie numeru kolejnej figury w pokazie
             if (N == (kpLFG.Count - 1))
                 N = 0;
-            else N++;
+            else
+                N++;
+            //if (N == (kpLFG.Count - 1))
+            //    N = 0;
+            //else N++;
             //ustalen ie rozmiaru powierzchni graficznej
             int Xmax = kppbRysownica.Width;
             int Ymax = kppbRysownica.Height;
@@ -887,8 +978,26 @@ namespace ProjektNr2_Plutka_62026
             kppbRysownica.Refresh();
             //wpisanie aktualnego numeru N do kontrolki txtBIndex
             kptxtNumerFiguryIndeks.Text = N.ToString();
-            kpRysownica.Clear(kppbRysownica.BackColor);
-            kppbRysownica.Refresh();
+            //kpRysownica.Clear(kppbRysownica.BackColor);
+            //kppbRysownica.Refresh();
+
+            //int N = int.Parse(txtBIndeks.Text);
+            ////wymazanie figury o numerze N
+            //TFG[N].Wymaż(pbRysownica, Rysownica);
+            ////wyznaczenie numeru kolejnej figury w pokazie
+            //if (N == (TFG.Length - 1))
+            //    N = 0;
+            //else N++;
+            ////ustalen ie rozmiaru powierzchni graficznej
+            //int Xmax = pbRysownica.Width;
+            //int Ymax = pbRysownica.Height;
+            ////przesuniecie z wykreslenien=m figury o numerze n
+            //TFG[N].PrzesuńDoNowegoXY(pbRysownica, Rysownica, Xmax / 2, Ymax / 2);
+            //pbRysownica.Refresh();
+            ////wpisanie aktualnego numeru N do kontrolki txtBIndex
+            //txtBIndeks.Text = N.ToString();
+            //Rysownica.Clear(pbRysownica.BackColor);
+            //pbRysownica.Refresh();
         }
 
         private void kpbtnWyłączPokazSlajdów_Click(object sender, EventArgs e)
@@ -917,6 +1026,16 @@ namespace ProjektNr2_Plutka_62026
             kpbtnPoprzedni.Enabled = false;
             kptxtNumerFiguryIndeks.Enabled = false;
             kprdbPokazAutomatyczny.Checked = true;
+        }
+
+        private void kprdbPokazAutomatyczny_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void kpbtnCofnij_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

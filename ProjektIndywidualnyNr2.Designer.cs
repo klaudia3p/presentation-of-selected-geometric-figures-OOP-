@@ -138,6 +138,7 @@
             this.kpbtnCofnij.TabIndex = 19;
             this.kpbtnCofnij.Text = "Cofnij (ostatnią figurę)";
             this.kpbtnCofnij.UseVisualStyleBackColor = true;
+            this.kpbtnCofnij.Click += new System.EventHandler(this.kpbtnCofnij_Click);
             // 
             // kprdbFillPie
             // 
@@ -472,6 +473,7 @@
             this.kprdbPokazAutomatyczny.TabStop = true;
             this.kprdbPokazAutomatyczny.Text = "Automatyczny\r\n(sterowany zegarem)";
             this.kprdbPokazAutomatyczny.UseVisualStyleBackColor = true;
+            this.kprdbPokazAutomatyczny.CheckedChanged += new System.EventHandler(this.kprdbPokazAutomatyczny_CheckedChanged);
             // 
             // label3
             // 
