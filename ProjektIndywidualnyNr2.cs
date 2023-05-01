@@ -714,18 +714,13 @@ namespace ProjektNr2_Plutka_62026
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            //wymazanie aktualnej wykreslonej figury
             kpRysownica.Clear(kppbRysownica.BackColor);
-            //    //ustalenie rozmiaru powierzchni graficznej
             int Xmax = kppbRysownica.Width;
             int Ymax = kppbRysownica.Height;
-            //    //wyznaczeni indeksu do pokazu
             int N = int.Parse(timer1.Tag.ToString());
-            //    //przesuniecie wykreslenie figury geom ktoerj nr byl zapisany w polu time
             kpLFG[N].kpPrzesuńDoNowegoXY(kppbRysownica, kpRysownica, Xmax / 2, Ymax / 2);
 
             kppbRysownica.Refresh();
-            //    //wpisanie do pola tag nr nastepnej figury do wykreslenia
             timer1.Tag = (N + 1) % (kpLFG.Count - 1);
 
         }
@@ -899,6 +894,11 @@ namespace ProjektNr2_Plutka_62026
 
         private void kpbtnWyłączPokazSlajdów_Click(object sender, EventArgs e)
         {
+           
+            kpbtnNastępny.Enabled = false;
+            kpbtnPoprzedni.Enabled = false;
+            kptxtNumerFiguryIndeks.Enabled = false;
+            kprdbPokazAutomatyczny.Checked = true;
             kpRysownica.Clear(kppbRysownica.BackColor);
             timer1.Enabled = false;
             kpbtnWyłączPokazSlajdów.Enabled = false;
@@ -914,10 +914,6 @@ namespace ProjektNr2_Plutka_62026
                 kpLFG[i].kpPrzesuńDoNowegoXY(kppbRysownica, kpRysownica, Xn, Yn);
             }
             kppbRysownica.Refresh();
-            kpbtnNastępny.Enabled = false;
-            kpbtnPoprzedni.Enabled = false;
-            kptxtNumerFiguryIndeks.Enabled = false;
-            kprdbPokazAutomatyczny.Checked = true;
         }
 
         private void kprdbPokazAutomatyczny_CheckedChanged(object sender, EventArgs e)

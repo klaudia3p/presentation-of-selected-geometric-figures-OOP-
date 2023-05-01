@@ -710,35 +710,57 @@ namespace ProjektNr2_Plutka_62026
         }//linia ciagla kreslona mysza
         public class kpKrzywaBeziera : kpPunkt
         {
+            int kpX, kpY;
 
+            Point startPoint = new Point();
+            Point controlPoint1 = new Point();
+            Point controlPoint2 = new Point();
+            Point endPoint = new Point();
+            private int x;
+            private int y;
+            private Color backColor;
+            private DashStyle selectedIndex;
+            private int value;
 
-            int kpXk, kpYk;
-            int kpXp, kpYp;
-            public kpKrzywaBeziera(int kpXp, int kpYp, int kpXk, int kpYk) : base(kpXp, kpYp)
-           {
-               this.kpXk = kpXk;
-               this.kpYk = kpYk;
-                kpFigura = kpFiguryGeometryczne.kpKrzywaBeziera;
-           }
-            public kpKrzywaBeziera(int kpXp, int kpYp, int kpXk, int kpYk, Color kpKolorLini,
-                DashStyle kpStylLini, float kpGrubośćLini) : base(kpXp, kpYp, kpKolorLini)
+            // public kpKrzywaBeziera(float kpX1, float kpY1, float kpX2, float kpY2, float kpX3, float kpY3, float kpX4, float kpY4) : base(kpX1, kpY1)
+            // {
+            //     this.kpX1 = kpX1;
+            //     this.kpY1 = kpY1;
+            //     this.kpX2 = kpX2;
+            //     this.kpY2 = kpY2;
+            //     this.kpX3 = kpX3;
+            //     this.kpY3 = kpY3;
+            //     this.kpX4 = kpX4;
+            //     this.kpY4 = kpY4;
+            //     kpFigura = kpFiguryGeometryczne.kpKrzywaBeziera;
+            //}
+            public kpKrzywaBeziera(int kpX,int kpY,Point kstartPoint, Point controlPoint1, Point controlPoint2, Point endPoint, Color kpKolorLini,
+                DashStyle kpStylLini, float kpGrubośćLini) : base(kpX, kpY, kpKolorLini)
             {
-
+                this.kpX = kpX;
+                this.kpY = kpY;
                 kpFigura = kpFiguryGeometryczne.kpKrzywaBeziera;
-                this.kpXk = kpXk;
-                this.kpYk = kpYk;
+                
                 this.kpStylLini = kpStylLini;
                 this.kpGrubośćLini = kpGrubośćLini;
 
             }
 
+            public kpKrzywaBeziera(int kpX, int kpY, int x, int y, Color backColor, DashStyle selectedIndex, int value) : base(kpX, kpY)
+            {
+                this.x = x;
+                this.y = y;
+                this.backColor = backColor;
+                this.selectedIndex = selectedIndex;
+                this.value = value;
+            }
 
             public void kpWykreśl(Point endPoint, Graphics kpRysownica)
             {
                 using (Pen kpPióro = new Pen(kpKolor, kpGrubośćLini))
                 {
                     kpPióro.DashStyle = kpStylLini;
-
+                    kpRysownica.DrawBezier(kpPióro, startPoint, controlPoint1, controlPoint2, endPoint);
                     kpWidoczny = true;
                 }
             }
@@ -750,7 +772,7 @@ public override void kpWymaż(Control kpKontrolka, Graphics kpRysownica)
                     using (Pen kpPióro = new Pen(kpKontrolka.BackColor, kpGrubośćLini))
                     {
                         kpPióro.DashStyle = kpStylLini;
-                        kpRysownica.DrawLine(kpPióro, kpX, kpY, kpXk, kpYk);
+                        kpRysownica.DrawBezier(kpPióro, startPoint, controlPoint1, controlPoint2, endPoint);
                         kpWidoczny = false;
                     }
                 }
@@ -768,8 +790,8 @@ public override void kpWymaż(Control kpKontrolka, Graphics kpRysownica)
                     kpDy = kpY - kpYn;
                 kpX = kpXn;
                 kpY = kpYn;
-                kpXk = (kpXk + kpDx) % kpKontrolka.Width;
-                kpYk = (kpYk + kpDy) % kpKontrolka.Height;
+                kpX = (kpX + kpDx) % kpKontrolka.Width;
+                kpY = (kpY + kpDy) % kpKontrolka.Height;
                 kpWykreśl(kpRysownica);
             }
 
