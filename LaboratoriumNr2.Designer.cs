@@ -104,11 +104,10 @@
             "Elipsa",
             "Okrąg",
             "Prostokąt",
-            "Kwadrat",
-            "itd"});
+            "Kwadrat"});
             this.chlbFiguryGeometryczne.Location = new System.Drawing.Point(815, 89);
             this.chlbFiguryGeometryczne.Name = "chlbFiguryGeometryczne";
-            this.chlbFiguryGeometryczne.Size = new System.Drawing.Size(152, 172);
+            this.chlbFiguryGeometryczne.Size = new System.Drawing.Size(152, 130);
             this.chlbFiguryGeometryczne.TabIndex = 4;
             this.chlbFiguryGeometryczne.SelectedIndexChanged += new System.EventHandler(this.chlbFiguryGeometryczne_SelectedIndexChanged);
             // 

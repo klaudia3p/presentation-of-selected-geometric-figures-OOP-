@@ -153,6 +153,24 @@ namespace ProjektNr2_Plutka_62026
                             IndexTFG++;
                             break;
                         }
+                    case "Prostokąt":
+                        {
+                            int Promień = rnd.Next(Margines, Xmax / 4);
+                            //utworzenie gzemplarza okregu i wpisanie jego referencji do tfg
+                            TFG[IndexTFG] = new Prostokąt(Xp, Yp, Promień, Promień/2,  Kolor, StylLini, GrubośćLini);
+                            TFG[IndexTFG].Wykreśl(Rysownica);
+                            IndexTFG++;
+                            break;
+                        }
+                    case "Kwadrat":
+                        {
+                            int Promień = rnd.Next(Margines, Xmax / 4);
+                            //utworzenie gzemplarza okregu i wpisanie jego referencji do tfg
+                            TFG[IndexTFG] = new Kwadrat(Xp, Yp, Promień, Promień, Kolor, StylLini, GrubośćLini);
+                            TFG[IndexTFG].Wykreśl(Rysownica);
+                            IndexTFG++;
+                            break;
+                        }
                     default:
                         {
                             MessageBox.Show("UWAGA: tej figury jeszcze nie wykreślam :(");

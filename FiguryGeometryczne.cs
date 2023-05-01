@@ -279,7 +279,7 @@ namespace ProjektNr2_Plutka_62026
                         Widoczny = false;
                     }
             }
-        }
+        }//elipsa
 
         public class Okrąg : Elipsa
         {
@@ -294,15 +294,85 @@ namespace ProjektNr2_Plutka_62026
                 }
             }
             //konstruyktor
-            public Okrąg(int x, int y, int Promień, Color KolorLini, DashStyle StylLini, 
+            public Okrąg(int x, int y, int Promień, Color KolorLini, DashStyle StylLini,
                 float GrubośćLini) : base(x, y, 2 * Promień, 2 * Promień, KolorLini, StylLini, GrubośćLini)
             {
                 Figura = FiguryGeometryczne.Okrąg;
             }
 
-        }
+        }//okrag
+        public class Prostokąt : Punkt
+        {
+            protected int OśDuża, OśMała;
+            public Prostokąt(int x, int y, int ośDuża, int ośMała, Color KolorLini, DashStyle StylLini, float GrubośćLini) : base(x, y, KolorLini)
+            {
+                Figura = FiguryGeometryczne.Prostokąt;
+                Widoczny = false;
+
+                OśDuża = ośDuża;
+                OśMała = ośMała;
+                this.StylLini = StylLini;
+                this.GrubośćLini = GrubośćLini;
+
+            }
+            public override void Wykreśl(Graphics Rysownica)
+            {
+                using (Pen Pióro = new Pen(Kolor, GrubośćLini))
+                {
+                    Pióro.DashStyle = StylLini;
+                    Rysownica.DrawRectangle(Pióro, X - OśDuża / 2, Y - OśMała / 2, OśDuża, OśMała);
+                    
+                    Widoczny = true;
+                }
+            }
+            public override void Wymaż(Control Kontrolka, Graphics Rysownica)
+            {
+                if (Widoczny)
+                    using (Pen Pióro = new Pen(Kontrolka.BackColor, GrubośćLini))
+                    {
+                        Pióro.DashStyle = StylLini;
+                        Rysownica.DrawRectangle(Pióro, X - OśDuża / 2, Y - OśMała / 2, OśDuża, OśMała);
+                        Widoczny = false;
+                    }
+            }
+        }//prostokat
+        public class Kwadrat : Punkt
+        {
+            protected int OśDuża, OśMała;
+            public Kwadrat(int x, int y, int ośDuża, int ośMała, Color KolorLini, DashStyle StylLini, float GrubośćLini) : base(x, y, KolorLini)
+            {
+                Figura = FiguryGeometryczne.Kwadrat;
+                Widoczny = false;
+
+                OśDuża = ośDuża;
+                OśMała = ośMała;
+                this.StylLini = StylLini;
+                this.GrubośćLini = GrubośćLini;
+
+            }
+            public override void Wykreśl(Graphics Rysownica)
+            {
+                using (Pen Pióro = new Pen(Kolor, GrubośćLini))
+                {
+                    Pióro.DashStyle = StylLini;
+                    Rysownica.DrawRectangle(Pióro, X - OśDuża / 2, Y - OśMała / 2, OśDuża, OśMała);
+
+                    Widoczny = true;
+                }
+            }
+            public override void Wymaż(Control Kontrolka, Graphics Rysownica)
+            {
+                if (Widoczny)
+                    using (Pen Pióro = new Pen(Kontrolka.BackColor, GrubośćLini))
+                    {
+                        Pióro.DashStyle = StylLini;
+                        Rysownica.DrawRectangle(Pióro, X - OśDuża / 2, Y - OśMała / 2, OśDuża, OśMała);
+                        Widoczny = false;
+                    }
+            }
+        }//kwadrat
     }
-    //deklaracja klasy okrag
+    //deklaracja klasyfg
    
 }
 
